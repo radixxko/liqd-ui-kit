@@ -44,7 +44,7 @@
              margin: 10rem 0;
              transition: opacity 50ms ease-in-out;
             input{ font-size: 10rem; line-height: 22rem; padding-left: 10rem; }
-            --size: 10rem;
+            --size: 8rem;
          }
 
         &.medium
@@ -161,12 +161,13 @@ let _width = ( typeof width != 'undefined' ? width : '' );
 let _style = ( typeof style != 'undefined' ? style : '' );
 let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
+let _type = ( typeof type != 'undefined' ? type : 'text' );
 
 <div class={'Form_Input ' + ( _value.length > 0 ? ' ' : 'empty ' ) + _size + _error + _success  } style={"width:" + _width + _style } >
 if( _size === 'big' )
 {
     <label for={'Form_Input_label_'+label} onclick="this.nextSibling.focus()">{label}</label>
 }
-    <input id={'Form_Input_label_'+label} placeholder={( _size != 'big' ? label : null )} data-selector={_selector} type={type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
+    <input id={'Form_Input_label_'+label} placeholder={( _size != 'big' ? label : null )} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
     <i class="alert-icon" data-icon="warning"></i>
 </div>

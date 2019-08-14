@@ -1,0 +1,149 @@
+<style>
+    .checkbox
+    {
+        position: relative;
+        margin: var(--padding-1) 0;
+        label
+        {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            &:before
+             {
+                 position: absolute;
+                 top: 0;
+                 left: 0;
+                 border: 1px solid var(--gray-3);
+                 background: white;
+                 border-radius: 2px;
+                 font-size: inherit;
+                 line-height: inherit;
+                 color: transparent;
+             }
+            &:hover::before
+             {
+                 border:1px solid var(--gray-8);
+                 color: var(--gray-3);
+                 background: var(--gray-0);
+             }
+            span { font-size: inherit; line-height: inherit; color: var(--gray-9);  }
+        }
+
+        input[type=checkbox]
+        {
+            visibility: hidden;
+            margin: 0;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            &:checked + label:before
+             {
+                 color: var(--green-9);
+                 background: var(--green-0);
+                 border: 1px solid var(--green-3);
+             }
+            &:disabled + label:before{ background: var(--gray-0); }
+        }
+
+        &.failed
+         {
+            input:checked + label:before
+            {
+                content: "\e002";
+                color: var(--red-9);
+                background: var(--red-0);
+                border: 1px solid var(--red-3);
+            }
+        }
+        &.error
+         {
+            label:before
+            {
+                border: 1px solid var(--red-9);
+            }
+         }
+
+        &.small
+         {
+             width: 24rem;
+             height: 24rem;
+            label:before{ width: 24rem;  height: 24rem; font-size: 12rem; line-height: 24rem; }
+            label > span{ margin-left: 24rem; }
+         }
+
+        &.medium
+         {
+             width: 36rem;
+             height: 36rem;
+            label:before{ width: 36px;  height: 36rem; font-size: 14rem; line-height: 36rem; }
+            label > span{ margin-left: 36rem; }
+         }
+
+        &.big
+         {
+             width: 48rem;
+             height: 48rem;
+            label:before{ width: 48rem;  height: 48rem; font-size: 16rem; line-height: 48rem; }
+            label > span{ margin-left: 48rem; }
+         }
+
+        &.disabled{ pointer-events: none!important; }
+    }
+</style>
+<script>
+    window.checkBox_handler = function ( event, callback )
+    {
+        if( !event.target.parentNode.querySelector('input').disabled )
+        {
+            event.preventDefault();
+            let _input = event.target.parentNode.querySelector('input');
+
+            if( _input.checked )
+            {
+                _input.removeAttribute('failed');
+                _input.checked = false;
+                event.target.parentNode.classList.remove('failed');
+            }
+            else
+            {
+                _input.checked = true;
+                _input.setAttribute('failed', true);
+                event.target.parentNode.classList.add('failed');
+            }
+            callback();
+        }
+    };
+
+    window.checkBox_negative_handler = function ( element )
+    {
+        if( element.classList.contains('failed') )
+        {
+            element.classList.remove('failed');
+            element.querySelector('input').removeAttribute('failed');
+            element.parentNode.parentNode.querySelector('span.Form_Textarea').classList.add('hidden');
+
+            for( let step of Array.from( document.querySelectorAll('ul.step-list li') ) )
+            {
+                step.querySelector('input').disabled = false;
+            }
+        }
+    }
+</script>
+
+let _failed = ( typeof failed != "undefined" ? 'failed ' : '' );
+let _size = ( typeof size != 'undefined' ? (size + ' ') : '' );
+let _onClick = ( typeof onclick != 'undefined' ? onclick : '' );
+let _onChange = ( typeof onchange != "undefined" ? onchange : null );
+let _disabled = ( typeof disabled != "undefined" ? ' disabled' : null );
+let _checked = (typeof checked != 'undefined' ? 'true' : null );
+
+<div class={"checkbox "+ _failed + _size + ( typeof _disabled != 'null' ? _disabled : '' ) }  onclick={ 'checkBox_negative_handler( this );' + _onClick } oncontextmenu={( typeof rightClick != "undefined" ? "checkBox_handler( event, function(){" + rightClick + "('"+label.liqd_slugify()+"_checkbox_name')})" : null )} onchange={_onChange} >
+<input disabled={(typeof disabled != "undefined" ? undefined : null)} type="checkbox" id={label.liqd_slugify()+'_checkbox_name'} name="check" checked={_checked} />
+<label for={label.liqd_slugify()+'_checkbox_name'} data-icon="checkmark"></label>
+</div>

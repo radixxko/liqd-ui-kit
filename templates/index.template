@@ -8,11 +8,12 @@
         {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            &.between{ justify-content: space-between; }
         }
         table
         {
             width: 100%;
+            margin-bottom: var(--padding-4);
             th
             {
                 @font-14;
@@ -34,6 +35,18 @@
             <th align="left">required</th>
         </tr>
         <tr>
+            <td>label</td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>YES</td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>string</td>
+            <td>text</td>
+            <td>NO</td>
+        </tr>
+        <tr>
             <td>required</td>
             <td>true</td>
             <td>undefined</td>
@@ -50,12 +63,6 @@
             <td>string</td>
             <td>undefined</td>
             <td>NO</td>
-        </tr>
-        <tr>
-            <td>label</td>
-            <td>string</td>
-            <td>undefined</td>
-            <td>YES</td>
         </tr>
         <tr>
             <td>value</td>
@@ -106,25 +113,193 @@
             <td>NO</td>
         </tr>
     </table>
-    <div class="flex">
+    <div class="flex between">
         <h3>Input small</h3>
         <Input type="text" label="small" size="small" width="calc(97% / 4)" />
         <Input type="text" label="error" size="small" error="true" width="calc(97% / 4)" />
         <Input type="text" label="success" size="small" success="true" width="calc(97% / 4)" />
         <Input type="text" label="small" size="small" value="value" width="calc(97% / 4)" />
     </div>
-    <div class="flex">
+    <div class="flex between">
         <h3>Input medium</h3>
         <Input type="text" label="medium" size="medium" width="calc(97% / 4)" />
         <Input type="text" label="error" size="medium" error="true" width="calc(97% / 4)" />
         <Input type="text" label="success" size="medium" success="true" width="calc(97% / 4)" />
         <Input type="text" label="medium" size="medium" value="value" width="calc(97% / 4)" />
     </div>
-    <div class="flex">
+    <div class="flex between">
         <h3>Input big</h3>
         <Input type="text" label="big" size="big" width="calc(97% / 4)" />
         <Input type="text" label="error" size="big" error="true" width="calc(97% / 4)" />
         <Input type="text" label="success" size="big" success="true" width="calc(97% / 4)" />
         <Input type="text" label="value" size="big" value="value" width="calc(97% / 4)" />
+    </div>
+</div>
+<div class="main-content">
+    <table>
+        <tr>
+            <th align="left">Textarea</th>
+            <th align="left">type</th>
+            <th align="left">default</th>
+            <th align="left">required</th>
+        </tr>
+        <tr>
+            <td>label</td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>YES</td>
+        </tr>
+        <tr>
+            <td>required</td>
+            <td>true</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>small, medium, big</td>
+            <td>medium</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>selector</td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>value</td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>onChange</td>
+            <td>function</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>autocomplete</td>
+            <td>true</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>required</td>
+            <td>true</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>string</td>
+            <td>100%</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>style</td>
+            <td>string</td>
+            <td>udefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>string</td>
+            <td>udefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>success</td>
+            <td>string</td>
+            <td>udefined</td>
+            <td>NO</td>
+        </tr>
+    </table>
+    <div class="flex between">
+        <h3>Textarea small</h3>
+        <Textarea type="text" label="small" size="small" width="calc(97% / 4)" />
+        <Textarea type="text" label="error" size="small" error="true" width="calc(97% / 4)" />
+        <Textarea type="text" label="success" size="small" success="true" width="calc(97% / 4)" />
+        <Textarea type="text" label="small" size="small" value="value" width="calc(97% / 4)" />
+    </div>
+    <div class="flex between">
+        <h3>Textarea medium</h3>
+        <Textarea type="text" label="medium" size="medium" width="calc(97% / 4)" />
+        <Textarea type="text" label="error" size="medium" error="true" width="calc(97% / 4)" />
+        <Textarea type="text" label="success" size="medium" success="true" width="calc(97% / 4)" />
+        <Textarea type="text" label="medium" size="medium" value="value" width="calc(97% / 4)" />
+    </div>
+    <div class="flex between">
+        <h3>Textarea big</h3>
+        <Textarea type="text" label="big" size="big" width="calc(97% / 4)" />
+        <Textarea type="text" label="error" size="big" error="true" width="calc(97% / 4)" />
+        <Textarea type="text" label="success" size="big" success="true" width="calc(97% / 4)" />
+        <Textarea type="text" label="value" size="big" value="value" width="calc(97% / 4)" />
+    </div>
+</div>
+<div class="main-content">
+    <table>
+        <tr>
+            <th align="left">Button</th>
+            <th align="left">type</th>
+            <th align="left">default</th>
+            <th align="left">required</th>
+        </tr>
+    </table>
+    <div class="flex">
+        <h3 style="margin-bottom: var(--padding-2);">Button small</h3>
+        <Button label="small" size="small" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="small" size="small" loader="true" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="small" size="small" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="small" size="small" icon="checkmark-round" iconPosition="right" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button rounded="true" size="small" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button rounded="true" size="small" icon="checkmark-round" loader="true" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button square="true" size="small" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button square="true" size="small" icon="checkmark-round" loader="true" />
+    </div>
+    <div class="flex">
+        <h3 style="margin: var(--padding-2) 0;">Button medium</h3>
+        <Button label="medium" size="medium" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="medium" size="medium" loader="true" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="medium" size="medium" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="medium" size="medium" icon="checkmark-round" iconPosition="right" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button rounded="true" size="medium" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button rounded="true" size="medium" icon="checkmark-round" loader="true" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button square="true" size="medium" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button square="true" size="medium" icon="checkmark-round" loader="true" />
+    </div>
+    <div class="flex">
+        <h3 style="margin: var(--padding-2) 0;">Button big</h3>
+        <Button label="big" size="big" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="big" size="big" loader="true"/>
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="big" size="big" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button label="big" size="big" icon="checkmark-round" iconPosition="right" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button rounded="true" size="big" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button rounded="true" size="big" icon="checkmark-round" loader="true" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button square="true" size="big" icon="checkmark-round" />
+        <div style="margin-right: var(--padding-1);"></div>
+        <Button square="true" size="big" icon="checkmark-round" loader="true" />
     </div>
 </div>

@@ -1,0 +1,583 @@
+<style>
+    .input-select
+    {
+
+        border: 1px solid var(--gray-2);
+        border-radius: 2px;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        cursor: text;
+        background-color: white;
+        color: var(--gray-8);
+
+        .input
+        {
+            display: block;
+            position: relative;
+            width: 100%;
+            border: 0;
+            outline: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            color: var(--gray-6);
+
+            &:empty:before
+             {
+                 content: "\200B";
+                 display: inline;
+             }
+
+            &[placeholder]:empty:before
+             {
+                 content:attr(placeholder);
+                 display: inline;
+             }
+
+            &:after
+             {
+                 content: "\e08a";
+                 font-family: "flaticon";
+                 top: 0;
+                 right: 0;
+                 bottom: 0;
+                 position: absolute;
+                 text-align: center;
+                 opacity: 0;
+                 transition: opacity 200ms ease-in;
+             }
+        }
+
+        label
+        {
+            cursor: pointer;
+            position: absolute;
+            color: var(--gray-8);
+            font-weight: normal;
+            transition: top 50ms ease-in 0s,font-size 50ms ease-in 0s,color 50ms ease-in 0s;
+            -webkit-transition: top 50ms ease-in 0s,font-size 50ms ease-in 0s,color 50ms ease-in 0s;
+        }
+
+        .select-wrap
+        {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            background-color: transparent;
+            min-width: 100%;
+            border: 1px solid transparent;
+            height: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            max-height: 150px;
+
+            input
+            {
+                display: inline-block;
+                position: relative;
+                font-family: inherit;
+                width: 100%;
+                transition: margin-top 50ms ease-in 0s;
+                border: 0;
+                outline: none;
+                background-color: transparent;
+                color: var(--gray-8);
+
+
+                &:invalid
+                 {
+                     border: 0;
+                     box-shadow: none;
+                 }
+
+                &::-webkit-input-placeholder { color: var(--gray-8); }
+                &::-moz-placeholder { color: var(--gray-8); }
+                &:-ms-input-placeholder { color: var(--gray-8); }
+                &:-moz-placeholder { color: var(--gray-8); }
+            }
+
+            .select-group
+            {
+                font-weight: bold;
+                cursor: default;
+                color: var(--gray-8);
+                white-space: nowrap;
+            }
+
+            .select-option
+            {
+                cursor: pointer;
+                color: var(--gray-8);
+                white-space: nowrap;
+
+                &:hover,
+                &.active
+                 {
+                     background-color: var(--gray-1);
+                     color: var(--gray-9);
+                 }
+            }
+        }
+
+        &:hover
+         {
+            .input
+            {
+                &:after
+                 {
+                     opacity: 0.3;
+                 }
+            }
+         }
+
+        &.focus{ border: 1px solid blue; }
+
+        &.focus,
+        &.fill
+         {
+            .input
+            {
+                color: var(--gray-9);
+                &:after
+                 {
+                     opacity: 0.7;
+                 }
+            }
+
+            label
+            {
+                top: 0;
+                color: var(--gray-9);
+            }
+        }
+
+        &.focus
+         {
+            .select-wrap
+            {
+                height: auto;
+                background-color: #fff;
+                z-index: 999;
+                margin-left: -1px;
+                border: 1px solid blue;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+            }
+         }
+
+        &.small
+         {
+             height: 24rem;
+             line-height: 24rem;
+             margin: 10rem 0;
+             transition: opacity 50ms ease-in-out;
+            .input, .select-wrap input
+            {
+                height: 24rem; margin: 0; font-size: 10rem; line-height: 24rem; padding-left: 10rem;
+            }
+            .input:after
+            {
+                font-size: 10rem;
+                padding-right: 10rem;
+            }
+            .select-wrap
+            {
+                top: 22rem;
+                right: -1rem;
+                .select-group
+                {
+                    padding: 5rem 10rem;
+                    line-height: 12rem;
+                    font-size: 12rem;
+                }
+                .select-option
+                {
+                    padding: 5rem 10rem;
+                    line-height: 10rem;
+                    font-size: 10rem;
+                }
+            }
+
+            &.focus,
+            &.fill
+             {
+                .input
+                {
+                    height: 24rem;
+                    line-height: 24rem;
+                    margin: 0;
+                }
+            }
+            --size: 10rem;
+        }
+
+        &.medium
+         {
+             height: 36rem;
+             line-height: 36rem;
+             margin: 12rem 0;
+             transition: opacity 50ms ease-in-out;
+            .input, .select-wrap input
+            {
+                height: 36rem; margin: 0; font-size: 12rem; line-height: 36rem; padding-left: 12rem;
+            }
+            .input:after
+            {
+                font-size: 12rem;
+                padding-right: 12rem;
+            }
+            .select-wrap
+            {
+                top: 34rem;
+                right: -1rem;
+                .select-group
+                {
+                    padding: 5rem 12rem;
+                    line-height: 12rem;
+                    font-size: 12rem;
+                }
+                .select-option
+                {
+                    padding: 5rem 12rem;
+                    line-height: 12rem;
+                    font-size: 12rem;
+                }
+            }
+            &.focus,
+            &.fill
+             {
+                .input
+                {
+                    height: 36rem;
+                    line-height: 36rem;
+                    margin: 0;
+                }
+             }
+            --size: 10rem;
+        }
+
+        &.big
+         {
+             height: 48rem;
+             line-height: 48rem;
+             margin: 12rem 0;
+             transition: opacity 50ms ease-in-out;
+            .input, .select-wrap input
+            {
+                height: 48rem; margin: 0; font-size: 12rem; line-height: 48rem; padding-left: 12rem;
+            }
+            .input:after
+            {
+                font-size: 12rem;
+                padding-right: 12rem;
+            }
+            .select-wrap
+            {
+                top: 46rem;
+                right: -1rem;
+                .select-group
+                {
+                    padding: 5rem 12rem;
+                    line-height: 12rem;
+                    font-size: 12rem;
+                }
+                .select-option
+                {
+                    padding: 5rem 12rem;
+                    line-height: 12rem;
+                    font-size: 12rem;
+                }
+            }
+            &.focus,
+            &.fill
+             {
+                .input
+                {
+                    height: 48rem;
+                    line-height: 48rem;
+                    margin: 0;
+                }
+            }
+            --size: 12rem;
+        }
+
+        &.error
+         {
+             border: 1px solid var(--red-8);
+             background: rgba(191, 54, 12, 0.05);
+            .input, .input:after
+            {
+                opacity: 1;
+                color: var(--red-8);
+                content: "\e055";
+            }
+            .input:after{  font-size: calc(var(--size) + 6rem); }
+        }
+
+        &.success
+         {
+             border: 1px solid var(--green-8);
+             background: rgba(105, 240, 174, 0.05);
+            .input, .input:after
+            {
+                opacity: 1;
+                color: var(--green-8);
+                content: "\e025";
+            }
+            .input:after{  font-size: calc(var(--size) + 6rem); }
+        }
+    }
+</style>
+<script>
+    if( typeof Select === 'undefined' )
+    {
+        window.Select = class Select
+        {
+            constructor( input, value, option, options = {} )
+            {
+                input._class = this;
+
+                this._input = input;
+                this._element = this._input.parentNode;
+
+                this._element.addEventListener( 'click', this.focus.bind(this) );
+                this._element.addEventListener( 'mouseover', this.stop.bind(this) );
+                this._element.addEventListener( 'mouseout', this.hidden.bind(this) );
+
+                if( options.hasOwnProperty('contenteditable') && options.contenteditable )
+                {
+                    this._element.querySelector('.input').addEventListener( 'keypress', event => { if( event.keyCode === 13 ){  DOM_stopPropagation( event ) } } );
+                    this._element.querySelector('.input').addEventListener( 'input', event => { event.target.previousSibling.value = event.target.textContent.replace(/\n|\t/g,' '); } );
+                }
+
+                this._element.querySelectorAll('.select-option').forEach( ( item ) => { item.addEventListener( 'click', this.select.bind(this, item) ); } );
+
+                let input_text = null;
+                if( ( input_text = this._element.querySelector('.select-wrap input[type="text"]') ) )
+                {
+                    input_text.addEventListener( 'keyup', this.keyup.bind( this, input_text ) );
+                }
+
+                this._option = option;
+                this._values = [];
+                this._suggest_timeout = null;
+
+                if( value )
+                {
+                    this._element.querySelector('div.input').innerText = option.Steps.find( f => f.id === JSON.parse( value ) ).value;
+                }
+            }
+
+            stop()
+            {
+                Timers.unsetTimeout( this._input.id );
+            }
+
+            hidden()
+            {
+                Timers.setTimeout( this._input.id, () =>
+                {
+                    this._hidden();
+                }, 500);
+            }
+
+            _hidden()
+            {
+                if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
+                this._element.classList.remove('focus');
+            }
+
+            focus( event )
+            {
+                if( event.target.classList.contains('input-select') || event.target.classList.contains('input') || event.target.classList.contains('label') )
+                {
+                    this._element.querySelector('.select-wrap').style.maxHeight = Math.max( 150, ( document.body.getBoundingClientRect().height - this._element.querySelector('.select-wrap').getBoundingClientRect().y - 100 ) )+'px';
+                    this._element.classList.add('focus');
+
+                    if( this._element.querySelector('.select-wrap input[type="text"]') && !this._element.querySelector('.input').getAttribute('contenteditable') ){ this._element.querySelector('.select-wrap input[type="text"]').focus(); }
+                }
+
+                if(this._element.classList.contains('error')){ this._element.classList.remove('error') }
+                if(this._element.classList.contains('success')){ this._element.classList.remove('success') }
+            }
+
+            setValue( value )
+            {
+                this._values = [];
+                if( this._option[ value ] ){ this._values.push({ value, label : this._option[ value ] }) }
+                this._setValue();
+            }
+
+            select( element )
+            {
+                this._values = [];
+                if( element.classList.contains('active') && !this._element.classList.contains('selected') )
+                {
+                    element.classList.remove('active');
+                }
+                else
+                {
+                    this._element.querySelectorAll('.select-option').forEach( item => item.classList.remove('active') );
+
+                    element.classList.add('active');
+                    this._values.push({ value : element.getAttribute('data-value'), label : element.innerText.trim() });
+                }
+                this._setValue();
+                this._hidden();
+            }
+
+            keyup( element )
+            {
+                if( element.getAttribute('data-request') )
+                {
+                    var url = decodeURIComponent( element.getAttribute( 'data-request' ) );
+
+                    window.clearTimeout( this._suggest_timeout );
+
+                    this._suggest_timeout = setTimeout( () =>
+                    {
+                        DOM_request( 'GET', url, { query : element.value }, ( data ) =>
+                        {
+                            var wrapper = element.parentNode;
+                            wrapper.querySelectorAll('.select-option,.select-group').remove();
+
+                            let div = null, sub_div = null, isSelected = false;
+                            for( var key in data.option )
+                            {
+                                div = wrapper.querySelector('[data-value="'+key+'"]');
+                                if( !div )
+                                {
+                                    isSelected = ( typeof this._values.find( f => { return ( f.value === key ); } ) !== 'undefined' );
+                                    div = document.createElement('div'); div.className = 'select-'+( typeof data.option[key] === 'string' ? 'option' : 'group' )+( isSelected ? ' active' : '' ); div.setAttribute('data-value', key);
+                                    div.innerHTML = ( typeof data.option[key] === 'string' ? data.option[key] : key );
+                                    if( typeof data.option[key] === 'string' ){ div.addEventListener( 'click', this.select.bind(this, div) ); }
+                                }
+                                wrapper.appendChild( div );
+                                if( typeof data.option[key] === 'object' )
+                                {
+                                    for( var s_key in data.option[key] )
+                                    {
+                                        sub_div = wrapper.querySelector('[data-value="'+data.option[key][s_key].id+'"]');
+                                        if( !sub_div )
+                                        {
+                                            isSelected = ( typeof this._values.find( f => { return ( f.value === data.option[key][s_key].id ); } ) !== 'undefined' );
+                                            sub_div = document.createElement('div'); sub_div.className = 'select-option'+( isSelected ? ' active' : '' ); sub_div.setAttribute('data-value', data.option[key][s_key].id);
+                                            sub_div.innerHTML = data.option[key][s_key].value;
+                                            sub_div.addEventListener( 'click', this.select.bind(this, sub_div) );
+                                        }
+                                        wrapper.appendChild( sub_div );
+                                    }
+                                }
+                            }
+                        } );
+                    }, 300 );
+                }
+                else
+                {
+                    var options = element.parentNode.querySelectorAll('.select-option');
+                    if( options.length > 0 )
+                    {
+                        for( var a = 0; a < options.length; ++a )
+                        {
+                            if( !this._containsWords( options[a].innerHTML, element.value ) ){ options[a].style.display = 'none'; } else { options[a].style.display = 'block'; }
+                        }
+                    }
+                }
+            }
+
+            _setValue( change = true )
+            {
+                let old_value = this._input.value;
+                this._element.querySelector('.input').innerHTML = ( this._values.length > 0 ? this._values[0].label : '' );
+                this._input.value = ( this._values.length > 0 ? this._values[0].value : '' );
+
+                if( this._input.value !== '' )
+                {
+                    this._element.classList.add('fill');
+                    this._element.querySelector('.select-option[data-value="'+this._input.value+'"]').classList.add('active');
+                }
+                else if( this._input.value === '' )
+                {
+                    this._element.classList.remove('fill');
+                    if( this._element.querySelector('.select-option.active') )
+                    {
+                        this._element.querySelector('.select-option.active').classList.remove('active');
+                    }
+                }
+
+                if( this._input.onchange && old_value !== this._input.value && change )
+                {
+                    this._input.onchange();
+                }
+
+                if( "createEvent" in document  && old_value !== this._input.value && change )
+                {
+                    var evt = document.createEvent("HTMLEvents");
+                    evt.initEvent("change", false, true);
+                    this._input.dispatchEvent(evt);
+                }
+            }
+
+            _containsWords( haystack, words )
+            {
+                words = words.trim().toLowerCase();
+                haystack = haystack.trim().toLowerCase();
+
+                if( words.length )
+                {
+                    if( typeof words == 'string' ){ words = words.split(/\s+/g); }
+
+                    for( var i = 0; i < words.length; ++i )
+                    {
+                        let position = -1, found = false;
+
+                        while( ( position = haystack.indexOf( words[i], position + 1 ) ) !== -1 )
+                        {
+                            if( position != 0 && ' \t\n'.indexOf(haystack[position-1]) === -1 ) { continue; } else if( i < words.length - 1 && haystack.length > words[i].length + position && ' \t\n'.indexOf(haystack[position+words[i].length]) === -1 ) { continue; } else { found = true; break; }
+                        }
+
+                        if( !found ){ return false; }
+                    }
+                }
+                return true;
+            }
+        }
+    }
+</script>
+var value = ( typeof value !== 'object' ? ( value !== '' ? value.toString().split( ( typeof join !== 'undefined' ? join : ',' ) ) : [] ) : value );
+<div style={'width:'+(typeof width !== 'undefined' ? width : '100%')+';'+(typeof style !== 'undefined' ? style : '')} class={'input-select'+(typeof value !== 'undefined' && value.length > 0 ? ' fill' : '')+(typeof selected !== 'undefined' && selected === 'true' ? ' selected' : '')+(typeof clazz !== 'undefined' ? ' '+clazz : '')+(typeof disabled !== 'undefined' && disabled === 'true' ? ' disabled' : '')+(typeof label === 'undefined' ? ' not-label' : '')+(typeof size != 'undefined' ? (' ' + size) : ' medium')}>
+<input data-filter={( typeof dataFilter !== 'undefined' ? dataFilter : null )} type="text" style="display:none;" required={(typeof required !== 'undefined' ? required : null)} pattern={(typeof pattern !== 'undefined' ? pattern : null)} onchange={(typeof onchange !== 'undefined' ? onchange : null)} value={(typeof value !== 'undefined' ? value.join( ( typeof join !== 'undefined' ? join : ',' ) ) : '')} name={(typeof id !== 'undefined' ? id : '')} id={(typeof id !== 'undefined' ? id : '')} data-join={(typeof join !== 'undefined' ? join : null )} />
+<div class="input" placeholder={(typeof placeholder !== 'undefined' ? placeholder : null)} contenteditable={( typeof contenteditable !== 'undefined' ? contenteditable : null )} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+</div>
+<div class="select-wrap">
+    if( typeof suggest !== 'undefined' && suggest )
+    {
+    <input placeholder="Search" autocomplete="off" class="input-element-text" onkeypress="return event.keyCode!=13" type="text" data-request={ ( typeof request !== 'undefined' ? encodeURIComponent( request ) : null ) }/>
+    }
+
+    for( key, item of option )
+    {
+    <div class={'select-'+( typeof item === 'string' ? 'option' : 'group' )+( value.includes( key.toString() ) ? ' active' : '' )} data-value={key}>{( typeof item === 'string' ? item : key )}</div>
+if( typeof item === 'object' )
+{
+for( g_item of item )
+{
+<div class={'select-option'+( value.includes( g_item.id.toString() ) ? ' active' : '' )} data-value={g_item.id}>{g_item.value}</div>
+}
+}
+}
+</div>
+if( typeof label !== 'undefined' )
+{
+    <label for={id} class="label">{label}</label>
+}
+</div>
+
+<script instance id={id} value={value} option={option} contenteditable={( typeof contenteditable !== 'undefined' ? contenteditable : false )} init={( typeof init !== 'undefined' ? init : 'true' )}>
+if( init === 'true' )
+{
+new Select( document.getElementById( id ), value, option, {contenteditable} );
+}
+</script>

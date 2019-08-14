@@ -6,6 +6,17 @@ const Template = new TEMPLATE( { directory:  __dirname + '/templates' } );
 
 const server = new Server();
 
+server.get( '/data', async( req, res, next ) =>
+{
+    try
+    {
+        res.setHeader( 'Cache-Control', 'public, max-age=31536000' );
+        res.end( require('fs').readFileSync( __dirname + req.url ) );
+    }
+    catch(e){ res.reply(404); }
+});
+
+
 server.use('/', async(req, res, next ) =>
 {
 

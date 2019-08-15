@@ -69,16 +69,16 @@
              height: 24rem; padding: 0 12rem;
             .loader-box{  width: 12rem;  height: 12rem;  }
             .loader-box:after{ width: calc(12rem - 4px);  height: calc(12rem - 4px); }
-            .content, i, .loading, .loader-box{ font-size: 12rem; }
+            .content, i, .loading, .loader-box{ font-size: 12rem; line-height: 12rem; }
             &.rounded, &.square{ width: 24rem; }
          }
 
-        &.medium
+        &.normal
          {
              height: 36rem;  padding: 0 14rem;
             .loader-box{  width: 14rem;  height: 14rem;  }
             .loader-box:after{ width: calc(14rem - 4px);  height: calc(14rem - 4px); }
-            .content, i, .loading, .loader-box{ font-size: 14rem; }
+            .content, i, .loading, .loader-box{ font-size: 14rem; line-height: 14rem; }
             &.rounded, &.square{ width: 36rem; }
          }
 
@@ -87,26 +87,30 @@
              height: 48rem;  padding: 0 16rem;
             .loader-box{  width: 16rem;  height: 16rem;  }
             .loader-box:after{ width: calc(16rem - 4px);  height: calc(16rem - 4px); }
-            .content, i, .loading, .loader-box{ font-size: 16rem; }
+            .content, i, .loading, .loader-box{ font-size: 16rem; line-height: 16rem; }
             &.rounded, &.square{ width: 48rem; }
          }
+
+        &.red{ --button-background-color: red; --button-hover-color: var(--red-8); }
+        &.green{ --button-background-color: green; --button-hover-color: var(--green-8); }
     }
 </style>
 let _rounded = ( typeof rounded != "undefined" ? 'rounded ' : '');
 let _square = ( typeof square != "undefined" ? 'square ' : '');
-let _size = ( typeof size != "undefined" ? ( size + ' ') : 'medium ');
+let _size = ( typeof size != "undefined" ? ( size + ' ') : 'normal ');
 let _color = ( typeof color != "undefined" ? (color + ' ') : '' );
 let _icon = ( typeof icon != 'undefined' ? icon : null );
 let _label = ( typeof label != 'undefined' ? label : null );
 let _icon_position = ( typeof iconPosition != 'undefined' ? iconPosition : 'left' );
 let _loader = ( typeof loader != 'undefined' ? ' loader' : null );
+let _loading_text = ( typeof loaderText != 'undefined' ? loaderText : 'Loading...' );
 
 <button class={"button " + _rounded + _square + _size + _color + _loader}  onclick={( typeof onclick != "undefined" ? "(async () => {this.classList.add('loader'); await " + onclick + ";this.classList.remove('loader')})();" : null )}>
     <div class="loading">
         <div class="loader-box"></div>
         if( !_rounded.length && !_square.length )
         {
-            Loading...
+            {_loading_text}
         }
     </div>
     <div class="content">

@@ -143,6 +143,8 @@ $font-22-height: 30rem;
 [data-icon=minus]:before { content: "\e0a5"; }
 [data-icon=checkmark-round]:before { content: "\e023"; }
 [data-icon=start-round]:before { content: "\e089"; }
+[data-icon=extend]:before { content: "\e090"; }
+[data-icon=shorten]:before { content: "\e035"; }
 
 html{ font-size: 1px!important; }
 html, body{  margin: 0; padding: 0;  }

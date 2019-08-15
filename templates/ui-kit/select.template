@@ -213,7 +213,7 @@
             --size: 10rem;
         }
 
-        &.medium
+        &.normal
          {
              height: 36rem;
              line-height: 36rem;
@@ -547,7 +547,7 @@
     }
 </script>
 var value = ( typeof value !== 'object' ? ( value !== '' ? value.toString().split( ( typeof join !== 'undefined' ? join : ',' ) ) : [] ) : value );
-<div style={'width:'+(typeof width !== 'undefined' ? width : '100%')+';'+(typeof style !== 'undefined' ? style : '')} class={'input-select'+(typeof value !== 'undefined' && value.length > 0 ? ' fill' : '')+(typeof selected !== 'undefined' && selected === 'true' ? ' selected' : '')+(typeof clazz !== 'undefined' ? ' '+clazz : '')+(typeof disabled !== 'undefined' && disabled === 'true' ? ' disabled' : '')+(typeof label === 'undefined' ? ' not-label' : '')+(typeof size != 'undefined' ? (' ' + size) : ' medium')}>
+<div style={'width:'+(typeof width !== 'undefined' ? width : '100%')+';'+(typeof style !== 'undefined' ? style : '')} class={'input-select'+(typeof value !== 'undefined' && value.length > 0 ? ' fill' : '')+(typeof selected !== 'undefined' && selected === 'true' ? ' selected' : '')+(typeof clazz !== 'undefined' ? ' '+clazz : '')+(typeof disabled !== 'undefined' && disabled === 'true' ? ' disabled' : '')+(typeof label === 'undefined' ? ' not-label' : '')+(typeof size != 'undefined' ? (' ' + size) : ' normal')}>
 <input data-filter={( typeof dataFilter !== 'undefined' ? dataFilter : null )} type="text" style="display:none;" required={(typeof required !== 'undefined' ? required : null)} pattern={(typeof pattern !== 'undefined' ? pattern : null)} onchange={(typeof onchange !== 'undefined' ? onchange : null)} value={(typeof value !== 'undefined' ? value.join( ( typeof join !== 'undefined' ? join : ',' ) ) : '')} name={(typeof id !== 'undefined' ? id : '')} id={(typeof id !== 'undefined' ? id : '')} data-join={(typeof join !== 'undefined' ? join : null )} />
 <div class="input" placeholder={(typeof placeholder !== 'undefined' ? placeholder : null)} contenteditable={( typeof contenteditable !== 'undefined' ? contenteditable : null )} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
 </div>

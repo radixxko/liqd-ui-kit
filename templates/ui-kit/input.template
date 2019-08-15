@@ -47,7 +47,7 @@
             --size: 8rem;
          }
 
-        &.medium
+        &.normal
          {
              height: 36rem;
              margin: 12rem 0;
@@ -61,10 +61,10 @@
         &.big
          {
              height: 48rem;
-             transition: all 50ms ease-in-out;
              margin: 12rem 0;
             label
             {
+                transition: all 50ms ease-in-out;
                 height: 24rem;
                 font-size: 10rem;
                 line-height: 10rem;
@@ -151,7 +151,7 @@
     });
 </script>
 
-let _size = ( typeof size != 'undefined' ? size : ' medium' );
+let _size = ( typeof size != 'undefined' ? size : ' normal' );
 let _selector = ( typeof selector != 'undefined' ? selector : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );

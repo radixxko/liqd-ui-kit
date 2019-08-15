@@ -77,7 +77,7 @@
             label > span{ margin-left: 24rem; }
          }
 
-        &.medium
+        &.normal
          {
              width: 36rem;
              height: 36rem;
@@ -144,6 +144,6 @@ let _disabled = ( typeof disabled != "undefined" ? ' disabled' : null );
 let _checked = (typeof checked != 'undefined' ? 'true' : null );
 
 <div class={"checkbox "+ _failed + _size + ( typeof _disabled != 'null' ? _disabled : '' ) }  onclick={ 'checkBox_negative_handler( this );' + _onClick } oncontextmenu={( typeof rightClick != "undefined" ? "checkBox_handler( event, function(){" + rightClick + "('"+label.liqd_slugify()+"_checkbox_name')})" : null )} onchange={_onChange} >
-<input disabled={(typeof disabled != "undefined" ? undefined : null)} type="checkbox" id={label.liqd_slugify()+'_checkbox_name'} name="check" checked={_checked} />
-<label for={label.liqd_slugify()+'_checkbox_name'} data-icon="checkmark"></label>
+    <input disabled={(typeof disabled != "undefined" ? undefined : null)} type="checkbox" id={label.liqd_slugify()+'_checkbox_name'} name="check" checked={_checked} />
+    <label for={label.liqd_slugify()+'_checkbox_name'} data-icon="checkmark"></label>
 </div>

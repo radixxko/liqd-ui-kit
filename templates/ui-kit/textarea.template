@@ -39,6 +39,7 @@
             overflow: hidden;
             padding: 0;
             font-family: inherit;
+            resize: none;
             &::-ms-expand {display: none;}
             &:hover, &:focus { color: var(--gray-9); }
         }
@@ -58,7 +59,7 @@
             --size: 8rem;
         }
 
-        &.medium
+        &.normal
          {
              height: 36rem;
              margin: 12rem 0;
@@ -78,13 +79,12 @@
         &.big
          {
              height: 48rem;
-             transition: all 50ms ease-in-out;
              margin: 12rem 0;
-            label{ height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 10rem; overflow: hidden; opacity: 0; }
-            textarea{ font-size: 12rem; line-height: 16rem; border-top: 12rem solid transparent; border-bottom: 12rem solid transparent; padding-left: 10rem; }
+            label{ transition: all 50ms ease-in-out; height: 24rem; font-size: 10rem; line-height: 10rem; padding-left: 10rem; overflow: hidden; }
+            textarea{ font-size: 12rem; line-height: 16rem; border-top: 20rem solid transparent; padding-left: 10rem; }
             &.empty
              {
-                label{ height: 48rem; margin: 0;  }
+                label{ height: 48rem; font-size: 12rem; line-height: 12rem; margin: 0;  }
              }
             .alert-icon{ top: 12rem; }
             --size: 12rem;
@@ -156,7 +156,7 @@
     });
 </script>
 
-let _size = ( typeof size != 'undefined' ? size : ' medium' );
+let _size = ( typeof size != 'undefined' ? size : ' normal' );
 let _selector = ( typeof selector != 'undefined' ? selector : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
@@ -167,6 +167,7 @@ let _style = ( typeof style != 'undefined' ? style : '' );
 let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
 let _rows = ( typeof rows != 'undefined' ? rows : 1 );
+let _auto_extend = ( typeof autoextend != 'undefined' ? true : false );
 
 <div class={'Form_Textarea ' + ( _value.length > 0 ? '' : 'empty ' ) + _size + _error + _success} style={"width:" + _width + _style }>
     if( _size === 'big' )
@@ -176,29 +177,33 @@ let _rows = ( typeof rows != 'undefined' ? rows : 1 );
     <textarea data-selector={_selector} placeholder={( _size != 'big' ? label : null )} required={_required} onfocus="textarea.Focus(this.parentNode)" onchange={_onChange} onblur="textarea.Blur(this.parentNode)" rows={_rows} id={'textarea_data_' + label.liqd_slugify()}>{( _value.length > 0 ? _value : '' )}</textarea>
     <i class="alert-icon" data-icon="warning"></i>
 </div>
-<script Textarea_ID ={'textarea_data_' + label.liqd_slugify()} size={( typeof size != "undefined" ? size : 36)} instance>
+<script Textarea_ID ={'textarea_data_' + label.liqd_slugify()} autoextend={_auto_extend} size={( typeof size != "undefined" ? size : 36)} instance>
     let txtAreaElement = document.getElementById(Textarea_ID);
-
     if( typeof size == "string" )
     {
-        size === 'small' ? size = 24 : '';
-        size === 'medium' ? size = 36 : '';
-        size === 'big' ? size = 48 : '';
-        typeof size == "string" ? size = 36 : '';
+        size === 'small' ? size = { font: 24, line: 14, margin: 10 } : '';
+        size === 'normal' ? size = { font: 36, line: 16, margin: 20 } : '';
+        size === 'big' ? size = { font: 48, line: 16, margin: 32 } : '';
+        typeof size == "string" ? size = { font: 36, line: 16, margin: 20 } : '';
     }
-    txtAreaElement.parentNode.style.height = parseInt(txtAreaElement.rows) * size + 'rem';
-    txtAreaElement.addEventListener('input', function()
+
+    if(autoextend)
     {
-        var text = document.querySelector('textarea').value;
-        var lines = text.split("\n");
-        var count = lines.length;
-        if( count > parseInt(txtAreaElement.rows) )
+        txtAreaElement.parentNode.style.height = parseInt(txtAreaElement.rows) * size.font + 'rem';
+
+        let oldCount = 1;
+
+        txtAreaElement.addEventListener('input', function()
         {
-            txtAreaElement.parentNode.style.height = ( 16 * count ) + 'rem';
-        }
-        else
-        {
-            txtAreaElement.parentNode.style.height = parseInt(txtAreaElement.rows) * size + 'rem';
-        }
-    });
+            var text = txtAreaElement.value;
+            var lines = text.split("\n");
+            var count = lines.length;
+
+            if( count != oldCount )
+            {
+                txtAreaElement.parentNode.style.height = ( ( size.line  * count ) + size.margin ) + 'rem';
+                oldCount = count;
+            }
+        });
+    }
 </script>

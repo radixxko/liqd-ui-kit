@@ -426,6 +426,42 @@
             <th align="left">required</th>
             <th align="right"><div class="extend-icon" data-icon="extend" onclick="document.querySelector('[data-selector=checkbox-table]').classList.toggle(('active'));this.classList.toggle('active');"></div></th>
         </tr>
+        <tr>
+            <td>size</td>
+            <td>small, normal, big</td>
+            <td>normal</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>onclick</td>
+            <td>function</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>onchange</td>
+            <td>function</td>
+            <td>undefined</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>checked</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>NO</td>
+        </tr>
     </table>
     </Scroll>
     <div class="flex" style="width: 33.333%;">
@@ -465,6 +501,30 @@
                 <th align="left">default</th>
                 <th align="left">required</th>
                 <th align="right"><div class="extend-icon" data-icon="extend" onclick="document.querySelector('[data-selector=statuslog-table]').classList.toggle(('active'));this.classList.toggle('active');"></div></th>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>success, error</td>
+                <td>undefined</td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>undefined</td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td>string</td>
+                <td>undefined</td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td>style</td>
+                <td>string</td>
+                <td>undefined</td>
+                <td>NO</td>
             </tr>
         </table>
     </Scroll>

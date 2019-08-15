@@ -44,28 +44,20 @@
             height: 100%;
             &:checked + label:before
              {
-                 color: var(--green-9);
-                 background: var(--green-0);
-                 border: 1px solid var(--green-3);
+                 color: var(--gray-9);
+                 background: var(--gray-0);
+                 border: 1px solid var(--gray-9);
              }
             &:disabled + label:before{ background: var(--gray-0); }
         }
 
-        &.failed
-         {
-            input:checked + label:before
-            {
-                content: "\e002";
-                color: var(--red-9);
-                background: var(--red-0);
-                border: 1px solid var(--red-3);
-            }
-        }
+
         &.error
          {
             label:before
             {
                 border: 1px solid var(--red-9);
+                background: rgba(191, 54, 12, 0.05);
             }
          }
 
@@ -96,54 +88,15 @@
         &.disabled{ pointer-events: none!important; }
     }
 </style>
-<script>
-    window.checkBox_handler = function ( event, callback )
-    {
-        if( !event.target.parentNode.querySelector('input').disabled )
-        {
-            event.preventDefault();
-            let _input = event.target.parentNode.querySelector('input');
 
-            if( _input.checked )
-            {
-                _input.removeAttribute('failed');
-                _input.checked = false;
-                event.target.parentNode.classList.remove('failed');
-            }
-            else
-            {
-                _input.checked = true;
-                _input.setAttribute('failed', true);
-                event.target.parentNode.classList.add('failed');
-            }
-            callback();
-        }
-    };
-
-    window.checkBox_negative_handler = function ( element )
-    {
-        if( element.classList.contains('failed') )
-        {
-            element.classList.remove('failed');
-            element.querySelector('input').removeAttribute('failed');
-            element.parentNode.parentNode.querySelector('span.Form_Textarea').classList.add('hidden');
-
-            for( let step of Array.from( document.querySelectorAll('ul.step-list li') ) )
-            {
-                step.querySelector('input').disabled = false;
-            }
-        }
-    }
-</script>
-
-let _failed = ( typeof failed != "undefined" ? 'failed ' : '' );
-let _size = ( typeof size != 'undefined' ? (size + ' ') : '' );
+let _size = ( typeof size != 'undefined' ? (size + ' ') : 'normal ' );
 let _onClick = ( typeof onclick != 'undefined' ? onclick : '' );
 let _onChange = ( typeof onchange != "undefined" ? onchange : null );
 let _disabled = ( typeof disabled != "undefined" ? ' disabled' : null );
 let _checked = (typeof checked != 'undefined' ? 'true' : null );
+let _error = (typeof error != 'undefined' ? ' error' : '' );
 
-<div class={"checkbox "+ _failed + _size + ( typeof _disabled != 'null' ? _disabled : '' ) }  onclick={ 'checkBox_negative_handler( this );' + _onClick } oncontextmenu={( typeof rightClick != "undefined" ? "checkBox_handler( event, function(){" + rightClick + "('"+label.liqd_slugify()+"_checkbox_name')})" : null )} onchange={_onChange} >
+<div class={"checkbox " + _size + ( typeof _disabled != null ? _disabled : '' ) + _error }  onclick={ _onClick } onchange={_onChange} >
     <input disabled={(typeof disabled != "undefined" ? undefined : null)} type="checkbox" id={label.liqd_slugify()+'_checkbox_name'} name="check" checked={_checked} />
     <label for={label.liqd_slugify()+'_checkbox_name'} data-icon="checkmark"></label>
 </div>

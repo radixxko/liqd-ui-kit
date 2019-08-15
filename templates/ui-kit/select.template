@@ -19,7 +19,6 @@
             border: 0;
             outline: none;
             white-space: nowrap;
-            overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
             color: var(--gray-6);
@@ -52,12 +51,15 @@
 
         label
         {
-            cursor: pointer;
             position: absolute;
-            color: var(--gray-8);
+            top: 0;
+            left: 0;
+            width: 100%;
             font-weight: normal;
-            transition: top 50ms ease-in 0s,font-size 50ms ease-in 0s,color 50ms ease-in 0s;
-            -webkit-transition: top 50ms ease-in 0s,font-size 50ms ease-in 0s,color 50ms ease-in 0s;
+            color: var(--gray-6);
+            user-select: none;
+            display: flex;
+            align-items: center;
         }
 
         .select-wrap
@@ -145,12 +147,6 @@
                      opacity: 0.7;
                  }
             }
-
-            label
-            {
-                top: 0;
-                color: var(--gray-9);
-            }
         }
 
         &.focus
@@ -172,7 +168,6 @@
              height: 24rem;
              line-height: 24rem;
              margin: 10rem 0;
-             transition: opacity 50ms ease-in-out;
             .input, .select-wrap input
             {
                 height: 24rem; margin: 0; font-size: 10rem; line-height: 24rem; padding-left: 10rem;
@@ -210,7 +205,7 @@
                     margin: 0;
                 }
             }
-            --size: 10rem;
+            --size: 8rem;
         }
 
         &.normal
@@ -218,15 +213,14 @@
              height: 36rem;
              line-height: 36rem;
              margin: 12rem 0;
-             transition: opacity 50ms ease-in-out;
             .input, .select-wrap input
             {
-                height: 36rem; margin: 0; font-size: 12rem; line-height: 36rem; padding-left: 12rem;
+                height: 36rem; margin: 0; font-size: 12rem; line-height: 36rem; padding-left: 10rem;
             }
             .input:after
             {
                 font-size: 12rem;
-                padding-right: 12rem;
+                padding-right: 10rem;
             }
             .select-wrap
             {
@@ -234,13 +228,13 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 5rem 12rem;
+                    padding: 5rem 10rem;
                     line-height: 12rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 5rem 12rem;
+                    padding: 5rem 10rem;
                     line-height: 12rem;
                     font-size: 12rem;
                 }
@@ -263,15 +257,19 @@
              height: 48rem;
              line-height: 48rem;
              margin: 12rem 0;
-             transition: opacity 50ms ease-in-out;
             .input, .select-wrap input
             {
-                height: 48rem; margin: 0; font-size: 12rem; line-height: 48rem; padding-left: 12rem;
+                height: 48rem; margin: 0; font-size: 12rem; line-height: 48rem; padding-left: 10rem; border-top: 20rem solid transparent;
             }
+
+            label{ transition: all 50ms ease-in-out; height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 10rem; overflow: hidden; cursor: pointer; }
+
+            .input:after { top: -20px; }
+
             .input:after
             {
                 font-size: 12rem;
-                padding-right: 12rem;
+                padding-right: 10rem;
             }
             .select-wrap
             {
@@ -279,13 +277,13 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 5rem 12rem;
+                    padding: 5rem 10rem;
                     line-height: 12rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 5rem 12rem;
+                    padding: 5rem 10rem;
                     line-height: 12rem;
                     font-size: 12rem;
                 }
@@ -295,10 +293,10 @@
              {
                 .input
                 {
-                    height: 48rem;
-                    line-height: 48rem;
-                    margin: 0;
+                    line-height: 16rem;
+                    &:after{ top: 0; }
                 }
+                label{  height: 24rem; font-size: 10rem; line-height: 10rem;  }
             }
             --size: 12rem;
         }
@@ -307,7 +305,7 @@
          {
              border: 1px solid var(--red-8);
              background: rgba(191, 54, 12, 0.05);
-            .input, .input:after
+            .input, .input:after, label
             {
                 opacity: 1;
                 color: var(--red-8);
@@ -320,7 +318,7 @@
          {
              border: 1px solid var(--green-8);
              background: rgba(105, 240, 174, 0.05);
-            .input, .input:after
+            .input, .input:after, label
             {
                 opacity: 1;
                 color: var(--green-8);
@@ -364,9 +362,9 @@
                 this._values = [];
                 this._suggest_timeout = null;
 
-                if( value )
+                if( this._element.querySelector('div.select-option.active') )
                 {
-                    this._element.querySelector('div.input').innerText = option.Steps.find( f => f.id === JSON.parse( value ) ).value;
+                    this._element.querySelector('div.input').innerText = this._element.querySelector('div.select-option.active').innerText;
                 }
             }
 
@@ -546,38 +544,57 @@
         }
     }
 </script>
-var value = ( typeof value !== 'object' ? ( value !== '' ? value.toString().split( ( typeof join !== 'undefined' ? join : ',' ) ) : [] ) : value );
-<div style={'width:'+(typeof width !== 'undefined' ? width : '100%')+';'+(typeof style !== 'undefined' ? style : '')} class={'input-select'+(typeof value !== 'undefined' && value.length > 0 ? ' fill' : '')+(typeof selected !== 'undefined' && selected === 'true' ? ' selected' : '')+(typeof clazz !== 'undefined' ? ' '+clazz : '')+(typeof disabled !== 'undefined' && disabled === 'true' ? ' disabled' : '')+(typeof label === 'undefined' ? ' not-label' : '')+(typeof size != 'undefined' ? (' ' + size) : ' normal')}>
-<input data-filter={( typeof dataFilter !== 'undefined' ? dataFilter : null )} type="text" style="display:none;" required={(typeof required !== 'undefined' ? required : null)} pattern={(typeof pattern !== 'undefined' ? pattern : null)} onchange={(typeof onchange !== 'undefined' ? onchange : null)} value={(typeof value !== 'undefined' ? value.join( ( typeof join !== 'undefined' ? join : ',' ) ) : '')} name={(typeof id !== 'undefined' ? id : '')} id={(typeof id !== 'undefined' ? id : '')} data-join={(typeof join !== 'undefined' ? join : null )} />
-<div class="input" placeholder={(typeof placeholder !== 'undefined' ? placeholder : null)} contenteditable={( typeof contenteditable !== 'undefined' ? contenteditable : null )} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
-</div>
-<div class="select-wrap">
-    if( typeof suggest !== 'undefined' && suggest )
+
+var value = ( typeof value !== 'object' ? ( value !== '' ? value.toString().split( ',' ) : [] ) : value );
+let _width = ( typeof width !== 'undefined' ? width : '100%' );
+let _style = ( typeof style !== 'undefined' ? style : '' );
+let _selected = ( typeof selected !== 'undefined' && selected === 'true' ? ' selected' : '');
+let _class = ( typeof clazz !== 'undefined' ? ' '+clazz : '' );
+let _disabled = ( typeof disabled !== 'undefined' && disabled === 'true' ? ' disabled' : '' );
+let _fill = ( typeof value !== 'undefined' && value.length > 0 ? ' fill' : '' );
+let _label = ( typeof label === 'undefined' ? ' not-label' : '' );
+let _size = ( typeof size != 'undefined' ? ' '+size : ' normal' );
+let _required = ( typeof required !== 'undefined' ? required : null );
+let _onchange = ( typeof onchange !== 'undefined' ? onchange : null );
+let _value = ( typeof value !== 'undefined' ? value.join( ',' ) : '' );
+let _name = ( typeof name !== 'undefined' ? name : null );
+let _id = ( typeof id !== 'undefined' ? id : null );
+let _contenteditable = ( typeof contenteditable !== 'undefined' ? contenteditable : null );
+let _request = ( typeof request !== 'undefined' ? encodeURIComponent( request ) : null );
+let _init = ( typeof init !== 'undefined' ? init : 'true' );
+let _error = ( typeof error !== 'undefined' ? ' error' : '' );
+let _success = ( typeof success !== 'undefined' ? ' success' : '' );
+
+<div style={'width:'+_width+';'+_style} class={'input-select' + _fill + _selected +_class + _disabled + _label + _size + _error + _success }>
+    <input type="text" style="display:none;" required={_required} onchange={_onchange} value={_value} name={_name} id={_id} />
+    <div class="input" placeholder={( _size.trim() != "big" ? label : null)} contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </div>
+    <div class="select-wrap">
+        if( typeof suggest !== 'undefined' && suggest )
+        {
+            <input placeholder="Search" autocomplete="off" class="input-element-text" onkeypress="return event.keyCode!=13" type="text" data-request={_request}/>
+        }
+
+        for( key, item of option )
+        {
+            <div class={'select-'+( typeof item === 'string' ? 'option' : 'group' )+( value.includes( key.toString() ) ? ' active' : '' )} data-value={key}>{( typeof item === 'string' ? item : key )}</div>
+            if( typeof item === 'object' )
+            {
+                for( g_item of item )
+                {
+                    <div class={'select-option'+( value.includes( g_item.id.toString() ) ? ' active' : '' )} data-value={g_item.id}>{g_item.value}</div>
+                }
+            }
+        }
+    </div>
+    if( typeof label !== 'undefined' && _size.trim() === 'big' )
     {
-    <input placeholder="Search" autocomplete="off" class="input-element-text" onkeypress="return event.keyCode!=13" type="text" data-request={ ( typeof request !== 'undefined' ? encodeURIComponent( request ) : null ) }/>
+        <label for={_id} class="label">{label}</label>
     }
-
-    for( key, item of option )
-    {
-    <div class={'select-'+( typeof item === 'string' ? 'option' : 'group' )+( value.includes( key.toString() ) ? ' active' : '' )} data-value={key}>{( typeof item === 'string' ? item : key )}</div>
-if( typeof item === 'object' )
-{
-for( g_item of item )
-{
-<div class={'select-option'+( value.includes( g_item.id.toString() ) ? ' active' : '' )} data-value={g_item.id}>{g_item.value}</div>
-}
-}
-}
 </div>
-if( typeof label !== 'undefined' )
-{
-    <label for={id} class="label">{label}</label>
-}
-</div>
-
-<script instance id={id} value={value} option={option} contenteditable={( typeof contenteditable !== 'undefined' ? contenteditable : false )} init={( typeof init !== 'undefined' ? init : 'true' )}>
+<script instance select={_id} value={value} option={option} contenteditable={_contenteditable} init={_init}>
 if( init === 'true' )
 {
-new Select( document.getElementById( id ), value, option, {contenteditable} );
+    new Select( document.getElementById( select ), value, option, {contenteditable} );
 }
 </script>

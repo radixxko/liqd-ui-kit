@@ -19,8 +19,17 @@ server.get( '/data', async( req, res, next ) =>
 
 server.use('/', async(req, res, next ) =>
 {
+    let select =
+        {
+            Options:
+                [
+                    { id: 1, value: 'test' },
+                    { id: 2, value: 'test1' },
+                    { id: 3, value: 'test2' }
+                ]
+        };
 
-    res.reply(await Template.render('index', { }  ), 'text/html');
+    res.reply(await Template.render('index', { select }  ), 'text/html');
 
 });
 

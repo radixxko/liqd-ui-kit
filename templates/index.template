@@ -46,6 +46,7 @@
         }
     }
 </style>
+<script src="/data/dom.js"></script>
 <div class="main-content">
     <Scroll height="36rem" selector="input-table">
         <table>
@@ -274,6 +275,40 @@
         <Textarea type="text" label="big-error" size="big" error="true" width="calc(97% / 4)" />
         <Textarea type="text" label="big-success" size="big" success="true" width="calc(97% / 4)" />
         <Textarea type="text" label="big-value" size="big" value="press enter" width="calc(97% / 4)" autoextend="true"/>
+    </div>
+</div>
+<div class="main-content">
+    <Scroll height="36rem" selector="textarea-table">
+        <table>
+            <tr>
+                <th align="left">Select</th>
+                <th align="left">type</th>
+                <th align="left">default</th>
+                <th align="left">required</th>
+                <th align="right"><div class="extend-icon" data-icon="extend" onclick="document.querySelector('[data-selector=textarea-table]').classList.toggle(('active'));this.classList.toggle('active');"></div></th>
+            </tr>
+        </table>
+    </Scroll>
+    <div class="flex between">
+        <h3>Select small</h3>
+        <Select suggest="true" option={select} value="" id="0_Step_Suggestor" size="small" label="small" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="" error="true" id="1_Step_Suggestor" size="small" label="error" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="" success="true" id="2_Step_Suggestor" size="small" label="success" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="1" id="3_Step_Suggestor" size="small" label="value" width="calc(97% / 4)" />
+    </div>
+    <div class="flex between">
+        <h3>Select normal</h3>
+        <Select suggest="true" option={select} value="" id="4_Step_Suggestor" size="normal" label="normal" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="" error="true" id="5_Step_Suggestor" size="normal" label="error" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="" success="true" id="6_Step_Suggestor" size="normal" label="success" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="1" id="7_Step_Suggestor" size="normal" label="value" width="calc(97% / 4)" />
+    </div>
+    <div class="flex between">
+        <h3>Select big</h3>
+        <Select suggest="true" option={select} value="" id="8_Step_Suggestor" size="big" label="big" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="" error="true" id="9_Step_Suggestor" size="big" label="error" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="" success="true" id="10_Step_Suggestor" size="big" label="success" width="calc(97% / 4)" />
+        <Select suggest="true" option={select} value="1" id="11_Step_Suggestor" size="big" label="value" width="calc(97% / 4)" />
     </div>
 </div>
 <div class="main-content">

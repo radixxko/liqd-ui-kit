@@ -2,10 +2,15 @@
     .main-content
     {
         width: 1140px;
-        margin: var(--padding-5) auto;
+        margin: 12rem auto;
         display: flex;
         flex-wrap: wrap;
-        h3{ width: 100%; }
+        h3
+        {
+            width: 100%;
+            font-size: 14rem;
+            line-height: 24rem;
+        }
         .flex
         {
             display: flex;
@@ -260,14 +265,14 @@
         <Textarea type="text" label="small" size="small" width="calc(97% / 4)" />
         <Textarea type="text" label="small-error" size="small" error="true" width="calc(97% / 4)" />
         <Textarea type="text" label="small-success" size="small" success="true" width="calc(97% / 4)" />
-        <Textarea type="text" label="small-small" size="small" value="value" width="calc(97% / 4)" />
+        <Textarea type="text" label="small-small" size="small" value="value" width="calc(97% / 4)" autoextend="true" />
     </div>
     <div class="flex between">
         <h3>Textarea normal</h3>
         <Textarea type="text" label="normal" size="normal" width="calc(97% / 4)" />
         <Textarea type="text" label="normal-error" size="normal" error="true" width="calc(97% / 4)" />
         <Textarea type="text" label="normal-success" size="normal" success="true" width="calc(97% / 4)" />
-        <Textarea type="text" label="normal-normal" size="normal" value="value" width="calc(97% / 4)" />
+        <Textarea type="text" label="normal-normal" size="normal" value="value" width="calc(97% / 4)" autoextend="true" />
     </div>
     <div class="flex between">
         <h3>Textarea big</h3>
@@ -291,14 +296,14 @@
     </Scroll>
     <div class="flex between">
         <h3>Select small</h3>
-        <Select suggest="true" option={select} value="" id="0_Step_Suggestor" size="small" label="small" width="calc(97% / 4)" />
+        <Select option={select} value="" id="0_Step_Suggestor" size="small" label="small" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="" error="true" id="1_Step_Suggestor" size="small" label="error" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="" success="true" id="2_Step_Suggestor" size="small" label="success" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="1" id="3_Step_Suggestor" size="small" label="value" width="calc(97% / 4)" />
     </div>
     <div class="flex between">
         <h3>Select normal</h3>
-        <Select suggest="true" option={select} value="" id="4_Step_Suggestor" size="normal" label="normal" width="calc(97% / 4)" />
+        <Select option={select} value="" id="4_Step_Suggestor" size="normal" label="normal" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="" error="true" id="5_Step_Suggestor" size="normal" label="error" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="" success="true" id="6_Step_Suggestor" size="normal" label="success" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="1" id="7_Step_Suggestor" size="normal" label="value" width="calc(97% / 4)" />
@@ -500,31 +505,37 @@
     </table>
     </Scroll>
     <div class="flex" style="width: 33.333%;">
-        <h3 style="margin-bottom: var(--padding-2);">Checkbox small</h3>
-        <Checkbox label="small" size="small" />
-        <div style="margin-right: var(--padding-1);"></div>
-        <Checkbox label="small" size="small" checked="true" />
-        <div style="margin-right: var(--padding-1);"></div>
-        <Checkbox label="small" size="small" disabled="true" />
-        <div style="margin-right: var(--padding-1);"></div>
+        <h3>Checkbox small</h3>
+        <div style="display: inline-flex">
+            <Checkbox label="small" size="small" />
+            <div style="margin-right: var(--padding-1);"></div>
+            <Checkbox label="small" size="small" checked="true" />
+            <div style="margin-right: var(--padding-1);"></div>
+            <Checkbox label="small" size="small" disabled="true" />
+            <div style="margin-right: var(--padding-1);"></div>
+        </div>
     </div>
     <div class="flex" style="width: 33.333%;">
-        <h3 style="margin: var(--padding-2) 0;">Checkbox normal</h3>
-        <Checkbox label="small-1" size="normal" />
-        <div style="margin-right: var(--padding-1);"></div>
-        <Checkbox label="small-2" size="normal" checked="true" />
-        <div style="margin-right: var(--padding-1);"></div>
-        <Checkbox label="small-3" size="normal" disabled="true" />
-        <div style="margin-right: var(--padding-1);"></div>
+        <h3>Checkbox normal</h3>
+        <div style="display: inline-flex">
+            <Checkbox label="small-1" size="normal" />
+            <div style="margin-right: var(--padding-1);"></div>
+            <Checkbox label="small-2" size="normal" checked="true" />
+            <div style="margin-right: var(--padding-1);"></div>
+            <Checkbox label="small-3" size="normal" disabled="true" />
+            <div style="margin-right: var(--padding-1);"></div>
+        </div>
     </div>
     <div class="flex" style="width: 33.333%;">
-        <h3 style="margin: var(--padding-2) 0;">Checkbox big</h3>
-        <Checkbox label="small" size="big" />
-        <div style="margin-right: var(--padding-1);"></div>
-        <Checkbox label="small" size="big" checked="true" />
-        <div style="margin-right: var(--padding-1);"></div>
-        <Checkbox label="small" size="big" disabled="true" />
-        <div style="margin-right: var(--padding-1);"></div>
+        <h3>Checkbox big</h3>
+        <div style="display: inline-flex">
+            <Checkbox label="small" size="big" />
+            <div style="margin-right: var(--padding-1);"></div>
+            <Checkbox label="small" size="big" checked="true" />
+            <div style="margin-right: var(--padding-1);"></div>
+            <Checkbox label="small" size="big" disabled="true" />
+            <div style="margin-right: var(--padding-1);"></div>
+        </div>
     </div>
 </div>
 <div class="main-content">

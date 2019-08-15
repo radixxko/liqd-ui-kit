@@ -5,7 +5,6 @@
         position: relative;
         width: 100%;
         border: 1px solid var(--gray-2);
-        background: white;
         border-radius:2px;
         transition: all 83ms ease-in-out 34ms;
         &.active {  border-color: blue; label{ color: blue; }  }
@@ -41,18 +40,18 @@
         &.small
          {
              height: 24rem;
-             margin: 10rem 0;
+             margin-bottom: 12rem;
              transition: opacity 50ms ease-in-out;
-            input{ font-size: 10rem; line-height: 22rem; padding-left: 10rem; }
+            input{ font-size: 10rem; line-height: 14rem; padding-left: 7rem; }
             --size: 8rem;
          }
 
         &.normal
          {
              height: 36rem;
-             margin: 12rem 0;
+             margin-bottom: 24rem;
              transition: opacity 50ms ease-in-out;
-            input{ font-size: 12rem; line-height: 34rem; padding-left: 10rem; }
+            input{ font-size: 12rem; line-height: 16rem; padding-left: 7rem; }
             --size: 10rem;
         }
 
@@ -61,19 +60,19 @@
         &.big
          {
              height: 48rem;
-             margin: 12rem 0;
+             margin-bottom: 36rem;
             label
             {
                 transition: all 50ms ease-in-out;
                 height: 24rem;
                 font-size: 10rem;
                 line-height: 10rem;
-                padding-left: 12rem;
+                padding-left: 7rem;
             }
             input
             {
                 font-size: 12rem;
-                padding-left: 12rem;
+                padding-left: 7rem;
                 padding-top: 12rem;
                 line-height: 12rem;
             }
@@ -87,7 +86,7 @@
         .alert-icon
         {
             position: absolute;
-            right: var(--size);
+            right: 7rem;
             font-size: calc(var(--size) + 6rem);
             top: 0;
             bottom: 0;

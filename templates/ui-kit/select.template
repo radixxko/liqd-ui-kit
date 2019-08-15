@@ -8,12 +8,11 @@
         vertical-align: top;
         position: relative;
         cursor: text;
-        background-color: white;
         color: var(--gray-8);
 
         .input
         {
-            display: block;
+            display: flex;
             position: relative;
             width: 100%;
             border: 0;
@@ -22,6 +21,7 @@
             text-overflow: ellipsis;
             cursor: pointer;
             color: var(--gray-6);
+            align-items: center;
 
             &:empty:before
              {
@@ -39,12 +39,11 @@
              {
                  content: "\e08a";
                  font-family: "flaticon";
-                 top: 0;
                  right: 0;
-                 bottom: 0;
                  position: absolute;
                  text-align: center;
                  opacity: 0;
+                 margin: auto;
                  transition: opacity 200ms ease-in;
              }
         }
@@ -154,7 +153,6 @@
             .select-wrap
             {
                 height: auto;
-                background-color: #fff;
                 z-index: 999;
                 margin-left: -1px;
                 border: 1px solid blue;
@@ -166,15 +164,20 @@
         &.small
          {
              height: 24rem;
-             line-height: 24rem;
-             margin: 10rem 0;
+             line-height: 14rem;
+             margin-bottom: 12rem;
+
             .input, .select-wrap input
             {
-                height: 24rem; margin: 0; font-size: 10rem; line-height: 24rem; padding-left: 10rem;
+                margin: 0; font-size: 10rem; line-height: 14rem; padding-left: 10rem;
             }
+
+            .select-wrap input{ line-height: 22rem; }
+            .input{ height: 22rem;  }
             .input:after
             {
                 font-size: 10rem;
+                line-height: 14rem;
                 padding-right: 10rem;
             }
             .select-wrap
@@ -183,14 +186,14 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 5rem 10rem;
-                    line-height: 12rem;
+                    padding: 0 10rem;
+                    line-height: 24rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 5rem 10rem;
-                    line-height: 10rem;
+                    padding: 0 10rem;
+                    line-height: 24rem;
                     font-size: 10rem;
                 }
             }
@@ -201,7 +204,6 @@
                 .input
                 {
                     height: 24rem;
-                    line-height: 24rem;
                     margin: 0;
                 }
             }
@@ -212,14 +214,19 @@
          {
              height: 36rem;
              line-height: 36rem;
-             margin: 12rem 0;
+             margin-bottom: 24rem;
             .input, .select-wrap input
             {
-                height: 36rem; margin: 0; font-size: 12rem; line-height: 36rem; padding-left: 10rem;
+                margin: 0; font-size: 12rem; line-height: 16rem; padding-left: 10rem;
             }
+
+            .input{ height: 34rem; }
+            .select-wrap input{ line-height: 22rem; }
+
             .input:after
             {
                 font-size: 12rem;
+                line-height: 16rem;
                 padding-right: 10rem;
             }
             .select-wrap
@@ -228,14 +235,14 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 5rem 10rem;
-                    line-height: 12rem;
+                    padding: 0 10rem;
+                    line-height: 24rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 5rem 10rem;
-                    line-height: 12rem;
+                    padding: 0 10rem;
+                    line-height: 24rem;
                     font-size: 12rem;
                 }
             }
@@ -245,7 +252,6 @@
                 .input
                 {
                     height: 36rem;
-                    line-height: 36rem;
                     margin: 0;
                 }
              }
@@ -256,20 +262,22 @@
          {
              height: 48rem;
              line-height: 48rem;
-             margin: 12rem 0;
+             margin-bottom: 36rem;
             .input, .select-wrap input
             {
-                height: 48rem; margin: 0; font-size: 12rem; line-height: 48rem; padding-left: 10rem; border-top: 20rem solid transparent;
+               margin: 0; font-size: 12rem; line-height: 16rem; padding-left: 10rem;
             }
 
-            label{ transition: all 50ms ease-in-out; height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 10rem; overflow: hidden; cursor: pointer; }
+            .select-wrap input{ line-height: 22rem; }
+            .input{ border-top: 21rem solid transparent; }
 
-            .input:after { top: -20px; }
+            label{ transition: all 50ms ease-in-out; height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 10rem; overflow: hidden; cursor: pointer; }
 
             .input:after
             {
                 font-size: 12rem;
                 padding-right: 10rem;
+                transform: translateY(-5px);
             }
             .select-wrap
             {
@@ -277,14 +285,14 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 5rem 10rem;
-                    line-height: 12rem;
+                    padding: 0 10rem;
+                    line-height: 24rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 5rem 10rem;
-                    line-height: 12rem;
+                    padding: 0 10rem;
+                    line-height: 24rem;
                     font-size: 12rem;
                 }
             }
@@ -294,7 +302,7 @@
                 .input
                 {
                     line-height: 16rem;
-                    &:after{ top: 0; }
+                    &:after{ transform: translateY(0); }
                 }
                 label{  height: 24rem; font-size: 10rem; line-height: 10rem;  }
             }
@@ -383,8 +391,8 @@
 
             _hidden()
             {
-                if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
-                this._element.classList.remove('focus');
+               // if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
+               // this._element.classList.remove('focus');
             }
 
             focus( event )

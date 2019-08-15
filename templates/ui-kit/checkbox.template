@@ -2,7 +2,6 @@
     .checkbox
     {
         position: relative;
-        margin: var(--padding-1) 0;
         label
         {
             width: 100%;
@@ -92,11 +91,11 @@
 let _size = ( typeof size != 'undefined' ? (size + ' ') : 'normal ' );
 let _onClick = ( typeof onclick != 'undefined' ? onclick : '' );
 let _onChange = ( typeof onchange != "undefined" ? onchange : null );
-let _disabled = ( typeof disabled != "undefined" ? ' disabled' : null );
+let _disabled = ( typeof disabled != "undefined" ? ' disabled' : '' );
 let _checked = (typeof checked != 'undefined' ? 'true' : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
 
-<div class={"checkbox " + _size + ( typeof _disabled != null ? _disabled : '' ) + _error }  onclick={ _onClick } onchange={_onChange} >
+<div class={"checkbox " + _size + _disabled + _error }  onclick={ _onClick } onchange={_onChange} >
     <input disabled={(typeof disabled != "undefined" ? undefined : null)} type="checkbox" id={label.liqd_slugify()+'_checkbox_name'} name="check" checked={_checked} />
     <label for={label.liqd_slugify()+'_checkbox_name'} data-icon="checkmark"></label>
 </div>

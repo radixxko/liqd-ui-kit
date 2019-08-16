@@ -9,7 +9,7 @@
         position: relative;
         cursor: text;
         color: var(--gray-8);
-
+        background-color: white;
         .input
         {
             display: flex;
@@ -158,6 +158,7 @@
                 border: 1px solid blue;
                 border-bottom-right-radius: 2px;
                 border-bottom-left-radius: 2px;
+                background-color: white;
             }
          }
 
@@ -169,7 +170,7 @@
 
             .input, .select-wrap input
             {
-                margin: 0; font-size: 10rem; line-height: 14rem; padding-left: 10rem;
+                margin: 0; font-size: 10rem; line-height: 14rem; padding-left: 7rem;
             }
 
             .select-wrap input{ line-height: 22rem; }
@@ -178,7 +179,7 @@
             {
                 font-size: 10rem;
                 line-height: 14rem;
-                padding-right: 10rem;
+                padding-right: 7rem;
             }
             .select-wrap
             {
@@ -186,13 +187,13 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 0 10rem;
+                    padding: 0 7rem;
                     line-height: 24rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 0 10rem;
+                    padding: 0 7rem;
                     line-height: 24rem;
                     font-size: 10rem;
                 }
@@ -217,7 +218,7 @@
              margin-bottom: 24rem;
             .input, .select-wrap input
             {
-                margin: 0; font-size: 12rem; line-height: 16rem; padding-left: 10rem;
+                margin: 0; font-size: 12rem; line-height: 16rem; padding-left: 7rem;
             }
 
             .input{ height: 34rem; }
@@ -227,7 +228,7 @@
             {
                 font-size: 12rem;
                 line-height: 16rem;
-                padding-right: 10rem;
+                padding-right: 7rem;
             }
             .select-wrap
             {
@@ -235,13 +236,13 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 0 10rem;
+                    padding: 0 7rem;
                     line-height: 24rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 0 10rem;
+                    padding: 0 7rem;
                     line-height: 24rem;
                     font-size: 12rem;
                 }
@@ -265,19 +266,26 @@
              margin-bottom: 36rem;
             .input, .select-wrap input
             {
-               margin: 0; font-size: 12rem; line-height: 16rem; padding-left: 10rem;
+               font-size: 12rem; line-height: 16rem; padding-left: 7rem;
             }
 
             .select-wrap input{ line-height: 22rem; }
-            .input{ border-top: 21rem solid transparent; }
+            .input
+            {
+                height: 16rem;
+                margin-top: calc( 26rem - 1px);
+            }
 
-            label{ transition: all 50ms ease-in-out; height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 10rem; overflow: hidden; cursor: pointer; }
+            label
+            {
+                transition: all 50ms ease-in-out; height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 7rem; overflow: hidden; cursor: pointer;
+            }
 
             .input:after
             {
                 font-size: 12rem;
-                padding-right: 10rem;
-                transform: translateY(-5px);
+                padding-right: 7rem;
+                transform: translateY(-10px);
             }
             .select-wrap
             {
@@ -285,13 +293,13 @@
                 right: -1rem;
                 .select-group
                 {
-                    padding: 0 10rem;
+                    padding: 0 7rem;
                     line-height: 24rem;
                     font-size: 12rem;
                 }
                 .select-option
                 {
-                    padding: 0 10rem;
+                    padding: 0 7rem;
                     line-height: 24rem;
                     font-size: 12rem;
                 }
@@ -304,7 +312,14 @@
                     line-height: 16rem;
                     &:after{ transform: translateY(0); }
                 }
-                label{  height: 24rem; font-size: 10rem; line-height: 10rem;  }
+                label
+                {
+                    height: 14rem;
+                    font-size: 10rem;
+                    line-height: 14rem;
+                    padding-left: 7rem;
+                    margin-top: calc(8rem - 1px);
+                }
             }
             --size: 12rem;
         }
@@ -347,6 +362,7 @@
 
                 this._input = input;
                 this._element = this._input.parentNode;
+                this._multiple = ( options.hasOwnProperty('multiple') && options.multiple == true ? true : false );
 
                 this._element.addEventListener( 'click', this.focus.bind(this) );
                 this._element.addEventListener( 'mouseover', this.stop.bind(this) );
@@ -372,7 +388,8 @@
 
                 if( this._element.querySelector('div.select-option.active') )
                 {
-                    this._element.querySelector('div.input').innerText = this._element.querySelector('div.select-option.active').innerText;
+                    this._element.querySelector('div.input').innerText = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => r.innerText ).join(',');
+                    this._values.push( Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => ( { value: r.dataset.value, label : r.innerText } ) ) );
                 }
             }
 
@@ -391,8 +408,8 @@
 
             _hidden()
             {
-               // if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
-               // this._element.classList.remove('focus');
+              //  if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
+              //  this._element.classList.remove('focus');
             }
 
             focus( event )
@@ -409,23 +426,23 @@
                 if(this._element.classList.contains('success')){ this._element.classList.remove('success') }
             }
 
-            setValue( value )
-            {
-                this._values = [];
-                if( this._option[ value ] ){ this._values.push({ value, label : this._option[ value ] }) }
-                this._setValue();
-            }
 
             select( element )
             {
-                this._values = [];
+                //TODO POFIXOVAT setValue pre multiple init
                 if( element.classList.contains('active') && !this._element.classList.contains('selected') )
                 {
                     element.classList.remove('active');
+                    if( this._multiple ){ this._values = this._values.filter( el => el.value !=  element.getAttribute('data-value') ); }
                 }
                 else
                 {
-                    this._element.querySelectorAll('.select-option').forEach( item => item.classList.remove('active') );
+                    if( !this._multiple )
+                    {
+
+                        this._values = [];
+                        this._element.querySelectorAll('.select-option').forEach( item => item.classList.remove('active') );
+                    }
 
                     element.classList.add('active');
                     this._values.push({ value : element.getAttribute('data-value'), label : element.innerText.trim() });
@@ -496,13 +513,16 @@
             _setValue( change = true )
             {
                 let old_value = this._input.value;
-                this._element.querySelector('.input').innerHTML = ( this._values.length > 0 ? this._values[0].label : '' );
-                this._input.value = ( this._values.length > 0 ? this._values[0].value : '' );
+                this._element.querySelector('.input').innerHTML = ( this._values.length > 0 ? this._values.map( r => r.label ).join(',') : '' );
+                this._input.value = ( this._values.length > 0 ? this._values.map( r => r.value ).join(',') : '' );
 
                 if( this._input.value !== '' )
                 {
                     this._element.classList.add('fill');
-                    this._element.querySelector('.select-option[data-value="'+this._input.value+'"]').classList.add('active');
+                    for( let value of this._input.value.split(',') )
+                    {
+                        this._element.querySelector('.select-option[data-value="'+value+'"]').classList.add('active');
+                    }
                 }
                 else if( this._input.value === '' )
                 {
@@ -572,7 +592,7 @@ let _request = ( typeof request !== 'undefined' ? encodeURIComponent( request ) 
 let _init = ( typeof init !== 'undefined' ? init : 'true' );
 let _error = ( typeof error !== 'undefined' ? ' error' : '' );
 let _success = ( typeof success !== 'undefined' ? ' success' : '' );
-
+let _multiple = ( typeof multiple !== 'undefined' ? true : false );
 <div style={'width:'+_width+';'+_style} class={'input-select' + _fill + _selected +_class + _disabled + _label + _size + _error + _success }>
     <input type="text" style="display:none;" required={_required} onchange={_onchange} value={_value} name={_name} id={_id} />
     <div class="input" placeholder={( _size.trim() != "big" ? label : null)} contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
@@ -590,7 +610,17 @@ let _success = ( typeof success !== 'undefined' ? ' success' : '' );
             {
                 for( g_item of item )
                 {
-                    <div class={'select-option'+( value.includes( g_item.id.toString() ) ? ' active' : '' )} data-value={g_item.id}>{g_item.value}</div>
+                    if( value.includes( g_item.id.toString() ) )
+                    {
+                        <div class="select-option active" data-value={g_item.id}>{g_item.value}</div>
+                    }
+                }
+                for( g_item of item )
+                {
+                    if( !value.includes( g_item.id.toString() ) )
+                    {
+                        <div class="select-option" data-value={g_item.id}>{g_item.value}</div>
+                    }
                 }
             }
         }
@@ -600,9 +630,9 @@ let _success = ( typeof success !== 'undefined' ? ' success' : '' );
         <label for={_id} class="label">{label}</label>
     }
 </div>
-<script instance select={_id} value={value} option={option} contenteditable={_contenteditable} init={_init}>
+<script instance select={_id} value={value} option={option} contenteditable={_contenteditable} multiple={_multiple} init={_init}>
 if( init === 'true' )
 {
-    new Select( document.getElementById( select ), value, option, {contenteditable} );
+    new Select( document.getElementById( select ), value, option, {contenteditable, multiple} );
 }
 </script>

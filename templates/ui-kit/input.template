@@ -7,6 +7,7 @@
         border: 1px solid var(--gray-2);
         border-radius:2px;
         transition: all 83ms ease-in-out 34ms;
+        background-color: white;
         &.active {  border-color: blue; label{ color: blue; }  }
         @media (max-width:1024px) { width: 100%; }
         label
@@ -64,17 +65,19 @@
             label
             {
                 transition: all 50ms ease-in-out;
-                height: 24rem;
+                height: 14rem;
                 font-size: 10rem;
-                line-height: 10rem;
+                line-height: 14rem;
                 padding-left: 7rem;
+                margin-top: calc(8rem - 1px);
             }
             input
             {
                 font-size: 12rem;
                 padding-left: 7rem;
-                padding-top: 12rem;
-                line-height: 12rem;
+                line-height: 16rem;
+                height: 16rem;
+                margin-top: calc( 26rem - 1px);
             }
             &.empty
              {

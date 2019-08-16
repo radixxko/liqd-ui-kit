@@ -296,7 +296,7 @@
     </Scroll>
     <div class="flex between">
         <h3>Select small</h3>
-        <Select option={select} value="" id="0_Step_Suggestor" size="small" label="small" width="calc(97% / 4)" />
+        <Select option={select} value="1,2,3" id="0_Step_Suggestor" size="small" label="small" width="calc(97% / 4)" multiple="true" />
         <Select suggest="true" option={select} value="" error="true" id="1_Step_Suggestor" size="small" label="error" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="" success="true" id="2_Step_Suggestor" size="small" label="success" width="calc(97% / 4)" />
         <Select suggest="true" option={select} value="1" id="3_Step_Suggestor" size="small" label="value" width="calc(97% / 4)" />

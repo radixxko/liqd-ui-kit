@@ -1,0 +1,104 @@
+<style>
+    .Quantity-input
+    {
+        display: flex;
+        background-color: white;
+        border: 1px solid var(--gray-2);
+        input
+        {
+            height: 100%;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: white;
+        }
+
+        .Quantity-button{ color: var(--gray-5);cursor: pointer; }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button
+        {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &.small
+         {
+             width: 96rem;
+             height: 24rem;
+             font-size: 10rem;
+             line-height: 24rem;
+            input{ width: 48rem; }
+            .Quantity-button
+            {
+                width: 24rem;
+                background-color: var(--gray-2);
+                text-align: center;
+                transition: all 50ms ease-in-out;
+                &:hover
+                 {
+                     background-color: var(--gray-3);
+                     color: var(--gray-9);
+                 }
+            }
+         }
+
+        &.normal
+         {
+             width: 108rem;
+             height: 36rem;
+             font-size: 12rem;
+             line-height: 36rem;
+            input{ width: 48rem; }
+            .Quantity-button
+            {
+                width: 36rem;
+                background-color: var(--gray-2);
+                text-align: center;
+                transition: all 50ms ease-in-out;
+                &:hover
+                 {
+                     background-color: var(--gray-3);
+                     color: var(--gray-9);
+                 }
+            }
+         }
+
+        &.big
+         {
+             width: 144rem;
+             height: 48rem;
+             font-size: 14rem;
+             line-height: 48rem;
+            input{ width: 96rem; }
+            .Quantity-button
+            {
+                width: 48rem;
+                background-color: var(--gray-2);
+                text-align: center;
+                transition: background-color 50ms ease-in-out;
+                &:hover
+                 {
+                     background-color: var(--gray-3);
+                 }
+            }
+         }
+    }
+</style>
+
+let _size = ( typeof size != 'undefined' ? size : ' normal' );
+let _selector = ( typeof selector != 'undefined' ? selector : null );
+let _value = ( typeof value != 'undefined' ? value : '' );
+let _width = ( typeof width != 'undefined' ? width : '' );
+let _style = ( typeof style != 'undefined' ? style : '' );
+let _error = ( typeof error != 'undefined' ? ' error' : '' );
+let _success = ( typeof success != 'undefined' ? ' success' : '' );
+let _min = ( typeof min != 'undefined' ? parseFloat(min) : 0 );
+let _max = ( typeof max != 'undefined' ? parseFloat(max) : undefined );
+
+<div class={"Quantity-input " + _size + _error + _success } data-selector={_selector}>
+    <div class="Quantity-button" data-icon="minus" onclick={"this.nextSibling.value = ( parseFloat(this.nextSibling.value) - 1 ) >= " + _min + " ? ( parseFloat(this.nextSibling.value) - 1 ) : parseFloat( this.nextSibling.value )"}></div>
+    <input type="number" value={_value} disabled />
+    <div class="Quantity-button" data-icon="plus" onclick={"this.previousSibling.value = ( typeof " + _max + " !== 'undefined' ? ( ( parseFloat(this.previousSibling.value) + 1 ) <= " + ( _max || 0 ) + " ) : true ) ? ( parseFloat(this.previousSibling.value) + 1 ) : parseFloat( this.previousSibling.value )"}></div>
+</div>

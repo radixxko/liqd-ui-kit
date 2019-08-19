@@ -16,12 +16,20 @@
         background: var( --form-button-background, var(--form-fill-background, silver ));
         color: var( --form-button-color, var(--form-color, black ));
         border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, silver ));
-        border-radius: var( --form-button-border-radius, var(--form-border-radius, 4px ));
+        border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
         box-sizing: border-box;
         height: var( --form-button-height-size, var(--form-height-size, 36px ));
         padding: 0 var( --form-button-font-size, var(--form-font-size, 14px ));
         font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
         line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
+        &:disabled
+         {
+                 cursor: default;
+                 pointer-events: none;
+                 background: var( --form-button-disabled-background, var(--form-fill-disabled-background, gray ));
+                 color: var( --form-button-disabled-color, var(--form-disabled-color, gray ));
+                 border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-disabled-color, var(--form-border-disabled-color, gray ));
+         }
         @media ( min-width: 1024px )
         {
             &:hover
@@ -100,7 +108,7 @@ let _icon = ( typeof icon != 'undefined' ? icon : null );
 let _label = ( typeof label != 'undefined' ? label : null );
 let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-' + iconPosition : ' icon-left' );
 let _loading_text = ( typeof loaderText != 'undefined' ? loaderText : 'Loading...' );
-let _disabled = ( typeof disabled != 'undefined' ? disabled : null );
+let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
 
 <button class={"button " + ( _icon ? _icon_position : '' )} disabled={_disabled} data-label={_label} data-loader={_loading_text} data-icon={_icon} onclick={( typeof onclick != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : '' )+"this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 750);"}>
         if(_label){{_label}}

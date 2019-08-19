@@ -3,6 +3,7 @@ const Server = require('liqd-server');
 
 const TEMPLATE = require('liqd-template');
 const Template = new TEMPLATE({ directory:  __dirname + '/templates' });
+const Component = require('./component');
 
 const server = new Server();
 
@@ -44,23 +45,26 @@ const components = require('./components');
 
 server.use('/', async(req, res, next ) =>
 {
-    console.log( components );
+    let render = '';
 
-    let template = components['Button'].variants['Button-disabled'].template;
+    for( let id in components )
+    {
+        let component = new Component( Template, components[id] );
+
+        render += await component.render();
+    }
+
+    /*let template = components['Button'].variants['Button-disabled'].template;
 
     let render = await Template.render( template.source, template.data );
-    let component = '<!DOCTYPE html><head><meta charset="utf-8"/><style>html,body{margin:0;padding:0;font-size:1px;}'+template.style+'</style></head><body>' + render + '</body></html>';
+    let component = '<!DOCTYPE html><head><meta charset="utf-8"/><style>html,body{margin:0;padding:0;font-size:1px;}'+template.style+'</style></head><body><div id="content">' + render + '</div><script></script></body></html>';
     let source = render.replace(/<style.*?<\/style>/g,'').replace(/<script.*?<\/script>/g,'');
 
     console.log(component);
 
     //beautifyHTML(source);
-
-    res.reply('<!DOCTYPE html><head><meta charset="utf-8"/></head><body><iframe width="600" frameborder="0" srcdoc="'+htmlentities(component)+'"/></ifram></body></html>', 'text/html');
-
-    //console.log( component );
-
-    res.reply(await Template.render('index2', {}), 'text/html');
+    */
+    res.reply('<!DOCTYPE html><head><meta charset="utf-8"/></head><body>' + render + '</body></html>', 'text/html');
 
 });
 

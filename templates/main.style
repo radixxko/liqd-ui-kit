@@ -157,7 +157,6 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     font-size: inherit;
     line-height: inherit;
     vertical-align: baseline;
-    &:focus{ outline: none; border: 0; }
 }
 
 body

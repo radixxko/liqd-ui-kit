@@ -30,6 +30,7 @@
             }
         }
         &.focus{ animation: outer-pulse 750ms infinite; }
+        &:focus{ outline: 0; }
         &:before
          {
              position: absolute;
@@ -39,10 +40,10 @@
              display: flex;
              align-items: center;
          }
-         &.icon-left:before, .loader-box{ left: var( --form-button-font-size, var(--form-font-size, 14rem )); }
-         &.icon-right:before, .loader-box{ right: var( --form-button-font-size, var(--form-font-size, 14rem )); }
-         &.icon-left{ padding-left: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); }
-         &.icon-right{ padding-right: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); }
+         &.icon-left:before{ left: var( --form-button-font-size, var(--form-font-size, 14rem )); }
+         &.icon-right:before{ right: var( --form-button-font-size, var(--form-font-size, 14rem )); }
+         &.icon-left{ padding-left: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); .loader-box { left: var( --form-button-font-size, var(--form-font-size, 14rem )); margin-left: auto; } }
+         &.icon-right{ padding-right: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); .loader-box { right: var( --form-button-font-size, var(--form-font-size, 14rem )); margin-right: auto; } }
 
         &.loader
          {
@@ -52,7 +53,6 @@
             {
                 border-radius: 50%;
                 animation: spin 2s linear infinite;
-                margin-right: var(--padding-1);
                 background: conic-gradient(from 90deg, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0.50), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1));
                 position: absolute;
                 width: var( --form-button-font-size, var(--form-font-size, 14rem ));

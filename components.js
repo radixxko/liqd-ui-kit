@@ -6,7 +6,7 @@ module.exports =
         description : 'Button',
         template    :
         {
-            source  : '<Button label="Test" disabled="true" onclick="alert(\'click\')"></Button>',
+            source  : '<Button label="Test" onclick="alert(\'click\')"></Button>',
             data    : {},
             style   : ''
         },
@@ -51,7 +51,7 @@ module.exports =
                 description : 'Button icon center label empty',
                 template    :
                 {
-                    source  : '<Button label="" icon="checkmark-round" iconPosition="center" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
+                    source  : '<Button label="" icon="checkmark-round" iconPosition="center" loading="" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
                     data    : {},
                     style   : ''
                 }

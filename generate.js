@@ -51,7 +51,7 @@ server.use('/', async(req, res, next ) =>
     {
         let component = new Component( Template, components[id] );
 
-        render += await component.render();
+        render += await component.render()+'<div style="clear:both;height:20px;"></div>';
     }
 
     /*let template = components['Button'].variants['Button-disabled'].template;

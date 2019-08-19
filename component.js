@@ -6,8 +6,6 @@ module.exports = class Component
     {
         this.template = template;
         this.config = config;
-
-        console.log( config );
     }
 
     async render()

@@ -7,16 +7,23 @@
 
     .button
     {
-        color: var(--gray-0);
         cursor: pointer;
         display: flex;
         border-radius: 2px;
         justify-content: center;
         align-items: center;
-        transition: background-color 30ms ease-in-out;
-        background-color: var(--button-background-color);
-        border: 0;
-        @media ( min-width: 1024px ){ &:hover{ background-color: var(--button-hover-color); } }
+        transition: all 30ms ease-in-out;
+        background-color: var( --form-button-background-color, var(--form-fill-background-color, silver ));
+        border: 1px solid  var( --form-button-border-color, var(--form-border-color, silver ));
+        color: var( --form-button-text-color, var(--form-text-color, black ));
+        @media ( min-width: 1024px )
+        {
+            &:hover
+            {
+                background-color: var( --form-button-hover-background-color, var(--form-hover-background-color, blue ));
+                color: var( --form-button-hover-text-color, var(--form-hover-text-color, white ));
+            }
+        }
         &.focus{ animation: outer-pulse 750ms infinite; }
         &:focus{ outline: none; }
         i
@@ -59,7 +66,7 @@
                      top: 50%;
                      left: 50%;
                      transform: translate(-50%, -50%);
-                     background-color: var(--button-background-color);
+                     background-color: var( --form-button-background-color, var(--form-fill-background-color, silver ));
                      border-radius: 50%;
                  }
             }
@@ -91,11 +98,9 @@
             .content, i, .loading, .loader-box{ font-size: 16rem; line-height: 16rem; }
             &.rounded, &.square{ width: 48rem; }
          }
-
-        &.red{ --button-background-color: red; --button-hover-color: var(--orange-3); }
-        &.green{ --button-background-color: green; --button-hover-color: var(--green-8); }
     }
 </style>
+
 let _rounded = ( typeof rounded != "undefined" ? 'rounded ' : '');
 let _square = ( typeof square != "undefined" ? 'square ' : '');
 let _size = ( typeof size != "undefined" ? ( size + ' ') : 'normal ');

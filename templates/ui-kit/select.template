@@ -120,7 +120,7 @@
                     color: var(--gray-9);
                  }
 
-                &.active{ background-color: var(--gray-1); &:not(:last-child){ border-bottom: 1px solid var(--gray-2); } }
+                &.active{ background-color: rgba( 0, 0, 0, 0.05 ); &:not(:last-child){ border-bottom: 1px solid var(--gray-2); } }
 
                  &:hover:before
                   {
@@ -129,8 +129,8 @@
                       left: 0;
                       top: 0;
                       bottom: 0;
-                      width: 2px;
-                      background: var(--gray-8);
+                      right: 0;
+                      background: rgba( 0, 0, 0, 0.05 );
                   }
             }
         }

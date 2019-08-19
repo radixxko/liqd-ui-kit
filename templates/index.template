@@ -52,6 +52,18 @@
     }
 </style>
 <script src="/data/dom.js"></script>
+<script>
+    window.testButton = async function()
+    {
+        return new Promise(function(resolve, reject)
+        {
+            setTimeout(function()
+            {
+                resolve(true);
+            }, 1000);
+        });
+    }
+</script>
 <div class="main-content">
     <Scroll height="36rem" selector="input-table">
         <table>
@@ -402,7 +414,7 @@
     </Scroll>
     <div class="flex">
         <h3 style="margin-bottom: var(--padding-2);">Button small</h3>
-        <Button label="small" size="small" color="red" />
+        <Button label="small" onclick="testButton()" icon="checkmark-round"  />
         <div style="margin-right: var(--padding-1);"></div>
         <Button label="small" size="small" loader="true" color="green" loaderText="nacitavam..." />
         <div style="margin-right: var(--padding-1);"></div>

@@ -9,13 +9,18 @@
     {
         cursor: pointer;
         display: flex;
-        border-radius: 2px;
         justify-content: center;
         align-items: center;
         transition: all 30ms ease-in-out;
+        position: relative;
         background-color: var( --form-button-background-color, var(--form-fill-background-color, silver ));
         border: 1px solid  var( --form-button-border-color, var(--form-border-color, silver ));
         color: var( --form-button-text-color, var(--form-text-color, black ));
+        border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
+        height: var( --form-button-height-size, var(--form-height-size, 36rem ));
+        padding: 0 var( --form-button-font-size, var(--form-font-size, 14rem ));
+        font-size: var( --form-button-font-size, var(--form-font-size, 14rem ));
+        line-height: var( --form-button-font-size, var(--form-font-size, 14rem ));
         @media ( min-width: 1024px )
         {
             &:hover
@@ -25,40 +30,33 @@
             }
         }
         &.focus{ animation: outer-pulse 750ms infinite; }
-        &:focus{ outline: none; }
-        i
-        {
-            &[data-icon]:before{ position: unset; }
-        }
-
-        &.rounded
+        &:before
          {
-             border-radius: 50px;
-             i{ padding: 0!important; }
-            .loader-box{ margin: 0!important; }
-        }
-
-        &.square
-         {
-             border-radius: 2px;
-             i{ padding: 0!important; }
-            .loader-box{ margin: 0!important; }
-        }
-
-        .loading{ display: none; }
+             position: absolute;
+             top: 0;
+             bottom: 0;
+             margin: auto;
+             display: flex;
+             align-items: center;
+         }
+         &.icon-left:before, .loader-box{ left: var( --form-button-font-size, var(--form-font-size, 14rem )); }
+         &.icon-right:before, .loader-box{ right: var( --form-button-font-size, var(--form-font-size, 14rem )); }
+         &.icon-left{ padding-left: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); }
+         &.icon-right{ padding-right: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); }
 
         &.loader
          {
-             pointer-events: none;
-            .loading{ display: inline-flex; align-items: center; justify-content: center; }
-            .content{ display: none; }
+            pointer-events: none;
+            &[data-icon]:before{ display: none; }
             .loader-box
             {
                 border-radius: 50%;
                 animation: spin 2s linear infinite;
                 margin-right: var(--padding-1);
                 background: conic-gradient(from 90deg, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0.50), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1));
-                position: relative;
+                position: absolute;
+                width: var( --form-button-font-size, var(--form-font-size, 14rem ));
+                height: var( --form-button-font-size, var(--form-font-size, 14rem ));
                 &:after
                  {
                      content: '';
@@ -66,62 +64,45 @@
                      top: 50%;
                      left: 50%;
                      transform: translate(-50%, -50%);
+                     width: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) - 4px );
+                     height: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) - 4px );
                      background-color: var( --form-button-background-color, var(--form-fill-background-color, silver ));
                      border-radius: 50%;
                  }
             }
         }
-
-        &.small
-         {
-             height: 24rem; padding: 0 12rem;
-            .loader-box{  width: 12rem;  height: 12rem;  }
-            .loader-box:after{ width: calc(12rem - 4px);  height: calc(12rem - 4px); }
-            .content, i, .loading, .loader-box{ font-size: 12rem; line-height: 12rem; }
-            &.rounded, &.square{ width: 24rem; }
-         }
-
-        &.normal
-         {
-             height: 36rem;  padding: 0 14rem;
-            .loader-box{  width: 14rem;  height: 14rem;  }
-            .loader-box:after{ width: calc(14rem - 4px);  height: calc(14rem - 4px); }
-            .content, i, .loading, .loader-box{ font-size: 14rem; line-height: 14rem; }
-            &.rounded, &.square{ width: 36rem; }
-         }
-
-        &.big
-         {
-             height: 48rem;  padding: 0 16rem;
-            .loader-box{  width: 16rem;  height: 16rem;  }
-            .loader-box:after{ width: calc(16rem - 4px);  height: calc(16rem - 4px); }
-            .content, i, .loading, .loader-box{ font-size: 16rem; line-height: 16rem; }
-            &.rounded, &.square{ width: 48rem; }
-         }
     }
 </style>
+<script>
+    window.Button = new ( function()
+    {
+        this._showLoader = function( element )
+        {
+            element.classList.add('loader');
+            let loader = document.createElement('DIV');
+                loader.className = 'loader-box';
 
-let _rounded = ( typeof rounded != "undefined" ? 'rounded ' : '');
-let _square = ( typeof square != "undefined" ? 'square ' : '');
+            element.innerText = element.dataset.loader;
+
+            element.prepend( loader );
+        };
+
+        this._hideLoader = function( element )
+        {
+           element.classList.remove('loader');
+           element.innerText = element.dataset.label;
+        };
+    });
+</script>
+
 let _size = ( typeof size != "undefined" ? ( size + ' ') : 'normal ');
 let _color = ( typeof color != "undefined" ? (color + ' ') : '' );
 let _icon = ( typeof icon != 'undefined' ? icon : null );
 let _label = ( typeof label != 'undefined' ? label : null );
-let _icon_position = ( typeof iconPosition != 'undefined' ? iconPosition : 'left' );
+let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-' + iconPosition : ' icon-left' );
 let _loader = ( typeof loader != 'undefined' ? ' loader' : null );
 let _loading_text = ( typeof loaderText != 'undefined' ? loaderText : 'Loading...' );
 
-<button class={"button " + _rounded + _square + _size + _color + _loader}  onclick={( typeof onclick != "undefined" ? "(async () => {this.classList.add('loader'); await " + onclick + ";this.classList.remove('loader')})();" : '' )+"this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 750);"}>
-    <div class="loading">
-        <div class="loader-box"></div>
-        if( !_rounded.length && !_square.length )
-        {
-            {_loading_text}
-        }
-    </div>
-    <div class="content">
-        if(_icon && _icon_position === 'left'){<i data-icon={_icon} style="padding-right: var(--padding-0);" ></i>}
+<button class={"button " + _size + _color + _loader + ( _icon ? _icon_position : '' )} data-label={_label} data-loader={_loading_text} data-icon={_icon} onclick={( typeof onclick != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : '' )+"this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 750);"}>
         if(_label){{_label}}
-        if(_icon && _icon_position === 'right'){<i data-icon={_icon} style="padding-left: var(--padding-0);"></i>}
-    </div>
 </button>

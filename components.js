@@ -1,10 +1,15 @@
 module.exports =
 {
-    'Tlacitko' :
+    'Button' :
     {
         title       : 'Button',
-        description : 'Tlacitko',
-        template    : '<Tlacitko label="Test"></Tlacitko>',
+        description : 'Button',
+        template    :
+        {
+            source  : '<Button label="Test" disabled="true"></Button>',
+            data    : {},
+            style   : ''
+        },
         variants    :
         {
             'Button-disabled' :
@@ -13,12 +18,10 @@ module.exports =
                 description : 'Disablnute tlacitko',
                 template    :
                 {
-                    source  : '<Tlacitko label="Test" disabled></Tlacitko>',
+                    source  : '<Button label="Test" disabled="true"></Button>',
                     data    : {},
-                    style   : ':root{ --color: red; }'
-                },
-                data        : {},
-                style       : ':root{ --color: red; }'
+                    style   : ''
+                }
             }
         }
     }

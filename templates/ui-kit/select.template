@@ -110,15 +110,28 @@
             .select-option
             {
                 cursor: pointer;
-                color: var(--gray-8);
+                color: var(--gray-6);
                 white-space: nowrap;
-
+                position: relative;
+                border-bottom: 1px solid transparent;
                 &:hover,
                 &.active
                  {
-                     background-color: var(--gray-1);
-                     color: var(--gray-9);
+                    color: var(--gray-9);
                  }
+
+                &.active{ background-color: var(--gray-1); &:not(:last-child){ border-bottom: 1px solid var(--gray-2); } }
+
+                 &:hover:before
+                  {
+                      content: '';
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      bottom: 0;
+                      width: 2px;
+                      background: var(--gray-8);
+                  }
             }
         }
 
@@ -389,7 +402,7 @@
                 if( this._element.querySelector('div.select-option.active') )
                 {
                     this._element.querySelector('div.input').innerText = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => r.innerText ).join(',');
-                    this._values.push( Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => ( { value: r.dataset.value, label : r.innerText } ) ) );
+                    this._values = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => ( { value: r.dataset.value, label : r.innerText } ) );
                 }
             }
 
@@ -408,8 +421,8 @@
 
             _hidden()
             {
-              //  if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
-              //  this._element.classList.remove('focus');
+                if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
+                this._element.classList.remove('focus');
             }
 
             focus( event )
@@ -429,11 +442,10 @@
 
             select( element )
             {
-                //TODO POFIXOVAT setValue pre multiple init
-                if( element.classList.contains('active') && !this._element.classList.contains('selected') )
+                if( element.classList.contains('active') )
                 {
                     element.classList.remove('active');
-                    if( this._multiple ){ this._values = this._values.filter( el => el.value !=  element.getAttribute('data-value') ); }
+                    if( this._multiple ){ this._values = this._values.filter( el => el.value != element.dataset.value ); }
                 }
                 else
                 {
@@ -448,7 +460,7 @@
                     this._values.push({ value : element.getAttribute('data-value'), label : element.innerText.trim() });
                 }
                 this._setValue();
-                this._hidden();
+                this._multiple ? this.hidden() : this._hidden();
             }
 
             keyup( element )

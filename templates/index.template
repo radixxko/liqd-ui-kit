@@ -414,7 +414,7 @@
     </Scroll>
     <div class="flex">
         <h3 style="margin-bottom: var(--padding-2);">Button small</h3>
-        <Button label="small" onclick="testButton()" iconPosition="left" icon="checkmark-round"  />
+        <Button label="small" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"  iconPosition="right" icon="checkmark-round"  />
         <div style="margin-right: var(--padding-1);"></div>
         <Button label="small" size="small" loader="true" color="green" loaderText="nacitavam..." />
         <div style="margin-right: var(--padding-1);"></div>

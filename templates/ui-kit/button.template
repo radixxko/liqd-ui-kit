@@ -1,4 +1,4 @@
-<style>
+<style require="/main.style">
     @keyframes spin
     {
         0% { transform: rotate(0deg); }
@@ -22,12 +22,13 @@
         padding: 0 var( --form-button-font-size, var(--form-font-size, 14px ));
         font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
         line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
+        &.empty{ width: var( --form-button-height-size, var(--form-height-size, 36px )); }
         &:disabled
          {
                  cursor: default;
                  pointer-events: none;
                  background: var( --form-button-disabled-background, var(--form-fill-disabled-background, gray ));
-                 color: var( --form-button-disabled-color, var(--form-disabled-color, gray ));
+                 color: var( --form-button-disabled-color, var(--form-disabled-color, black ));
                  border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-disabled-color, var(--form-border-disabled-color, gray ));
          }
         @media ( min-width: 1024px )
@@ -38,7 +39,6 @@
                 color: var( --form-button-hover-color, var(--form-hover-color, white ));
             }
         }
-        &.focus{ animation: outer-pulse 750ms infinite; }
         &:focus{ outline: 0; }
         &:before
          {
@@ -48,6 +48,7 @@
              margin: auto;
              display: flex;
              align-items: center;
+             justify-content: center;
          }
          &.icon-left:before{ left: var( --form-button-font-size, var(--form-font-size, 14px )); }
          &.icon-right:before{ right: var( --form-button-font-size, var(--form-font-size, 14px )); }
@@ -107,9 +108,9 @@
 let _icon = ( typeof icon != 'undefined' ? icon : null );
 let _label = ( typeof label != 'undefined' ? label : null );
 let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-' + iconPosition : ' icon-left' );
-let _loading_text = ( typeof loaderText != 'undefined' ? loaderText : 'Loading...' );
+let _loading_text = ( typeof loaderText != 'undefined' ? loaderText : ( _label ? 'Loading...' : '' ) );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
 
-<button class={"button " + ( _icon ? _icon_position : '' )} disabled={_disabled} data-label={_label} data-loader={_loading_text} data-icon={_icon} onclick={( typeof onclick != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : '' )+"this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 750);"}>
+<button class={"button " + ( _icon ? _icon_position : '' ) + ( _label ? '' : ' empty')} disabled={_disabled} data-label={_label} data-loader={_loading_text} data-icon={_icon} onclick={( typeof onclick != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : '' )}>
         if(_label){{_label}}
 </button>

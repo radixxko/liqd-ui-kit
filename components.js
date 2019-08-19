@@ -6,7 +6,7 @@ module.exports =
         description : 'Button',
         template    :
         {
-            source  : '<Button label="Test" disabled="true" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
+            source  : '<Button label="Test" disabled="true" onclick="alert(\'click\')"></Button>',
             data    : {},
             style   : ''
         },
@@ -18,7 +18,7 @@ module.exports =
                 description : 'Disablnute tlacitko',
                 template    :
                 {
-                    source  : '<Button label="Test" disabled="true" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
+                    source  : '<Button label="Test" disabled="true" onclick="alert(\'click\')"></Button>',
                     data    : {},
                     style   : ''
                 }
@@ -29,7 +29,7 @@ module.exports =
                 description : 'Button icon left',
                 template    :
                 {
-                    source  : '<Button label="Test" icon="checkmark-round" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
+                    source  : '<Button label="Test" icon="checkmark-round" onclick="new Promise( r => setTimeout( r, 3000 ))"></Button>',
                     data    : {},
                     style   : ''
                 }
@@ -40,7 +40,7 @@ module.exports =
                 description : 'Button icon right',
                 template    :
                 {
-                    source  : '<Button label="Test" icon="checkmark-round" iconPosition="right" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
+                    source  : '<Button label="Test" icon="checkmark-round" iconPosition="right" onclick="new Promise( r => setTimeout( r, 3000 ))"></Button>',
                     data    : {},
                     style   : ''
                 }

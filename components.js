@@ -57,5 +57,30 @@ module.exports =
                 }
             }
         }
+    },
+    'Input' :
+    {
+        title       : 'Input',
+        description : 'Input',
+        template    :
+        {
+            source  : '<Input type="text" label="small" size="small" width="calc(97% / 4)" />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+            'Input-disabled' :
+            {
+                title       : 'Disabled Button',
+                description : 'Disablnute tlacitko',
+                template    :
+                {
+                    source  : '<Input type="text" label="small" size="small" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            }
+        }
     }
 }

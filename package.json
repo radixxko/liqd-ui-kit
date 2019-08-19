@@ -23,7 +23,10 @@
     "algorithm",
     "liqd"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "liqd-server": "^1.3.2",
+    "liqd-template": "^1.9.1"
+  },
   "devDependencies": {
     "coveralls": "^3.0.4",
     "mocha": "^5.0.4",

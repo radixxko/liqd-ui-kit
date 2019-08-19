@@ -1,15 +1,22 @@
 <style>
-    .Form_Input
+    .Input
     {
         display: block;
         position: relative;
         width: 100%;
-        border: 1px solid var(--gray-2);
-        border-radius:2px;
+        border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, silver ));
+        height: var( --form-input-height-size, var(--form-height-size, 36px ));
+        border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
+        background: var( --form-input-background, var(--form-background, white ));
         transition: all 83ms ease-in-out 34ms;
-        background-color: white;
-        &.active {  border-color: blue; label{ color: blue; }  }
-        @media (max-width:1024px) { width: 100%; }
+        &.active
+         {
+             border-color: var( --form-input-focus-border-color, var(--form-focus-border-color, blue ));
+             label
+             {
+                 color: var( --form-input-focus-label-color, var(--form-focus-label-color, blue ));
+             }
+        }
         label
         {
             position:absolute;
@@ -17,7 +24,7 @@
             left: 0;
             width: 100%;
             font-weight: normal;
-            color: var(--gray-6);
+            color: var( --form-input-label-color, var(--form-label-color, blue ));
             user-select: none;
             display: flex;
             align-items: center;
@@ -33,29 +40,11 @@
             border: 0;
             border-radius: 0;
             background: transparent;
-            color: var(--gray-8);
-            &:hover, &:focus { color: var(--gray-9); outline: none; }
+            color: var( --form-input-color, var(--form-color, gray ));
+            font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
+            line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
+            padding-left: 7px;
         }
-
-
-        &.small
-         {
-             height: 24rem;
-             margin-bottom: 12rem;
-             transition: opacity 50ms ease-in-out;
-            input{ font-size: 10rem; line-height: 14rem; padding-left: 7rem; }
-            --size: 8rem;
-         }
-
-        &.normal
-         {
-             height: 36rem;
-             margin-bottom: 24rem;
-             transition: opacity 50ms ease-in-out;
-            input{ font-size: 12rem; line-height: 16rem; padding-left: 7rem; }
-            --size: 10rem;
-        }
-
 
 
         &.big
@@ -96,7 +85,7 @@
             align-items: center;
             justify-content: center;
             margin: auto;
-            opacity: 0;
+            visibility: hidden;
             display: flex;
         }
 
@@ -107,7 +96,7 @@
             label{ color: var(--red-8); }
             .alert-icon
             {
-                opacity: 1;
+                visibility: visible;
                 color: var(--red-8);
             }
         }
@@ -119,7 +108,7 @@
             label{ color: var(--green-8); }
             .alert-icon
             {
-                opacity: 1;
+                visibility: visible;
                 color: var(--green-8);
                 &:before{ content: "\e025"; }
             }
@@ -164,12 +153,14 @@ let _style = ( typeof style != 'undefined' ? style : '' );
 let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
 let _type = ( typeof type != 'undefined' ? type : 'text' );
+let _label = ( typeof label != 'undefined' ? label : null );
+let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
 
-<div class={'Form_Input ' + ( _value.length > 0 ? ' ' : 'empty ' ) + _size + _error + _success  } style={"width:" + _width + _style } >
-if( _size === 'big' )
-{
-    <label for={'Form_Input_label_'+label} onclick="this.nextSibling.focus()">{label}</label>
-}
-    <input id={'Form_Input_label_'+label} placeholder={( _size != 'big' ? label : null )} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
+<div class={'Input ' + ( _value.length > 0 ? ' ' : 'empty ' ) + _size + _error + _success  } style={"width:" + _width + _style } >
+    if( _label )
+    {
+        <label for={'Input_label_'+label} onclick="this.nextSibling.focus()">{label}</label>
+    }
+    <input id={'Input_label_'+label} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
     <i class="alert-icon" data-icon="warning"></i>
 </div>

@@ -2,7 +2,7 @@
 const Server = require('liqd-server');
 
 const TEMPLATE = require('liqd-template');
-const Template = new TEMPLATE({ directory:  __dirname + '/test-templates' });
+const Template = new TEMPLATE({ directory:  __dirname + '/templates' });
 
 const server = new Server();
 
@@ -19,14 +19,14 @@ function beautifyHTML( html )
     {
         //let val = '  '.repeat(offset) + ( comment || tag || text ) + '\n';
 
-        console.log({  match, comment, tag, text  }, val, tag[1] );
-
+        console.log({  match, comment, tag, text  } );
+        /*
         if( tag )
         {
             offset += ( tag[1] === '/' ) ? -1 : 1;
         }
 
-        return val;
+        return val;*/
     });
 }
 
@@ -46,9 +46,11 @@ server.use('/', async(req, res, next ) =>
 {
     console.log( components );
 
-    let template = await Template.render(components['Tlacitko'].template, {});
-    let component = '<!DOCTYPE html><head><meta charset="utf-8"/><style>html,body{margin:0;padding:0;font-size:1px;}</style></head><body>' + template + '</body></html>';
-    let source = template.replace(/<style.*?<\/style>/g,'').replace(/<script.*?<\/script>/g,'');
+    let template = components['Button'].variants['Button-disabled'].template;
+
+    let render = await Template.render( template.source, template.data );
+    let component = '<!DOCTYPE html><head><meta charset="utf-8"/><style>html,body{margin:0;padding:0;font-size:1px;}'+template.style+'</style></head><body>' + template + '</body></html>';
+    let source = render.replace(/<style.*?<\/style>/g,'').replace(/<script.*?<\/script>/g,'');
 
     console.log(source);
 

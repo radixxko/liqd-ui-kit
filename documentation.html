@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <style>
+            html, body{ margin: 0; padding: 0; }
+            .documentation{ position:relative; width: 600px; margin: 20px; display: block; outline: none; padding: 5px; }
+            .tabs{ margin: 20px; }
+            .tabs .header{ height: 20px; }
+            .tabs .header:after{ content: ''; display: block; clear: both; }
+            .tabs .header .tab{ height: 20px; position: relative; float: left; cursor: pointer; min-width: 60px; text-align: center; }
+            .tabs .header .tab.active{ color: blue; }
+            .tabs .content .tab{ display: none; }
+            .tabs .content .tab.active{ display: block; }
+            pre{ font-family: "Courier New", Courier, monospace !important; background: #f0f0f0; padding: 10px !important; }
+        </style>
+        <script>
+
+            function onTabClick( tab )
+            {
+                const headerTabs = [...tab.parentNode.childNodes].filter(n=>n.classList && n.classList.contains('tab'));
+                const activeTab = headerTabs.findIndex( t => t.classList.contains('active') );
+                const currentTab = headerTabs.findIndex( t => t === tab );
+
+                if( activeTab !== currentTab )
+                {
+                    const contentTabs = [...[...tab.parentNode.parentNode.childNodes].find(n=>n.classList && n.classList.contains('content')).childNodes].filter(n=>n.classList && n.classList.contains('tab'));
+
+                    headerTabs[activeTab].classList.remove('active');
+                    contentTabs[activeTab].classList.remove('active');
+                    headerTabs[currentTab].classList.add('active');
+                    contentTabs[currentTab].classList.add('active');
+                }
+            }
+
+        </script>
+    </head>
+    <body>${CONTENT}</body>
+</html>

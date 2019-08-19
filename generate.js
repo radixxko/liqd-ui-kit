@@ -1,4 +1,6 @@
 'use strict';
+
+const fs = require('fs');
 const Server = require('liqd-server');
 
 const TEMPLATE = require('liqd-template');
@@ -50,9 +52,28 @@ server.use('/', async(req, res, next ) =>
     for( let id in components )
     {
         let component = new Component( Template, components[id] );
+        let basic = await component.render();
 
-        render += await component.render()+'<div style="clear:both;height:20px;"></div>';
+        render += '<style>' + basic.styles.join('') + '</style><script>' + basic.styles.join('') + '</script>';
+        render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Element</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
+        render += '<div class="tab active">' + basic.render + '</div>';
+        render += '<div class="tab"><pre>' + htmlentities( basic.source ) + '</pre></div>';
+        render += '<div class="tab"><pre>' + htmlentities( basic.render ) + '</pre></div>';
+        render += '</div></div>';
+
+        for( let variant of component.variants )
+        {
+            variant = await component.render( variant );
+
+            render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Element</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
+            render += '<div class="tab active">' + variant.render + '</div>';
+            render += '<div class="tab"><pre>' + htmlentities( variant.source ) + '</pre></div>';
+            render += '<div class="tab"><pre>' + htmlentities( variant.render ) + '</pre></div>';
+            render += '</div></div>';
+        }
     }
+
+    res.reply( fs.readFileSync( __dirname + '/documentation.html', 'utf8' ).replace('${CONTENT}', render), 'text/html' );
 
     /*let template = components['Button'].variants['Button-disabled'].template;
 
@@ -64,7 +85,7 @@ server.use('/', async(req, res, next ) =>
 
     //beautifyHTML(source);
     */
-    res.reply('<!DOCTYPE html><head><meta charset="utf-8"/></head><body>' + render + '</body></html>', 'text/html');
+    //res.reply('<!DOCTYPE html><head><meta charset="utf-8"/></head><body>' + render + '</body></html>', 'text/html');
 
 });
 

@@ -99,10 +99,9 @@
 let _icon = ( typeof icon != 'undefined' ? icon : null );
 let _label = ( typeof label != 'undefined' ? label : null );
 let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-' + iconPosition : ' icon-left' );
-let _loader = ( typeof loader != 'undefined' ? ' loader' : null );
 let _loading_text = ( typeof loaderText != 'undefined' ? loaderText : 'Loading...' );
 let _disabled = ( typeof disabled != 'undefined' ? disabled : null );
 
-<button class={"button " + _size + _color + _loader + ( _icon ? _icon_position : '' )} disabled={_disabled} data-label={_label} data-loader={_loading_text} data-icon={_icon} onclick={( typeof onclick != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : '' )+"this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 750);"}>
+<button class={"button " + ( _icon ? _icon_position : '' )} disabled={_disabled} data-label={_label} data-loader={_loading_text} data-icon={_icon} onclick={( typeof onclick != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : '' )+"this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 750);"}>
         if(_label){{_label}}
 </button>

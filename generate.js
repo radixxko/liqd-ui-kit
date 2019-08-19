@@ -60,7 +60,7 @@ server.use('/', async(req, res, next ) =>
 
     //console.log( component );
 
-    res.reply(await Template.render('index', {}), 'text/html');
+    res.reply(await Template.render('index2', {}), 'text/html');
 
 });
 

@@ -49,12 +49,12 @@ server.use('/', async(req, res, next ) =>
     let template = components['Button'].variants['Button-disabled'].template;
 
     let render = await Template.render( template.source, template.data );
-    let component = '<!DOCTYPE html><head><meta charset="utf-8"/><style>html,body{margin:0;padding:0;font-size:1px;}'+template.style+'</style></head><body>' + template + '</body></html>';
+    let component = '<!DOCTYPE html><head><meta charset="utf-8"/><style>html,body{margin:0;padding:0;font-size:1px;}'+template.style+'</style></head><body>' + render + '</body></html>';
     let source = render.replace(/<style.*?<\/style>/g,'').replace(/<script.*?<\/script>/g,'');
 
-    console.log(source);
+    console.log(component);
 
-    beautifyHTML(source);
+    //beautifyHTML(source);
 
     res.reply('<!DOCTYPE html><head><meta charset="utf-8"/></head><body><iframe width="600" frameborder="0" srcdoc="'+htmlentities(component)+'"/></ifram></body></html>', 'text/html');
 

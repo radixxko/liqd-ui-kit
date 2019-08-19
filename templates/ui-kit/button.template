@@ -13,20 +13,21 @@
         align-items: center;
         transition: all 30ms ease-in-out;
         position: relative;
-        background-color: var( --form-button-background-color, var(--form-fill-background-color, silver ));
-        border: 1px solid  var( --form-button-border-color, var(--form-border-color, silver ));
-        color: var( --form-button-text-color, var(--form-text-color, black ));
-        border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
-        height: var( --form-button-height-size, var(--form-height-size, 36rem ));
-        padding: 0 var( --form-button-font-size, var(--form-font-size, 14rem ));
-        font-size: var( --form-button-font-size, var(--form-font-size, 14rem ));
-        line-height: var( --form-button-font-size, var(--form-font-size, 14rem ));
+        background: var( --form-button-background, var(--form-fill-background, silver ));
+        color: var( --form-button-color, var(--form-color, black ));
+        border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, silver ));
+        border-radius: var( --form-button-border-radius, var(--form-border-radius, 4px ));
+        box-sizing: border-box;
+        height: var( --form-button-height-size, var(--form-height-size, 36px ));
+        padding: 0 var( --form-button-font-size, var(--form-font-size, 14px ));
+        font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
+        line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
         @media ( min-width: 1024px )
         {
             &:hover
             {
-                background-color: var( --form-button-hover-background-color, var(--form-hover-background-color, blue ));
-                color: var( --form-button-hover-text-color, var(--form-hover-text-color, white ));
+                background: var( --form-button-hover-background, var(--form-hover-background, blue ));
+                color: var( --form-button-hover-color, var(--form-hover-color, white ));
             }
         }
         &.focus{ animation: outer-pulse 750ms infinite; }
@@ -40,10 +41,10 @@
              display: flex;
              align-items: center;
          }
-         &.icon-left:before{ left: var( --form-button-font-size, var(--form-font-size, 14rem )); }
-         &.icon-right:before{ right: var( --form-button-font-size, var(--form-font-size, 14rem )); }
-         &.icon-left{ padding-left: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); .loader-box { left: var( --form-button-font-size, var(--form-font-size, 14rem )); margin-left: auto; } }
-         &.icon-right{ padding-right: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) * 2 + 4rem ); .loader-box { right: var( --form-button-font-size, var(--form-font-size, 14rem )); margin-right: auto; } }
+         &.icon-left:before{ left: var( --form-button-font-size, var(--form-font-size, 14px )); }
+         &.icon-right:before{ right: var( --form-button-font-size, var(--form-font-size, 14px )); }
+         &.icon-left{ padding-left: calc( var( --form-button-font-size, var(--form-font-size, 14px )) * 2 + 4px ); .loader-box { left: var( --form-button-font-size, var(--form-font-size, 14px )); margin-left: auto; } }
+         &.icon-right{ padding-right: calc( var( --form-button-font-size, var(--form-font-size, 14px )) * 2 + 4px ); .loader-box { right: var( --form-button-font-size, var(--form-font-size, 14px )); margin-right: auto; } }
 
         &.loader
          {
@@ -55,8 +56,8 @@
                 animation: spin 2s linear infinite;
                 background: conic-gradient(from 90deg, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0.50), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1));
                 position: absolute;
-                width: var( --form-button-font-size, var(--form-font-size, 14rem ));
-                height: var( --form-button-font-size, var(--form-font-size, 14rem ));
+                width: var( --form-button-font-size, var(--form-font-size, 14px ));
+                height: var( --form-button-font-size, var(--form-font-size, 14px ));
                 &:after
                  {
                      content: '';
@@ -64,9 +65,9 @@
                      top: 50%;
                      left: 50%;
                      transform: translate(-50%, -50%);
-                     width: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) - 4px );
-                     height: calc( var( --form-button-font-size, var(--form-font-size, 14rem )) - 4px );
-                     background-color: var( --form-button-background-color, var(--form-fill-background-color, silver ));
+                     width: calc( var( --form-button-font-size, var(--form-font-size, 14px )) - 4px );
+                     height: calc( var( --form-button-font-size, var(--form-font-size, 14px )) - 4px );
+                     background: var( --form-button-background, var(--form-fill-background, silver ));
                      border-radius: 50%;
                  }
             }

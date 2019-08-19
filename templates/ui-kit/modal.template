@@ -1,0 +1,96 @@
+<script>
+    window.Modal = new ( function()
+    {
+        this.open = function( selector )
+        {
+            let element = document.querySelector('[data-selector="'+selector+'"]');
+            let _CloneNode = element.cloneNode( true );
+            _CloneNode.classList.add('opening');
+            _CloneNode.classList.add('opened');
+
+            document.body.appendChild( _CloneNode );
+            setTimeout( () =>
+            {
+                document.body.querySelector('[data-selector="'+selector+'"]:last-child').classList.remove('opening');
+            }, 25);
+        }
+
+        this.close = function ( element )
+        {
+            element.classList.add('removing');
+            setTimeout( () => { element.remove() }, 250);
+        }
+    });
+</script>
+<style>
+    .modal
+    {
+        display: none;
+        cursor: pointer;
+        z-index: 999;
+        .modal-content
+        {
+            background: white;
+            transition: all 250ms ease-in-out;
+            cursor: default;
+            width: 50%;
+            padding: var(--padding-3);
+            padding-top: calc(var(--padding-3) * 2);
+            display: flex;
+            flex-direction: column;
+            border-radius: 2px;
+            position: relative;
+        }
+        &.opening, &.removing
+         {
+             background-color: rgba(0, 0, 0, 0)!important;
+             -webkit-backdrop-filter: blur(0)!important;
+             backdrop-filter: blur(0)!important;
+            .modal-content
+            {
+                transform: translateY(-24rem) !important;
+                opacity: 0!important;
+            }
+         }
+        &.opened
+         {
+             position: fixed;
+             top: 0;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             transition: all 250ms ease-in-out;
+             background-color: rgba(0, 0, 0, 0.2);
+             -webkit-backdrop-filter: blur(2px);
+             backdrop-filter: blur(2px);
+            .modal-content{ transform: translateX(0); opacity: 1; }
+         }
+        .modal-close
+        {
+            position: absolute;
+            right: calc(var(--padding-3) - 6rem);
+            top: calc(var(--padding-3) - 6rem);
+            width: var(--padding-4);
+            height: var(--padding-4);
+            line-height: var(--padding-4);
+            font-size: 12rem;
+            text-align: center;
+            align-self: flex-end;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            color: var(--gray-5);
+            @media ( min-width: 1024px ){ &:hover{ background-color: var(--gray-1); color: var(--gray-9); } }
+            &.focus{ animation: outer-pulse 750ms infinite; }
+        }
+    }
+</style>
+<div class="modal" data-selector={selector} onclick="Modal.close( this );">
+    <div class="modal-content" onclick="event.stopPropagation();">
+        <div class="modal-close" data-icon="cancel" onclick="this.classList.add('focus');Modal.close( this.parentNode.parentNode );"></div>
+        {CONTENT}
+    </div>
+</div>

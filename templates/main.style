@@ -157,6 +157,7 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     font-size: inherit;
     line-height: inherit;
     vertical-align: baseline;
+    &:focus{ outline: none; border: 0; }
 }
 
 body
@@ -182,6 +183,7 @@ body
     background-image: linear-gradient(to bottom,#0ff 0,rgba(255,255,255,0)1px);
     background-repeat: repeat-y;
     background-size: 100% 12rem;
+    transition: filter 750ms ease-in-out;
 }
 
 
@@ -194,3 +196,26 @@ input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance:none;
 }
 
+@keyframes inner-pulse
+{
+    0%
+    {
+        box-shadow: inset 0px 0px 150px 0px rgba(0,0,0,0.2);
+    }
+    100%
+    {
+        box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.2);
+    }
+}
+
+@keyframes outer-pulse
+{
+    0%
+    {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+    100%
+    {
+        box-shadow: 0 0 0 7rem rgba(0, 0, 0, 0);
+    }
+}

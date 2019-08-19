@@ -1,0 +1,97 @@
+<style>
+    .Quantity-input
+    {
+        display: flex;
+        background-color: white;
+        border: 1px solid var(--gray-2);
+        input
+        {
+            height: 100%;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: white;
+            font-size: inherit;
+        }
+
+        .Quantity-button
+        {
+            color: var(--gray-5);
+            cursor: pointer;
+            background-color: white;
+            transition: all 50ms ease-in-out;
+            text-align: center;
+            &[data-icon=minus]{ border-right: 1px solid var(--gray-2); }
+            &[data-icon=plus]{ border-left: 1px solid var(--gray-2); }
+            &:hover
+             {
+                 background-color: var(--gray-1);
+                 color: var(--gray-9);
+             }
+             &.focus{ animation: inner-pulse 300ms infinite; }
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button
+        {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &.small
+         {
+             width: 84rem;
+             height: 24rem;
+             font-size: 10rem;
+             line-height: 24rem;
+            input{ width: 36rem; }
+            .Quantity-button
+            {
+                width: 24rem;
+            }
+         }
+
+        &.normal
+         {
+             width: 126rem;
+             height: 36rem;
+             font-size: 12rem;
+             line-height: 36rem;
+            input{ width: 54rem; }
+            .Quantity-button
+            {
+                width: 36rem;
+            }
+         }
+
+        &.big
+         {
+             width: 168rem;
+             height: 48rem;
+             font-size: 14rem;
+             line-height: 48rem;
+            input{ width: 72rem; }
+            .Quantity-button
+            {
+                width: 48rem;
+            }
+         }
+    }
+</style>
+
+let _size = ( typeof size != 'undefined' ? size : ' normal' );
+let _selector = ( typeof selector != 'undefined' ? selector : null );
+let _value = ( typeof value != 'undefined' ? value : '' );
+let _width = ( typeof width != 'undefined' ? width : '' );
+let _style = ( typeof style != 'undefined' ? style : '' );
+let _error = ( typeof error != 'undefined' ? ' error' : '' );
+let _success = ( typeof success != 'undefined' ? ' success' : '' );
+let _min = ( typeof min != 'undefined' ? parseFloat(min) : 0 );
+let _max = ( typeof max != 'undefined' ? parseFloat(max) : undefined );
+
+<div class={"Quantity-input " + _size + _error + _success } data-selector={_selector}>
+    <div class="Quantity-button" data-icon="minus" onclick={"this.nextSibling.value = ( ( parseFloat(this.nextSibling.value) - 1 ) >= " + _min + " ? ( parseFloat(this.nextSibling.value) - 1 ) : parseFloat( this.nextSibling.value ) );this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 300);"}></div>
+    <input type="number" value={_value} disabled />
+    <div class="Quantity-button" data-icon="plus" onclick={"this.previousSibling.value = ( ( typeof " + _max + " !== 'undefined' ? ( ( parseFloat(this.previousSibling.value) + 1 ) <= " + ( _max || 0 ) + " ) : true ) ? ( parseFloat(this.previousSibling.value) + 1 ) : parseFloat( this.previousSibling.value ) );this.classList.add('focus');setTimeout( () => { this.classList.remove('focus') }, 300);"}></div>
+</div>

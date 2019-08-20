@@ -6,7 +6,7 @@ module.exports =
         description : 'Button',
         template    :
         {
-            source  : '<Button label="Test" onclick="alert(\'click\')"></Button>',
+            source  : '<Button label="Test" onclick="alert(\'click\')">test</Button>',
             data    : {},
             style   : ''
         },
@@ -18,40 +18,29 @@ module.exports =
                 description : 'Disablnute tlacitko',
                 template    :
                 {
-                    source  : '<Button label="Test" disabled="true" onclick="alert(\'click\')"></Button>',
+                    source  : '<Button disabled="true" onclick="alert(\'click\')"><p>Test</p></Button>',
                     data    : {},
                     style   : ''
                 }
             },
-            'Icon-left' :
+            'Button-loader-icon' :
             {
-                title       : 'Button icon left',
-                description : 'Button icon left',
+                title       : 'Button loader icon',
+                description : 'Button loader icon',
                 template    :
                 {
-                    source  : '<Button label="Test" icon="checkmark-round" onclick="new Promise( r => setTimeout( r, 3000 ))"></Button>',
+                    source  : '<Button loading="" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"><i data-icon="start-round"></i></Button>',
                     data    : {},
                     style   : ''
                 }
             },
-            'Icon-Right' :
+            'Button-loader-text-icon' :
             {
-                title       : 'Button icon right',
-                description : 'Button icon right',
+                title       : 'Button loader text icon',
+                description : 'Button loader text icon',
                 template    :
                 {
-                    source  : '<Button label="Test" icon="checkmark-round" iconPosition="right" onclick="new Promise( r => setTimeout( r, 3000 ))"></Button>',
-                    data    : {},
-                    style   : ''
-                }
-            },
-            'Icon-Center-empty-label' :
-            {
-                title       : 'Button icon center label empty',
-                description : 'Button icon center label empty',
-                template    :
-                {
-                    source  : '<Button label="" icon="checkmark-round" iconPosition="center" loading="" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"></Button>',
+                    source  : '<Button loading="Loading" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 300000 ) ) )();"><i data-icon="start-round" style="padding-right: 4px;"></i>Start</Button>',
                     data    : {},
                     style   : ''
                 }

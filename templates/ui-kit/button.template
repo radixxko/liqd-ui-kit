@@ -13,16 +13,16 @@
         align-items: center;
         transition: all 30ms ease-in-out;
         position: relative;
+        user-select: none;
         background: var( --form-button-background, var(--form-fill-background, silver ));
         color: var( --form-button-color, var(--form-color, black ));
         border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, silver ));
         border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
         box-sizing: border-box;
         height: var( --form-button-height-size, var(--form-height-size, 36px ));
-        padding: 0 var( --form-button-font-size, var(--form-font-size, 14px ));
+        min-width: var( --form-button-height-size, var(--form-height-size, 36px ));
         font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
         line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
-        &.empty{ width: var( --form-button-height-size, var(--form-height-size, 36px )); }
         &:disabled
          {
                  cursor: default;
@@ -50,15 +50,10 @@
              align-items: center;
              justify-content: center;
          }
-         &.icon-left:before{ left: var( --form-button-font-size, var(--form-font-size, 14px )); }
-         &.icon-right:before{ right: var( --form-button-font-size, var(--form-font-size, 14px )); }
-         &.icon-left{ padding-left: calc( var( --form-button-font-size, var(--form-font-size, 14px )) * 2 + 4px ); .loader-box { left: var( --form-button-font-size, var(--form-font-size, 14px )); margin-left: auto; } }
-         &.icon-right{ padding-right: calc( var( --form-button-font-size, var(--form-font-size, 14px )) * 2 + 4px ); .loader-box { right: var( --form-button-font-size, var(--form-font-size, 14px )); margin-right: auto; } }
 
         &.loader
          {
             pointer-events: none;
-            &[data-icon]:before{ display: none; }
             .loader-box
             {
                 border-radius: 50%;
@@ -86,13 +81,22 @@
 <script>
     window.Button = new ( function()
     {
+        let _original_content = document.createDocumentFragment();
+
         this._showLoader = function( element )
         {
+            [...element.childNodes].forEach( n => _original_content.appendChild(n));
             element.classList.add('loader');
             let loader = document.createElement('DIV');
                 loader.className = 'loader-box';
 
             element.innerText = element.dataset.loader;
+
+            if( element.dataset.loader.length > 0 )
+            {
+                loader.style.left = '6px';
+                element.style.paddingLeft = 'calc( var( --form-button-font-size, var(--form-font-size, 14px )) + 10px )';
+            }
 
             element.prepend( loader );
         };
@@ -100,17 +104,17 @@
         this._hideLoader = function( element )
         {
            element.classList.remove('loader');
-           element.innerText = element.dataset.label;
+           element.innerHTML = '';
+           element.appendChild( _original_content );
         };
     });
 </script>
 
-let _icon = ( typeof icon != 'undefined' ? icon : null );
-let _label = ( typeof label != 'undefined' ? label : null );
-let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-' + iconPosition : ' icon-left' );
-let _loading = ( typeof loading != 'undefined' ? loading : ( _label ? 'Loading...' : '' ) );
+let _loading = ( typeof loading != 'undefined' ? loading : '' );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
-
-<button class={"button " + ( _icon ? _icon_position : '' ) + ( _label ? '' : ' empty')} disabled={_disabled} data-label={_label} data-loader={_loading} data-icon={_icon} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : onclick ) : '' )}>
-        if(_label){{_label}}
+<button class="button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : onclick ) : '' )}>
+   if( typeof CONTENT != 'undefined' )
+   {
+        {CONTENT}
+   }
 </button>

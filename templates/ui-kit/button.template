@@ -23,6 +23,7 @@
         min-width: var( --form-button-height-size, var(--form-height-size, 36px ));
         font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
         line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
+        padding:  var( --form-button-padding, var(--form-padding, 0 14px ));
         &:disabled
          {
                  cursor: default;
@@ -40,17 +41,6 @@
             }
         }
         &:focus{ outline: 0; }
-        &:before
-         {
-             position: absolute;
-             top: 0;
-             bottom: 0;
-             margin: auto;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-         }
-
         &.loading
          {
             pointer-events: none;
@@ -85,6 +75,8 @@
         {
             button.Button = { content: document.createDocumentFragment() };
             [...button.childNodes].forEach( n => button.Button.content.appendChild(n));
+            button.style.minWidth = button.offsetWidth + 'px';
+            console.log(button.offsetWidth, button.clientWidth, button.getBoundingClientRect())
             button.classList.add('loading');
             let loader = document.createElement('div');
                 loader.className = 'loader-box';

@@ -19,15 +19,22 @@
         }
         label
         {
-            position:absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             font-weight: normal;
-            color: var( --form-input-label-color, var(--form-label-color, blue ));
+            color: var( --form-input-label-color, var(--form-label-color, silver ));
             user-select: none;
             display: flex;
             align-items: center;
+            transition: all 50ms ease-in-out;
+            height: 14rem;
+            font-size: 10rem;
+            line-height: 14rem;
+            padding-left: 7rem;
+            margin-top: calc(8rem - 1px);
+        }
+        &.empty
+        {
+            label{ font-size: var( --form-input-label-size, var(--form-label-size, 12px )); line-height: var( --form-input-label-size, var(--form-label-size, 12px )); margin: 0;  }
         }
 
         input
@@ -43,6 +50,7 @@
             color: var( --form-input-color, var(--form-color, gray ));
             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
+            padding: 0;
             padding-left: 7px;
         }
 
@@ -53,12 +61,7 @@
              margin-bottom: 36rem;
             label
             {
-                transition: all 50ms ease-in-out;
-                height: 14rem;
-                font-size: 10rem;
-                line-height: 14rem;
-                padding-left: 7rem;
-                margin-top: calc(8rem - 1px);
+
             }
             input
             {
@@ -68,10 +71,7 @@
                 height: 16rem;
                 margin-top: calc( 26rem - 1px);
             }
-            &.empty
-             {
-                label{ height: 100%;  font-size: 12rem; line-height: 12rem; margin: 0;  }
-             }
+
             --size: 12rem;
         }
 

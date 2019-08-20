@@ -109,7 +109,7 @@
     });
 </script>
 
-let _loading = ( typeof loading != 'undefined' ? loading : '' );
+let _loading = ( typeof loading != 'undefined' ? loading : null );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
 <button class="button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : onclick ) : '' )}>
    if( typeof CONTENT != 'undefined' )

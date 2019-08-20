@@ -112,7 +112,7 @@ module.exports =
                 description : 'Checkbox checked',
                 template    :
                 {
-                    source  : '<Checkbox checked="true" />',
+                    source  : '<Checkbox label="test label" checked="true" />',
                     data    : {},
                     style   : ''
                 }

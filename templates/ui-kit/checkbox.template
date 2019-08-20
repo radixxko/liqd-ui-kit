@@ -1,7 +1,16 @@
 <style>
     .Checkbox
     {
+        display: flex;
+        align-items: center;
         height: var( --form-checkbox-height, var(--form-height, 24px ));
+        span
+        {
+            margin-left: 4px;
+            color: var( --form-checkbox-label-color, var(--form-label-color, silver ));
+            font-size: var( --form-checkbox-label-size, var(--form-label-size, 12px ));
+            line-height: var( --form-checkbox-label-size, var(--form-label-size, 16px ));
+        }
         input[type=checkbox]
         {
             position: relative;
@@ -53,7 +62,7 @@ let _checked = (typeof checked != 'undefined' ? 'true' : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
 let _label = (typeof label != 'undefined' ? label.liqd_slugify() : null );
 
-<label class={"Checkbox " + _error }  onclick={ _onClick } onchange={_onChange} >
+<label class={"Checkbox " + _error }  onclick={ _onClick } onchange={_onChange}>
     <input disabled={_disabled} type="checkbox" name="check" checked={_checked} />
     if( _label )
     {

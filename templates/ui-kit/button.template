@@ -12,18 +12,19 @@
         justify-content: center;
         align-items: center;
         transition: all 30ms ease-in-out;
-        position: relative;
         user-select: none;
+        box-sizing: border-box;
+        width: fit-content;
         background: var( --form-button-background, var(--form-fill-background, silver ));
         color: var( --form-button-color, var(--form-color, black ));
         border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, silver ));
         border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
-        box-sizing: border-box;
         height: var( --form-button-height-size, var(--form-height-size, 36px ));
         min-width: var( --form-button-height-size, var(--form-height-size, 36px ));
         font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
         line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
         padding:  var( --form-button-padding, var(--form-padding, 0 14px ));
+        outline: 0;
         &:disabled
          {
                  cursor: default;

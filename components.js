@@ -64,23 +64,34 @@ module.exports =
         description : 'Input',
         template    :
         {
-            source  : '<Input type="text" label="small" size="small" width="calc(97% / 4)" />',
+            source  : '<Input type="text" label="small" placeholder="placeholder" width="calc(97% / 4)" />',
             data    : {},
             style   : ''
         },
         variants    :
         {
-            'Input-disabled' :
+            'Input-error' :
             {
-                title       : 'Disabled Button',
-                description : 'Disablnute tlacitko',
+                title       : 'Input error',
+                description : 'Input error',
                 template    :
                 {
-                    source  : '<Input type="text" label="small" size="small" width="calc(97% / 4)" />',
+                    source  : '<Input type="text" label="error" value="value" error="true" width="calc(97% / 4)" />',
                     data    : {},
                     style   : ''
                 }
-            }
+            },
+            'Input-success' :
+            {
+                title       : 'Input success',
+                description : 'Input success',
+                template    :
+                {
+                    source  : '<Input type="text" label="success" placeholder="test" success="true" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
         }
     }
 }

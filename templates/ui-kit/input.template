@@ -2,9 +2,9 @@
     .Input
     {
         display: flex;
-        flex-wrap: wrap;
-        position: relative;
+        flex-direction: column;
         width: 100%;
+        position: relative;
         border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, silver ));
         height: var( --form-input-height-size, var(--form-height-size, 36px ));
         border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
@@ -20,25 +20,29 @@
         }
         input, label
         {
-            transform: translateY(calc(var( --form-input-label-height, var(--form-label-height, 14px )) * -1));
-            width: 100%;
             background: transparent;
             padding: var( --form-input-padding, var(--form-padding, 0 7px ));
         }
         label
         {
-
+            position: absolute;
             font-weight: normal;
             color: var( --form-input-label-color, var(--form-label-color, silver ));
             user-select: none;
             display: flex;
             align-items: center;
             transition: all 50ms ease-in-out;
-            height: var( --form-input-label-height, var(--form-label-height, 14px ));
             font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 10px ));
             line-height: var( --form-input-label-height, var(--form-label-height, 14px ));
-
-
+            bottom: var( --form-input-height-size, var(--form-height-size, 36px ));
+        }
+        &.empty
+        {
+            label
+            {
+                font-size: var( --form-input-label-size, var(--form-label-size, 12px ));
+                line-height: var( --form-input-label-size, var(--form-label-size, 16px ));
+            }
         }
         input
         {
@@ -47,41 +51,47 @@
             color: var( --form-input-color, var(--form-color, gray ));
             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
+            border: 0;
+            outline: 0;
         }
-        &.empty
+        input::-webkit-search-decoration,
+        input::-webkit-search-cancel-button,
+        input::-webkit-search-results-button,
+        input::-webkit-search-results-decoration
         {
-            label
-            {
-                font-size: var( --form-input-label-size, var(--form-label-size, 12px ));
-                line-height: var( --form-input-label-size, var(--form-label-size, 12px ));
-            }
+            -webkit-appearance:none;
         }
 
+        &:before
+         {
+             font-family: "flaticon";
+             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
+             line-height: var( --form-input-font-size, var(--form-font-size, 12px ));
+             position: absolute;
+             right: 0;
+             bottom: 0;
+             top: 0;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             padding: var( --form-input-padding, var(--form-padding, 0 7px ));
+         }
 
 
         &.error
          {
-             border: 1px solid var(--red-8);
-             background: rgba(191, 54, 12, 0.05);
-            label{ color: var(--red-8); }
-            .alert-icon
-            {
-                visibility: visible;
-                color: var(--red-8);
-            }
+            border: 1px solid var( --form-input-error-color, var(--form-error-color, #D84315 ));
+            background: var( --form-input-error-background, var(--form-error-background, rgba(191, 54, 12, 0.05) ));
+            label{ color: var( --form-input-error-color, var(--form-error-color, #D84315 )); }
+            &:before { content: "\e055"; }
         }
 
         &.success
          {
-             border: 1px solid var(--green-8);
-             background: rgba(105, 240, 174, 0.05);
-            label{ color: var(--green-8); }
-            .alert-icon
-            {
-                visibility: visible;
-                color: var(--green-8);
-                &:before{ content: "\e025"; }
-            }
+            border: 1px solid var( --form-input-success-color, var(--form-success-color, #2E7D32 ));
+            background: var( --form-input-success-background, var(--form-success-background, rgba(105, 240, 174, 0.05) ));
+            label{ color: var( --form-input-success-color, var(--form-success-color, #2E7D32 )); }
+            &:before{ content: "\e025"; }
         }
     }
 </style>
@@ -112,7 +122,6 @@
     });
 </script>
 
-let _size = ( typeof size != 'undefined' ? size : ' normal' );
 let _selector = ( typeof selector != 'undefined' ? selector : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
@@ -124,12 +133,13 @@ let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
 let _type = ( typeof type != 'undefined' ? type : 'text' );
 let _label = ( typeof label != 'undefined' ? label : null );
+let _name = ( typeof name != 'undefined' ? name : null );
 let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
 
-<div class={'Input ' + ( _value.length > 0 ? ' ' : 'empty ' ) + _size + _error + _success  } style={"width:" + _width + _style } >
+<div class={'Input ' + ( _value.length > 0 ? ' ' : 'empty ' )  + _error + _success  } style={"width:" + _width + _style } >
+    <input id={label} name={_name} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
     if( _label )
     {
-        <label for={'Input_label_'+label} onclick="this.nextSibling.focus()">{label}</label>
+        <label for={label} onclick="this.nextSibling.focus()">{label}</label>
     }
-    <input id={'Input_label_'+label} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
 </div>

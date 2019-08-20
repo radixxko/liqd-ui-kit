@@ -59,7 +59,7 @@
                 border-radius: 50%;
                 animation: spin 2s linear infinite;
                 background: conic-gradient(from 90deg, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0.50), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1));
-                position: absolute;
+                position: relative;
                 width: var( --form-button-font-size, var(--form-font-size, 14px ));
                 height: var( --form-button-font-size, var(--form-font-size, 14px ));
                 &:after
@@ -94,8 +94,7 @@
 
             if( element.dataset.loader.length > 0 )
             {
-                loader.style.left = '6px';
-                element.style.paddingLeft = 'calc( var( --form-button-font-size, var(--form-font-size, 14px )) + 10px )';
+                loader.style.marginRight = '4px';
             }
 
             element.prepend( loader );

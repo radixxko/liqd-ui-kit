@@ -46,6 +46,13 @@ module.exports = class Component
         .join('\n');
     }
 
+    async design( style )
+    {
+        console.log( style );
+
+        return style;
+    }
+
     async render( variant )
     {
         let template = variant ? this.config.variants[variant].template : this.config.template;

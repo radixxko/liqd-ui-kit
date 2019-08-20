@@ -54,11 +54,11 @@ server.use('/', async(req, res, next ) =>
         let component = new Component( Template, components[id] );
         let basic = await component.render();
 
-        render += '<style>' + basic.styles.join('') + '</style><script>' + basic.styles.join('') + '</script>';
+        render += '<style>' + basic.styles.join('') + '</style><script>' + basic.scripts.join('') + '</script>';
         render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Element</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
         render += '<div class="tab active">' + basic.render + '</div>';
-        render += '<div class="tab"><pre>' + htmlentities( basic.source ) + '</pre></div>';
-        render += '<div class="tab"><pre>' + htmlentities( basic.render ) + '</pre></div>';
+        render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.source )) + '</pre></div>';
+        render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.render )) + '</pre></div>';
         render += '</div></div>';
 
         for( let variant of component.variants )
@@ -67,8 +67,8 @@ server.use('/', async(req, res, next ) =>
 
             render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Element</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
             render += '<div class="tab active">' + variant.render + '</div>';
-            render += '<div class="tab"><pre>' + htmlentities( variant.source ) + '</pre></div>';
-            render += '<div class="tab"><pre>' + htmlentities( variant.render ) + '</pre></div>';
+            render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.source )) + '</pre></div>';
+            render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.render )) + '</pre></div>';
             render += '</div></div>';
         }
     }

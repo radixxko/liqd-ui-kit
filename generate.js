@@ -55,7 +55,7 @@ server.use('/', async(req, res, next ) =>
         let basic = await component.render();
 
         render += '<style>' + basic.styles.join('') + '</style><script>' + basic.scripts.join('') + '</script>';
-        render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Element</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
+        render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Preview</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
         render += '<div class="tab active">' + basic.render + '</div>';
         render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.source )) + '</pre></div>';
         render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.render )) + '</pre></div>';
@@ -65,7 +65,7 @@ server.use('/', async(req, res, next ) =>
         {
             variant = await component.render( variant );
 
-            render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Element</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
+            render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Preview</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div></div><div class="content">';
             render += '<div class="tab active">' + variant.render + '</div>';
             render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.source )) + '</pre></div>';
             render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.render )) + '</pre></div>';

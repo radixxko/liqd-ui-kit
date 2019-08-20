@@ -23,7 +23,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            &:before, &:after
+            &:before, &:checked:after
             {
                   content: "";
                   display: block;
@@ -32,23 +32,22 @@
                   left: 0;
                   width: calc( 100% - ( var( --form-checkbox-border-width, var(--form-border-width, 1px )) * 2 ));
                   height: calc( 100% - ( var( --form-checkbox-border-width, var(--form-border-width, 1px )) * 2 ));
+                  border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
             }
             &:before
             {
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-color, var(--form-border-color, silver ));
                  background: var( --form-checkbox-background, var(--form-background, white ));
-                 border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
+
             }
             &:hover:before
             {
-                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-hover-border-color, var(--form-hover-border-color, gray ));
-                 background: var( --form-checkbox-hover-background, var(--form-hover-background, gray ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-hover-border-color, var(--form-hover-border-color, lightblue ));
+                 background: var( --form-checkbox-hover-background, var(--form-hover-background, lightblue ));
             }
             &:checked:after
             {
-                 color: var(--gray-9);
-                 background: var(--gray-0);
-                 border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
+                 background: var( --form-checkbox-active-background, var(--form-active-background, blue ));
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-focus-border-color, var(--form-focus-border-color, blue ));
             }
         }

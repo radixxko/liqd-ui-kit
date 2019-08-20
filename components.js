@@ -94,5 +94,30 @@ module.exports =
                 }
             },
         }
+    },
+    'CheckBox' :
+    {
+        title       : 'CheckBox',
+        description : 'CheckBox',
+        template    :
+        {
+            source  : '<Checkbox  />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+            'Input-error' :
+            {
+                title       : 'Checkbox checked',
+                description : 'Checkbox checked',
+                template    :
+                {
+                    source  : '<Checkbox label="test label" checked="true" />',
+                    data    : {},
+                    style   : ''
+                }
+            }
+        }
     }
 }

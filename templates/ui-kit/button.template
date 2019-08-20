@@ -51,7 +51,7 @@
              justify-content: center;
          }
 
-        &.loader
+        &.loading
          {
             pointer-events: none;
             .loader-box
@@ -79,39 +79,39 @@
     }
 </style>
 <script>
-    window.Button = new ( function()
+    window.Button || ( window.Button =
     {
-        let _original_content = document.createDocumentFragment();
-
-        this._showLoader = function( element )
+        loadStart: function( button )
         {
-            [...element.childNodes].forEach( n => _original_content.appendChild(n));
-            element.classList.add('loader');
-            let loader = document.createElement('DIV');
+            button.Button = { content: document.createDocumentFragment() };
+            [...button.childNodes].forEach( n => button.Button.content.appendChild(n));
+            button.classList.add('loading');
+            let loader = document.createElement('div');
                 loader.className = 'loader-box';
 
-            element.innerText = element.dataset.loader;
+            button.innerText = button.dataset.loader;
 
-            if( element.dataset.loader.length > 0 )
+            if( button.dataset.loader.length > 0 )
             {
                 loader.style.marginRight = '4px';
             }
 
-            element.prepend( loader );
-        };
+            button.prepend( loader );
+        },
 
-        this._hideLoader = function( element )
+        loadEnd: function( button )
         {
-           element.classList.remove('loader');
-           element.innerHTML = '';
-           element.appendChild( _original_content );
-        };
-    });
+           button.classList.remove('loading');
+           button.innerHTML = '';
+           button.appendChild( button.Button.content );
+           delete button.Button.content;
+        }
+    })
 </script>
 
 let _loading = ( typeof loading != 'undefined' ? loading : null );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
-<button class="button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "(async () => {Button._showLoader(this); await " + onclick + ";Button._hideLoader(this)})();" : onclick ) : '' )}>
+<button class="button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick ) : '' )}>
    if( typeof CONTENT != 'undefined' )
    {
         {CONTENT}

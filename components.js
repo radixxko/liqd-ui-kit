@@ -29,7 +29,7 @@ module.exports =
                 description : 'Button loader icon',
                 template    :
                 {
-                    source  : '<Button loading="" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 3000 ) ) )();"><i data-icon="start-round"></i></Button>',
+                    source  : '<Button loading="" onclick="new Promise( r => setTimeout( r, 1000 ))"><i data-icon="start-round"></i></Button>',
                     data    : {},
                     style   : ''
                 }
@@ -40,7 +40,7 @@ module.exports =
                 description : 'Button loader text icon',
                 template    :
                 {
-                    source  : '<Button loading="Loading" onclick="( async () => new Promise( resolve => setTimeout( () => { resolve(true) }, 300000 ) ) )();"><i data-icon="start-round" style="padding-right: 4px;"></i>Start</Button>',
+                    source  : '<Button loading="Loading" onclick="new Promise( r => setTimeout( r, 1000 ))"><i data-icon="start-round" style="padding-right: 4px;"></i>Start</Button>',
                     data    : {},
                     style   : ''
                 }

@@ -119,7 +119,149 @@
                 input.classList.remove('empty');
             }
         };
+
+        this.keyUp = function( input, event )
+        {
+            let prev = input.previousValue || '';
+            let re = new RegExp(input.getAttribute('data-pattern'))
+            let partial = re.toPartialMatchRegex();
+
+            if( !partial.exec(input.value) )
+            {
+                input.value = prev;
+            }
+
+            input.previousValue = input.value;
+            //console.log({ re, partial });
+            //console.log( input.value, partial.exec(input.value) );
+        }
     });
+</script>
+<script>
+    RegExp.prototype.toPartialMatchRegex = function() {
+        "use strict";
+
+        var re = this,
+            source = this.source,
+            i = 0;
+
+        function process () {
+            var result = "",
+                tmp;
+
+            function appendRaw(nbChars) {
+                result += source.substr(i, nbChars);
+                i += nbChars;
+            };
+
+            function appendOptional(nbChars) {
+                result += "(?:" + source.substr(i, nbChars) + "|$)";
+                i += nbChars;
+            };
+
+            while (i < source.length) {
+                switch (source[i])
+                {
+                    case "\\":
+                        switch (source[i + 1])
+                        {
+                            case "c":
+                                appendOptional(3);
+                                break;
+
+                            case "x":
+                                appendOptional(4);
+                                break;
+
+                            case "u":
+                                if (re.unicode) {
+                                    if (source[i + 2] === "{") {
+                                        appendOptional(source.indexOf("}", i) - i + 1);
+                                    } else {
+                                        appendOptional(6);
+                                    }
+                                } else {
+                                    appendOptional(2);
+                                }
+                                break;
+
+                            default:
+                                appendOptional(2);
+                                break;
+                        }
+                        break;
+
+                    case "[":
+                        tmp = /\[(?:\\.|.)*?\]/g;
+                        tmp.lastIndex = i;
+                        tmp = tmp.exec(source);
+                        appendOptional(tmp[0].length);
+                        break;
+
+                    case "|":
+                    case "^":
+                    case "$":
+                    case "*":
+                    case "+":
+                    case "?":
+                        appendRaw(1);
+                        break;
+
+                    case "{":
+                        tmp = /\{\d+,?\d*\}/g;
+                        tmp.lastIndex = i;
+                        tmp = tmp.exec(source);
+                        if (tmp) {
+                            appendRaw(tmp[0].length);
+                        } else {
+                            appendOptional(1);
+                        }
+                        break;
+
+                    case "(":
+                        if (source[i + 1] == "?") {
+                            switch (source[i + 2])
+                            {
+                                case ":":
+                                    result += "(?:";
+                                    i += 3;
+                                    result += process() + "|$)";
+                                    break;
+
+                                case "=":
+                                    result += "(?=";
+                                    i += 3;
+                                    result += process() + ")";
+                                    break;
+
+                                case "!":
+                                    tmp = i;
+                                    i += 3;
+                                    process();
+                                    result += source.substr(tmp, i - tmp);
+                                    break;
+                            }
+                        } else {
+                            appendRaw(1);
+                            result += process() + "|$)";
+                        }
+                        break;
+
+                    case ")":
+                        ++i;
+                        return result;
+
+                    default:
+                        appendOptional(1);
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        return new RegExp(process(), this.flags);
+    };
 </script>
 
 let _selector = ( typeof selector != 'undefined' ? selector : null );
@@ -135,9 +277,10 @@ let _type = ( typeof type != 'undefined' ? type : 'text' );
 let _label = ( typeof label != 'undefined' ? label : null );
 let _name = ( typeof name != 'undefined' ? name : null );
 let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
+let _pattern = ( typeof pattern != 'undefined' ? pattern : null );
 
 <div class={'Input ' + ( _value.length > 0 ? ' ' : 'empty ' )  + _error + _success  } style={"width:" + _width + _style } >
-    <input id={label} name={_name} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
+    <input id={label} name={_name} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
     if( _label )
     {
         <label for={label} onclick="this.nextSibling.focus()">{label}</label>

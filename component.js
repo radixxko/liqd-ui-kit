@@ -57,6 +57,7 @@ module.exports = class Component
     {
         let template = variant ? this.config.variants[variant].template : this.config.template;
         let styles = [], scripts = [], offset = 0;
+
         let render = ( await this.template.render( template.source, template.data )).trim()
             .replace( /<script[^>]*>([\s\S]*?)<\/script>/g, ( script, source ) =>
             {
@@ -79,6 +80,11 @@ module.exports = class Component
 
         return '<div style="padding: 4px; float: left;">' + [ basic, ...variants ].join('</div><div style="padding: 4px; float: left;">') + '</div>';
         */
+    }
+
+    get title()
+    {
+        return this.config.title;
     }
 
     get variants()

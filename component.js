@@ -60,7 +60,7 @@ module.exports = class Component
                 styles.push( source ); return '';
             });
 
-        return { styles, scripts, render, source: template.source };
+        return { styles, scripts, render, style: template.style, source: template.source };
 
         /*let basic = await this.template.render( this.config.template.source, this.config.template.data );
         let variants = [];

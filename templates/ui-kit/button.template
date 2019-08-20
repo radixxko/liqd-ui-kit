@@ -1,11 +1,11 @@
-<style require="/main.style">
+<style>
     @keyframes spin
     {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
 
-    .button
+    .Button
     {
         cursor: pointer;
         display: flex;
@@ -40,7 +40,6 @@
                 color: var( --form-button-hover-color, var(--form-hover-color, white ));
             }
         }
-        &:focus{ outline: 0; }
         &.loading
          {
             pointer-events: none;
@@ -103,7 +102,7 @@
 
 let _loading = ( typeof loading != 'undefined' ? loading : null );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
-<button class="button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick ) : '' )}>
+<button class="Button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick ) : '' )}>
    if( typeof CONTENT != 'undefined' )
    {
         {CONTENT}

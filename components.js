@@ -31,7 +31,7 @@ module.exports =
                 {
                     source  : '<Button loading="" onclick="new Promise( r => setTimeout( r, 1000 ))"><i data-icon="start-round"></i></Button>',
                     data    : {},
-                    style   : ''
+                    style   : '--form-button-padding:0;'
                 }
             },
             'Button-loader-text-icon' :
@@ -45,7 +45,7 @@ module.exports =
                     style   : ''
                 }
             },
-            'Button-loader-text-icon' :
+            'Button-loader-image' :
             {
                 title       : 'Button loader text icon',
                 description : 'Button loader text icon',
@@ -53,7 +53,7 @@ module.exports =
                 {
                     source  : '<Button onclick="alert(\'click\')"><img style="object-fit: contain;height: 100%;width:auto;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Available_on_the_App_Store_%28black%29.png/640px-Available_on_the_App_Store_%28black%29.png" /></Button>',
                     data    : {},
-                    style   : '--form-button-padding:0 0; --form-button-border-width: 0; --form-button-border-radius: 6px;'
+                    style   : '--form-button-padding:0; --form-button-border-width: 0; --form-button-border-radius: 6px;'
                 }
             }
         }

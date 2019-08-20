@@ -1,7 +1,8 @@
 <style>
     .Input
     {
-        display: block;
+        display: flex;
+        flex-wrap: wrap;
         position: relative;
         width: 100%;
         border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, silver ));
@@ -17,77 +18,46 @@
                  color: var( --form-input-focus-label-color, var(--form-focus-label-color, blue ));
              }
         }
+        input, label
+        {
+            transform: translateY(calc(var( --form-input-label-height, var(--form-label-height, 14px )) * -1));
+            width: 100%;
+            background: transparent;
+            padding: var( --form-input-padding, var(--form-padding, 0 7px ));
+        }
         label
         {
-            width: 100%;
+
             font-weight: normal;
             color: var( --form-input-label-color, var(--form-label-color, silver ));
             user-select: none;
             display: flex;
             align-items: center;
             transition: all 50ms ease-in-out;
-            height: 14rem;
-            font-size: 10rem;
-            line-height: 14rem;
-            padding-left: 7rem;
-            margin-top: calc(8rem - 1px);
-        }
-        &.empty
-        {
-            label{ font-size: var( --form-input-label-size, var(--form-label-size, 12px )); line-height: var( --form-input-label-size, var(--form-label-size, 12px )); margin: 0;  }
-        }
+            height: var( --form-input-label-height, var(--form-label-height, 14px ));
+            font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 10px ));
+            line-height: var( --form-input-label-height, var(--form-label-height, 14px ));
 
+
+        }
         input
         {
-            position: absolute;
-            top: 0; left: 0; height:100%; width: 100%;
-            display: flex;
             cursor: pointer;
-            outline: 0;
-            border: 0;
-            border-radius: 0;
-            background: transparent;
+            height: 100%;
             color: var( --form-input-color, var(--form-color, gray ));
             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
-            padding: 0;
-            padding-left: 7px;
         }
-
-
-        &.big
-         {
-             height: 48rem;
-             margin-bottom: 36rem;
+        &.empty
+        {
             label
             {
-
+                font-size: var( --form-input-label-size, var(--form-label-size, 12px ));
+                line-height: var( --form-input-label-size, var(--form-label-size, 12px ));
             }
-            input
-            {
-                font-size: 12rem;
-                padding-left: 7rem;
-                line-height: 16rem;
-                height: 16rem;
-                margin-top: calc( 26rem - 1px);
-            }
-
-            --size: 12rem;
         }
 
-        .alert-icon
-        {
-            position: absolute;
-            right: 7rem;
-            font-size: calc(var(--size) + 6rem);
-            top: 0;
-            bottom: 0;
-            align-items: center;
-            justify-content: center;
-            margin: auto;
-            visibility: hidden;
-            display: flex;
-        }
+
 
         &.error
          {
@@ -162,5 +132,4 @@ let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
         <label for={'Input_label_'+label} onclick="this.nextSibling.focus()">{label}</label>
     }
     <input id={'Input_label_'+label} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" onchange={_onChange} autocomplete={_autocomplete} required={_required} />
-    <i class="alert-icon" data-icon="warning"></i>
 </div>

@@ -1,104 +1,62 @@
 <style>
-    .checkbox
+    .Checkbox
     {
-        position: relative;
-        label
-        {
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            position: absolute;
-            left: 0;
-            top: 0;
-            display: flex;
-            justify-content: space-between;
-            &:before
-             {
-                 position: absolute;
-                 top: 0;
-                 left: 0;
-                 border: 1px solid var(--gray-3);
-                 background: white;
-                 border-radius: 2px;
-                 font-size: inherit;
-                 line-height: inherit;
-                 color: transparent;
-             }
-             @media (min-width: 1024px)
-             {
-                 &:hover::before
-                 {
-                     border:1px solid var(--gray-5);
-                     color: var(--gray-3);
-                     background: var(--gray-0);
-                 }
-             }
-            span { font-size: inherit; line-height: inherit; color: var(--gray-9);  }
-        }
-
+        height: var( --form-checkbox-height, var(--form-height, 24px ));
         input[type=checkbox]
         {
-            visibility: hidden;
+            position: relative;
+            width: var( --form-checkbox-width, var(--form-width, 24px ));
+            height: var( --form-checkbox-height, var(--form-height, 24px ));
             margin: 0;
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            &:checked + label:before
-             {
+            padding: 0;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            &:before, &:after
+            {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: calc( 100% - ( var( --form-checkbox-border-width, var(--form-border-width, 1px )) * 2 ));
+                  height: calc( 100% - ( var( --form-checkbox-border-width, var(--form-border-width, 1px )) * 2 ));
+            }
+            &:before
+            {
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-color, var(--form-border-color, silver ));
+                 background: var( --form-checkbox-background, var(--form-background, white ));
+                 border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
+            }
+            &:hover:before
+            {
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-hover-border-color, var(--form-hover-border-color, gray ));
+                 background: var( --form-checkbox-hover-background, var(--form-hover-background, gray ));
+            }
+            &:checked:after
+            {
                  color: var(--gray-9);
                  background: var(--gray-0);
-                 border: 1px solid var(--gray-9);
-             }
-            &:disabled + label:before{ background: var(--gray-0); }
-        }
-
-
-        &.error
-         {
-            label:before
-            {
-                border: 1px solid var(--red-9);
-                background: rgba(191, 54, 12, 0.05);
+                 border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-focus-border-color, var(--form-focus-border-color, blue ));
             }
-         }
-
-        &.small
-         {
-             width: 24rem;
-             height: 24rem;
-            label:before{ width: 24rem;  height: 24rem; font-size: 12rem; line-height: 24rem; }
-            label > span{ margin-left: 24rem; }
-         }
-
-        &.normal
-         {
-             width: 36rem;
-             height: 36rem;
-            label:before{ width: 36px;  height: 36rem; font-size: 14rem; line-height: 36rem; }
-            label > span{ margin-left: 36rem; }
-         }
-
-        &.big
-         {
-             width: 48rem;
-             height: 48rem;
-            label:before{ width: 48rem;  height: 48rem; font-size: 16rem; line-height: 48rem; }
-            label > span{ margin-left: 48rem; }
-         }
-
-        &.disabled{ pointer-events: none!important; }
+        }
     }
 </style>
 
-let _size = ( typeof size != 'undefined' ? (size + ' ') : 'normal ' );
-let _onClick = ( typeof onclick != 'undefined' ? onclick : '' );
+let _onClick = ( typeof onclick != 'undefined' ? onclick : null );
 let _onChange = ( typeof onchange != "undefined" ? onchange : null );
-let _disabled = ( typeof disabled != "undefined" ? ' disabled' : '' );
+let _disabled = ( typeof disabled != "undefined" ? ' disabled' : null );
 let _checked = (typeof checked != 'undefined' ? 'true' : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
+let _label = (typeof label != 'undefined' ? label.liqd_slugify() : null );
 
-<div class={"checkbox " + _size + _disabled + _error }  onclick={ _onClick } onchange={_onChange} >
-    <input disabled={(typeof disabled != "undefined" ? undefined : null)} type="checkbox" id={label.liqd_slugify()+'_checkbox_name'} name="check" checked={_checked} />
-    <label for={label.liqd_slugify()+'_checkbox_name'} data-icon="checkmark"></label>
-</div>
+<label class={"Checkbox " + _error }  onclick={ _onClick } onchange={_onChange} >
+    <input disabled={_disabled} type="checkbox" name="check" checked={_checked} />
+    if( _label )
+    {
+        <span>{label}</span>
+    }
+</label>

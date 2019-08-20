@@ -64,9 +64,8 @@ module.exports =
         description : 'Input',
         template    :
         {
-            source  : '<Input type="text" label="small" placeholder="placeholder" width="calc(97% / 4)" pattern={pattern} />',
-            //data    : { pattern: '/^(\\+?[0-9]{3}[0-9]{9}|[0-9]{9,10})/' },
-            data    : { pattern: '^(\\+?[0-9]{12}|[0-9]{9,10})$' },
+            source  : '<Input type="text" label="small" placeholder="placeholder" width="calc(97% / 4)" pattern="^(\\+?\\s*([0-9]\\s*){12}|([0-9]\\s*){9,10})$" />',
+            data    : {},
             style   : ''
         },
         variants    :

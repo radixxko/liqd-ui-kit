@@ -1,102 +1,90 @@
 <style>
-    .input-select
+    .Select
     {
 
-        border: 1px solid var(--gray-2);
-        border-radius: 2px;
-        display: inline-block;
-        vertical-align: top;
+        display: flex;
+        width: 100%;
         position: relative;
-        cursor: text;
-        color: var(--gray-8);
-        background-color: white;
+        border: var( --form-select-border-width, var(--form-border-width, 1px )) solid  var( --form-select-border-color, var(--form-border-color, #dfe3e9 ));
+        height: var( --form-select-height-size, var(--form-height-size, 36px ));
+        border-radius: var( --form-select-border-radius, var(--form-border-radius, 2px ));
+        background: var( --form-select-background, var(--form-background, #ffffff ));
+        transition: all 83ms ease-in-out 34ms;
+
         .input
         {
             display: flex;
             position: relative;
             width: 100%;
-            border: 0;
-            outline: none;
+            height: 100%;
             white-space: nowrap;
             text-overflow: ellipsis;
             cursor: pointer;
-            color: var(--gray-6);
             align-items: center;
+            color: var( --form-select-color, var(--form-color, #354052 ));
+            padding-left: var( --form-select-padding-left, var(--form-padding-left, 7px ));
 
-            &:empty:before
-             {
-                 content: "\200B";
-                 display: inline;
-             }
 
             &[placeholder]:empty:before
-             {
-                 content:attr(placeholder);
-                 display: inline;
-             }
+            {
+                content:attr(placeholder);
+                display: inline;
+                opacity: 0.5;
+            }
 
             &:after
              {
                  content: "\e08a";
                  font-family: "flaticon";
-                 right: 0;
+                 right: var( --form-select-padding-right, var(--form-padding-right, 7px ));
                  position: absolute;
                  text-align: center;
                  opacity: 0;
                  margin: auto;
-                 transition: opacity 200ms ease-in;
+                 transition: opacity 83ms ease-in-out 34ms;
              }
+        }
+
+        &.label
+        {
+            margin-top: var( --form-select-label-height, var(--form-label-height, 24px ));
         }
 
         label
         {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             font-weight: normal;
-            color: var(--gray-6);
             user-select: none;
-            display: flex;
-            align-items: center;
+            transition: all 83ms ease-in-out 34ms;
+            color: var( --form-select-label-color, var(--form-label-color, #7f8fa4 ));
+            font-size: var( --form-select-label-fill-size, var(--form-fill-label-size, 12px ));
+            line-height: var( --form-select-label-height, var(--form-label-height, 24px ));
+            top: calc( var( --form-select-label-height, var(--form-label-height, 24px )) * -1 );
         }
 
         .select-wrap
         {
             position: absolute;
             left: 0;
-            top: 40px;
-            background-color: transparent;
-            min-width: 100%;
-            border: 1px solid transparent;
+            top: var( --form-select-height-size, var(--form-height-size, 36px ));
             height: 0;
+            width: 100%;
             overflow-x: hidden;
             overflow-y: auto;
-            max-height: 150px;
 
             input
             {
-                display: inline-block;
                 position: relative;
-                font-family: inherit;
-                width: 100%;
-                transition: margin-top 50ms ease-in 0s;
+                width: calc( 100% - var( --form-select-padding-left, var(--form-padding-left,7px )) );
                 border: 0;
                 outline: none;
-                background-color: transparent;
                 color: var(--gray-8);
-
-
-                &:invalid
-                 {
-                     border: 0;
-                     box-shadow: none;
-                 }
-
-                &::-webkit-input-placeholder { color: var(--gray-8); }
-                &::-moz-placeholder { color: var(--gray-8); }
-                &:-ms-input-placeholder { color: var(--gray-8); }
-                &:-moz-placeholder { color: var(--gray-8); }
+                padding: 0;
+                padding-left: var( --form-select-padding-left, var(--form-padding-left,7px ));
+                height: var( --form-select-search-height, 24px );
+                line-height: var( --form-select-line-height, var(--form-line-height, 16px ));
+                font-size: var( --form-select-font-size, var(--form-font-size, 12px ));
+                &::placeholder { color: var(--form-select-search-color, var(--form-color, #354052)); }
             }
 
             .select-group
@@ -136,15 +124,16 @@
         }
 
         &:hover
-         {
+        {
+             border-color: var( --form-textarea-border-hover-color, var(--form-border-hover-color, #ced0da ));
             .input
             {
                 &:after
                  {
-                     opacity: 0.3;
+                     opacity: 0.5;
                  }
             }
-         }
+        }
 
         &.focus{ border: 1px solid blue; }
 
@@ -175,168 +164,6 @@
             }
          }
 
-        &.small
-         {
-             height: 24rem;
-             line-height: 14rem;
-             margin-bottom: 12rem;
-
-            .input, .select-wrap input
-            {
-                margin: 0; font-size: 10rem; line-height: 14rem; padding-left: 7rem;
-            }
-
-            .select-wrap input{ line-height: 22rem; }
-            .input{ height: 22rem;  }
-            .input:after
-            {
-                font-size: 10rem;
-                line-height: 14rem;
-                padding-right: 7rem;
-            }
-            .select-wrap
-            {
-                top: 22rem;
-                right: -1rem;
-                .select-group
-                {
-                    padding: 0 7rem;
-                    line-height: 24rem;
-                    font-size: 12rem;
-                }
-                .select-option
-                {
-                    padding: 0 7rem;
-                    line-height: 24rem;
-                    font-size: 10rem;
-                }
-            }
-
-            &.focus,
-            &.fill
-             {
-                .input
-                {
-                    height: 24rem;
-                    margin: 0;
-                }
-            }
-            --size: 8rem;
-        }
-
-        &.normal
-         {
-             height: 36rem;
-             line-height: 36rem;
-             margin-bottom: 24rem;
-            .input, .select-wrap input
-            {
-                margin: 0; font-size: 12rem; line-height: 16rem; padding-left: 7rem;
-            }
-
-            .input{ height: 34rem; }
-            .select-wrap input{ line-height: 22rem; }
-
-            .input:after
-            {
-                font-size: 12rem;
-                line-height: 16rem;
-                padding-right: 7rem;
-            }
-            .select-wrap
-            {
-                top: 34rem;
-                right: -1rem;
-                .select-group
-                {
-                    padding: 0 7rem;
-                    line-height: 24rem;
-                    font-size: 12rem;
-                }
-                .select-option
-                {
-                    padding: 0 7rem;
-                    line-height: 24rem;
-                    font-size: 12rem;
-                }
-            }
-            &.focus,
-            &.fill
-             {
-                .input
-                {
-                    height: 36rem;
-                    margin: 0;
-                }
-             }
-            --size: 10rem;
-        }
-
-        &.big
-         {
-             height: 48rem;
-             line-height: 48rem;
-             margin-bottom: 36rem;
-            .input, .select-wrap input
-            {
-               font-size: 12rem; line-height: 16rem; padding-left: 7rem;
-            }
-
-            .select-wrap input{ line-height: 22rem; }
-            .input
-            {
-                height: 16rem;
-                margin-top: calc( 26rem - 1px);
-            }
-
-            label
-            {
-                transition: all 50ms ease-in-out; height: 48rem; font-size: 12rem; line-height: 12rem; padding-left: 7rem; overflow: hidden; cursor: pointer;
-            }
-
-            .input:after
-            {
-                font-size: 12rem;
-                padding-right: 7rem;
-                transform: translateY(-10px);
-            }
-            .select-wrap
-            {
-                top: 46rem;
-                right: -1rem;
-                .select-group
-                {
-                    padding: 0 7rem;
-                    line-height: 24rem;
-                    font-size: 12rem;
-                }
-                .select-option
-                {
-                    padding: 0 7rem;
-                    line-height: 24rem;
-                    font-size: 12rem;
-                }
-            }
-            &.focus,
-            &.fill
-             {
-                .input
-                {
-                    line-height: 16rem;
-                    &:after{ transform: translateY(0); }
-                }
-                label
-                {
-                    height: 14rem;
-                    font-size: 10rem;
-                    line-height: 14rem;
-                    padding-left: 7rem;
-                    margin-top: calc(8rem - 1px);
-                }
-            }
-            --size: 12rem;
-        }
-
         &.error
          {
              border: 1px solid var(--red-8);
@@ -347,7 +174,7 @@
                 color: var(--red-8);
                 content: "\e055";
             }
-            .input:after{  font-size: calc(var(--size) + 6rem); }
+            .input:after{  font-size: calc(var(--size) + 6px); }
         }
 
         &.success
@@ -360,7 +187,7 @@
                 color: var(--green-8);
                 content: "\e025";
             }
-            .input:after{  font-size: calc(var(--size) + 6rem); }
+            .input:after{  font-size: calc(var(--size) + 6px); }
         }
     }
 </style>
@@ -421,8 +248,8 @@
 
             _hidden()
             {
-                if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
-                this._element.classList.remove('focus');
+             //   if( this._input.value !== '' ){ this._element.classList.add('fill'); }else{ this._element.classList.remove('fill'); }
+              //  this._element.classList.remove('focus');
             }
 
             focus( event )
@@ -592,8 +419,7 @@ let _selected = ( typeof selected !== 'undefined' && selected === 'true' ? ' sel
 let _class = ( typeof clazz !== 'undefined' ? ' '+clazz : '' );
 let _disabled = ( typeof disabled !== 'undefined' && disabled === 'true' ? ' disabled' : '' );
 let _fill = ( typeof value !== 'undefined' && value.length > 0 ? ' fill' : '' );
-let _label = ( typeof label === 'undefined' ? ' not-label' : '' );
-let _size = ( typeof size != 'undefined' ? ' '+size : ' normal' );
+let _label = ( typeof label !== 'undefined' ? label : null );
 let _required = ( typeof required !== 'undefined' ? required : null );
 let _onchange = ( typeof onchange !== 'undefined' ? onchange : null );
 let _value = ( typeof value !== 'undefined' ? value.join( ',' ) : '' );
@@ -605,9 +431,12 @@ let _init = ( typeof init !== 'undefined' ? init : 'true' );
 let _error = ( typeof error !== 'undefined' ? ' error' : '' );
 let _success = ( typeof success !== 'undefined' ? ' success' : '' );
 let _multiple = ( typeof multiple !== 'undefined' ? true : false );
-<div style={'width:'+_width+';'+_style} class={'input-select' + _fill + _selected +_class + _disabled + _label + _size + _error + _success }>
+let _placeholder = ( typeof placeholder !== 'undefined' ? placeholder : null );
+
+<div style={'width:'+_width+';'+_style} class={'Select' + _fill + _selected +_class + _disabled + _error + _success  + ( _label ? ' label' : '' ) }>
+    <label for={_id} class="label">{label}</label>
     <input type="text" style="display:none;" required={_required} onchange={_onchange} value={_value} name={_name} id={_id} />
-    <div class="input" placeholder={( _size.trim() != "big" ? label : null)} contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <div class="input" placeholder={_placeholder} contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
     </div>
     <div class="select-wrap">
         if( typeof suggest !== 'undefined' && suggest )
@@ -637,14 +466,13 @@ let _multiple = ( typeof multiple !== 'undefined' ? true : false );
             }
         }
     </div>
-    if( typeof label !== 'undefined' && _size.trim() === 'big' )
-    {
-        <label for={_id} class="label">{label}</label>
-    }
 </div>
 <script instance select={_id} value={value} option={option} contenteditable={_contenteditable} multiple={_multiple} init={_init}>
-if( init === 'true' )
-{
-    new Select( document.getElementById( select ), value, option, {contenteditable, multiple} );
-}
+    window.addEventListener('DOMContentLoaded', (event) =>
+    {
+        if( init === 'true' )
+        {
+            new Select( document.getElementById( select ), value, option, {contenteditable, multiple} );
+        }
+    });
 </script>

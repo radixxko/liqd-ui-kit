@@ -148,6 +148,7 @@ $font-22-height: 30rem;
 [data-icon=start-round]:before { content: "\e089"; }
 [data-icon=extend]:before { content: "\e090"; }
 [data-icon=shorten]:before { content: "\e035"; }
+[data-icon=user]:before { content: "\e0a7"; }
 
 html{ font-size: 1px!important; }
 html, body{  margin: 0; padding: 0;  }

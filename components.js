@@ -12,17 +12,6 @@ module.exports =
         },
         variants    :
         {
-            'Button-disabled' :
-            {
-                title       : 'Disabled Button',
-                description : 'Disablnute tlacitko',
-                template    :
-                {
-                    source  : '<Button disabled="true" onclick="alert(\'click\')"><p>Test</p></Button>',
-                    data    : {},
-                    style   : ''
-                }
-            },
             'Button-loader-icon' :
             {
                 title       : 'Button loader icon',
@@ -55,7 +44,18 @@ module.exports =
                     data    : {},
                     style   : '--form-button-padding:0; --form-button-border-width: 0; --form-button-border-radius: 6px;'
                 }
-            }
+            },
+            'Button-disabled' :
+            {
+                title       : 'Disabled Button',
+                description : 'Disablnute tlacitko',
+                template    :
+                    {
+                        source  : '<Button disabled="true" onclick="alert(\'click\')">Test</Button>',
+                        data    : {},
+                        style   : ''
+                    }
+            },
         }
     },
     'Input' :
@@ -70,16 +70,38 @@ module.exports =
         },
         variants    :
         {
-            'Input-error' :
+            'Input-icon-left' :
             {
                 title       : 'Input error',
                 description : 'Input error',
                 template    :
                 {
-                    source  : '<Input type="text" label="error" value="value" error="true" width="calc(97% / 4)" />',
+                    source  : '<Input type="text" label="icon-left" value="value" icon="user" width="calc(97% / 4)" />',
                     data    : {},
                     style   : ''
                 }
+            },
+            'Input-icon-right' :
+            {
+                title       : 'Input error',
+                description : 'Input error',
+                template    :
+                {
+                    source  : '<Input type="text" label="icon-right" value="value" iconPosition="right" icon="search" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
+            'Input-error' :
+            {
+                title       : 'Input error',
+                description : 'Input error',
+                template    :
+                    {
+                        source  : '<Input type="text" label="error" value="value" error="true" width="calc(97% / 4)" />',
+                        data    : {},
+                        style   : ''
+                    }
             },
             'Input-success' :
             {
@@ -92,6 +114,122 @@ module.exports =
                     style   : ''
                 }
             },
+            'Input-disabled' :
+            {
+                title       : 'Input disabled',
+                description : 'Input disabled',
+                template    :
+                    {
+                        source  : '<Input type="text" label="disabled" value="value" disabled="true" width="calc(97% / 4)" />',
+                        data    : {},
+                        style   : ''
+                    }
+            }
+        }
+    },
+    'Textarea' :
+    {
+        title       : 'Textarea',
+        description : 'Textarea',
+        template    :
+        {
+            source  : '<Textarea label="Label" placeholder="placeholder" width="calc(97% / 4)" />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+            'Textarea-rows' :
+            {
+                title       : 'Textarea rows',
+                description : 'Textarea rows',
+                template    :
+                {
+                    source  : '<Textarea label="AutoExtend" value="Press Enter" rows="5" autoextend="true" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
+            'Textarea-error' :
+            {
+                title       : 'Textarea error',
+                description : 'Textarea error',
+                template    :
+                {
+                    source  : '<Textarea label="Textarea error" value="Press Enter" error="true" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
+            'Textarea-success' :
+            {
+                title       : 'Textarea success',
+                description : 'Textarea success',
+                template    :
+                {
+                    source  : '<Textarea label="Textarea success" value="Press Enter" success="true" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
+            'Textarea-disabled' :
+            {
+                title       : 'Textarea disabled',
+                description : 'Textarea disabled',
+                template    :
+                {
+                    source  : '<Textarea label="Disabled" value="value" disabled="true" width="calc(97% / 4)" />',
+                    data    : {},
+                    style   : ''
+                }
+            }
+        }
+    },
+    'Select' :
+    {
+        title       : 'Select',
+        description : 'Select',
+        template    :
+        {
+            source  : '<Select suggest="true" option={select} value="" id="1_Step_Suggestor" label="Label" placeholder="placeholder" width="calc(97% / 4)" />',
+            data    :
+                {
+                    select:
+                        {
+                            Options:
+                                [
+                                    { id: 1, value: 'Prvy value' },
+                                    { id: 2, value: 'Druhy value' },
+                                    { id: 3, value: 'Treti value' }
+                                ]
+                        }
+                },
+            style   : ''
+        },
+        variants    :
+        {
+            'Textarea-rows' :
+            {
+                title       : 'Textarea rows',
+                description : 'Textarea rows',
+                template    :
+                {
+                    source  : '<Select suggest="true" option={select} value="" id="1_Step_Suggestor" label="Label" width="calc(97% / 4)" />',
+                    data    :
+                        {
+                            select:
+                                {
+                                    Options:
+                                        [
+                                            { id: 1, value: 'Prvy value' },
+                                            { id: 2, value: 'Druhy value' },
+                                            { id: 3, value: 'Treti value' }
+                                        ]
+                                }
+                        },
+                    style   : ''
+                }
+            }
         }
     },
     'CheckBox' :
@@ -100,13 +238,35 @@ module.exports =
         description : 'CheckBox',
         template    :
         {
-            source  : '<Checkbox  />',
+            source  : '<Checkbox />',
             data    : {},
             style   : ''
         },
         variants    :
         {
-            'Input-error' :
+            'checkbox-disabled' :
+            {
+                title       : 'Checkbox disabled',
+                description : 'Checkbox disabled',
+                template    :
+                {
+                    source  : '<Checkbox label="test label" disabled="true" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
+            'checkbox-disabled-checked' :
+            {
+                title       : 'Checkbox disabled checked',
+                description : 'Checkbox disabled checked',
+                template    :
+                {
+                    source  : '<Checkbox label="test label" disabled="true" checked="true" />',
+                    data    : {},
+                    style   : ''
+                }
+            },
+            'checkbox-checked' :
             {
                 title       : 'Checkbox checked',
                 description : 'Checkbox checked',

@@ -15,9 +15,9 @@
         user-select: none;
         box-sizing: border-box;
         width: fit-content;
-        background: var( --form-button-background, var(--form-fill-background, silver ));
-        color: var( --form-button-color, var(--form-color, black ));
-        border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, silver ));
+        background: var( --form-button-background, var(--form-fill-background, linear-gradient(0deg, #3b4857 0%, #516072 100%) ));
+        color: var( --form-button-color, var(--form-color, #ffffff ));
+        border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, #3b4958 ));
         border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
         height: var( --form-button-height-size, var(--form-height-size, 36px ));
         min-width: var( --form-button-height-size, var(--form-height-size, 36px ));
@@ -27,18 +27,24 @@
         outline: 0;
         &:disabled
          {
-                 cursor: default;
-                 pointer-events: none;
-                 background: var( --form-button-disabled-background, var(--form-fill-disabled-background, gray ));
-                 color: var( --form-button-disabled-color, var(--form-disabled-color, black ));
-                 border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-disabled-color, var(--form-border-disabled-color, gray ));
+             cursor: default;
+             pointer-events: none;
+             background: var( --form-button-disabled-background, var(--form-fill-disabled-background, #e9edf1 ));
+             color: var( --form-button-disabled-color, var(--form-disabled-color, #354052 ));
+             border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
          }
+        &:focus
+        {
+            background: var( --form-button-focus-background, var(--form-focus-background, linear-gradient(0deg, #242f3b 0%, #354353 100%) ));
+            color: var( --form-button-focus-color, var(--form-focus-color, #ffffff ));
+            border-color: var( --form-button-focus-border-color, var(--form--focus-border-color, #303c4b ));
+        }
         @media ( min-width: 1024px )
         {
             &:hover
             {
-                background: var( --form-button-hover-background, var(--form-hover-background, blue ));
-                color: var( --form-button-hover-color, var(--form-hover-color, white ));
+                background: var( --form-button-hover-background, var(--form-hover-background, linear-gradient(0deg, #303d4c 0%, #415061 100%) ));
+                color: var( --form-button-hover-color, var(--form-hover-color, #ffffff ));
             }
         }
         &.loading
@@ -61,7 +67,7 @@
                      transform: translate(-50%, -50%);
                      width: calc( var( --form-button-font-size, var(--form-font-size, 14px )) - 4px );
                      height: calc( var( --form-button-font-size, var(--form-font-size, 14px )) - 4px );
-                     background: var( --form-button-background, var(--form-fill-background, silver ));
+                     background: var( --form-button-focus-background, var(--form-focus-background, linear-gradient(0deg, #242f3b 0%, #354353 100%) ));
                      border-radius: 50%;
                  }
             }
@@ -75,8 +81,6 @@
         {
             button.Button = { content: document.createDocumentFragment() };
             [...button.childNodes].forEach( n => button.Button.content.appendChild(n));
-            button.style.minWidth = button.offsetWidth + 'px';
-            console.log(button.offsetWidth, button.clientWidth, button.getBoundingClientRect())
             button.classList.add('loading');
             let loader = document.createElement('div');
                 loader.className = 'loader-box';
@@ -97,13 +101,14 @@
            button.innerHTML = '';
            button.appendChild( button.Button.content );
            delete button.Button.content;
+           button.blur();
         }
     })
 </script>
 
 let _loading = ( typeof loading != 'undefined' ? loading : null );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
-<button class="Button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick ) : '' )}>
+<button class="Button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick + ";this.blur()" ) : '' )}>
    if( typeof CONTENT != 'undefined' )
    {
         {CONTENT}

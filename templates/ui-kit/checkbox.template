@@ -47,8 +47,14 @@
             }
             &:checked:after
             {
-                 background: var( --form-checkbox-active-background, var(--form-active-background, blue ));
+                 background: var( --form-checkbox-fill-background, var(--form-fill-background, blue ));
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-focus-border-color, var(--form-focus-border-color, blue ));
+            }
+            &:disabled
+            {
+                pointer-events: none; cursor: default;
+                background: var( --form-checkbox-disabled-background, var(--form-disabled-background, blue ));
+                border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, blue ));
             }
         }
     }

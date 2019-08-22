@@ -191,7 +191,7 @@ module.exports =
         description : 'Select',
         template    :
         {
-            source  : '<Select suggest="true" option={select} value="" id="1_Step_Suggestor" label="Label" placeholder="placeholder" width="calc(97% / 4)" />',
+            source  : '<Select suggest="true" option={select} value="" id="First-suggestor" label="Label" placeholder="placeholder" width="calc(97% / 4)" />',
             data    :
                 {
                     select:
@@ -208,13 +208,57 @@ module.exports =
         },
         variants    :
         {
-            'Textarea-rows' :
+            'Select-multiple' :
             {
-                title       : 'Textarea rows',
-                description : 'Textarea rows',
+                title       : 'Select Multiple',
+                description : 'Select Multiple',
                 template    :
                 {
-                    source  : '<Select suggest="true" option={select} value="" id="1_Step_Suggestor" label="Label" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" option={select} value="1,2" multiple="true" id="Second-suggestor" label="Multiple-Select" width="calc(97% / 4)" />',
+                    data    :
+                        {
+                            select:
+                                {
+                                    Options:
+                                        [
+                                            { id: 1, value: 'Prvy value' },
+                                            { id: 2, value: 'Druhy value' },
+                                            { id: 3, value: 'Treti value' }
+                                        ]
+                                }
+                        },
+                    style   : ''
+                }
+            },
+            'Select-error' :
+            {
+                title       : 'Select Error',
+                description : 'Select Error',
+                template    :
+                {
+                    source  : '<Select suggest="true" option={select} value="1,2" multiple="true" error="true" id="Third-suggestor" label="Multiple Select Error" width="calc(97% / 4)" />',
+                    data    :
+                        {
+                            select:
+                                {
+                                    Options:
+                                        [
+                                            { id: 1, value: 'Prvy value' },
+                                            { id: 2, value: 'Druhy value' },
+                                            { id: 3, value: 'Treti value' }
+                                        ]
+                                }
+                        },
+                    style   : ''
+                }
+            },
+            'Select-success' :
+            {
+                title       : 'Select Success',
+                description : 'Select Success',
+                template    :
+                {
+                    source  : '<Select suggest="true" option={select} value="1,2" multiple="true" success="true" id="Fourth-suggestor" label="Multiple Select Success" width="calc(97% / 4)" />',
                     data    :
                         {
                             select:

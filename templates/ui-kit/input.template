@@ -104,16 +104,16 @@
 
         &.error
         {
-            border: 1px solid var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
+            border-color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
             span{ color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
-            &:after { content: "\e002"; color: #ed1c24; }
+            &:after { content: "\e002"; color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
         }
 
         &.success
         {
-            border: 1px solid var( --form-input-success-color, var(--form-success-color, #1bb934 ));
+            border-color: var( --form-input-success-color, var(--form-success-color, #1bb934 ));
             span{ color: var( --form-input-success-color, var(--form-success-color, #1bb934 )); }
-            &:after{ content: "\e024"; color: #1bb934; }
+            &:after{ content: "\e024"; color: var( --form-input-success-color, var(--form-success-color, #1bb934 )); }
         }
     }
 </style>

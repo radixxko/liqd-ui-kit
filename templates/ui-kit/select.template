@@ -36,12 +36,15 @@
              {
                  content: "\e08a";
                  font-family: var( --form-select-icon-font, var(--from-icon-font, "flaticon"));
-                 right: var( --form-select-padding-right, var(--form-padding-right, 7px ));
+                 right: 0;
+                 height: var( --form-select-height-size, var(--form-height-size, 36px ));
+                 width: var( --form-select-height-size, var(--form-height-size, 36px ));
                  position: absolute;
-                 text-align: center;
                  opacity: 0;
-                 margin: auto;
                  transition: opacity 83ms ease-in-out 34ms;
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
              }
         }
 
@@ -195,6 +198,15 @@
             }
          }
 
+        &.error, &.success
+        {
+              .input:after
+              {
+                  font-weight: bold;
+                  font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) - 2px);
+                  line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) - 2px);
+              }
+        }
         &.error
          {
              border-color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));

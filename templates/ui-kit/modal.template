@@ -11,9 +11,10 @@
             document.body.appendChild( _CloneNode );
             setTimeout( () =>
             {
-                document.body.querySelector('[data-selector="'+selector+'"]:last-child').classList.remove('opening');
+                console.log(document.querySelector('div.opening[data-selector="'+selector+'"]'))
+                document.querySelector('div.opening[data-selector="'+selector+'"]').classList.remove('opening');
             }, 25);
-        }
+        };
 
         this.close = function ( element )
         {
@@ -33,12 +34,11 @@
             background: white;
             transition: all 250ms ease-in-out;
             cursor: default;
-            width: 50%;
-            padding: var(--padding-3);
-            padding-top: calc(var(--padding-3) * 2);
+            min-width: 50%;
+            padding: var( --form-modal-height-size, var(--form-height-size, 36px ));
             display: flex;
             flex-direction: column;
-            border-radius: 2px;
+            border-radius: var( --form-modal-border-radius, var(--form-border-radius, 2px ));
             position: relative;
         }
         &.opening, &.removing
@@ -48,7 +48,7 @@
              backdrop-filter: blur(0)!important;
             .modal-content
             {
-                transform: translateY(-24rem) !important;
+                transform: translateY(-24px) !important;
                 opacity: 0!important;
             }
          }
@@ -71,20 +71,21 @@
         .modal-close
         {
             position: absolute;
-            right: calc(var(--padding-3) - 6rem);
-            top: calc(var(--padding-3) - 6rem);
-            width: var(--padding-4);
-            height: var(--padding-4);
-            line-height: var(--padding-4);
-            font-size: 12rem;
+            right: calc(var( --form-modal-height-size, var(--form-height-size, 36px )) / 2);
+            top: calc(var( --form-modal-height-size, var(--form-height-size, 36px )) / 2);
+            width: var( --form-modal-height-size, var(--form-height-size, 36px ));
+            height: var( --form-modal-height-size, var(--form-height-size, 36px ));
+            line-height: var( --form-modal-height-size, var(--form-height-size, 36px ));
+            font-size: var( --form-modal-close-font-size, var(--form-font-size, 12px ));
             text-align: center;
             align-self: flex-end;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            color: var(--gray-5);
-            @media ( min-width: 1024px ){ &:hover{ background-color: var(--gray-1); color: var(--gray-9); } }
-            &.focus{ animation: outer-pulse 750ms infinite; }
+            transition: all 83ms ease-in-out 34ms;
+            color: var( --form-modal-close-color, var(--form-color, #354052 ));
+            opacity: 0.5;
+            @media ( min-width: 1024px ){ &:hover{ background:var( --form-modal-close-background, var(--form-disabled-background, rgba(0,0,0,0.03) )); opacity: 1; } }
         }
     }
 </style>

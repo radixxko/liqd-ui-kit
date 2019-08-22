@@ -1,0 +1,193 @@
+<style>
+    .range-slider-box
+    {
+        width: 100%;
+        .range_slider
+        {
+            position:relative;
+            width: calc(100% - 16px);
+            height: 36px;
+            user-select: none;
+        }
+        .color-bar, .slider-handle, .color-inside
+        {
+            position: absolute; bottom: 0;
+        }
+
+        .color-bar, .color-inside
+        {
+            height: var( --form-range-slider-bar-height, 6px);
+            left: 0;
+        }
+        .color-bar
+        {
+            background: var( --form-input-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
+            border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
+            right: -16px;
+            border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
+
+        }
+        .slider-handle
+        {
+            cursor: pointer;
+            height: var( --form-range-slider-handler-height, 24px);
+            width: var( --form-range-slider-handler-height, 24px);
+            background: var( --form-input-background, var(--form-background, #ffffff ));
+            border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
+            border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
+            bottom: -25%;
+            &:before
+             {
+                 position: relative;
+                 content: var(--value-0);
+                 user-select: none;
+                 text-align: center;
+                 color: var( --form-input-label-color, var(--form-label-color, #7f8fa4 ));
+                 font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 12px ));
+                 font-weight: bold;
+                 bottom: calc( var( --form-range-slider-handler-height, 24px) - 4px );
+                 min-width: var( --form-range-slider-handler-height, 24px);
+                 display: flex;
+                 justify-content: center;
+             }
+        }
+        .color-inside
+        {
+            background: var( --form-input-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
+        }
+    }
+</style>
+<script>
+    window.RangeSlider = new ( function()
+    {
+        var current_slider = null;
+
+        function handleMove( event )
+        {
+            var value = Math.round( Math.max( Math.min( current_slider.value + current_slider.range * ( (event.type === 'touchmove' ? event.touches[0].clientX :  event.clientX) - current_slider.x ) / current_slider.width, current_slider.max ), current_slider.min ) );
+            current_slider.slider.setAttribute('data-'+current_slider.type, value);
+            if(current_slider.type === 'from') {
+                let leftValue = ( (100 * (value - current_slider.sliderMin) / current_slider.range) * ( current_slider.width - 16 ) ) / 100  + 'px';
+                current_slider.handle.setAttribute('style' , "left:" + leftValue + ";--value-0:'" + value + "'");
+                current_slider.handle.setAttribute('data-value' , value);
+            }
+            else {
+                let rightValue = ( current_slider.width - 32 ) - ( ( ( 100 * (value - current_slider.sliderMin) / current_slider.range) * ( current_slider.width - 16 ) ) / 100 )  + 'px';
+                current_slider.handle.setAttribute('style' , "right:" + rightValue + ";--value-0:'" + value + "'");
+                current_slider.handle.setAttribute('data-value' , value);
+            }
+
+            var leftSize = document.getElementById(current_slider.slider.id).children[2].style.left;
+            var rightSize = document.getElementById(current_slider.slider.id).children[3].style.right;
+            document.getElementById(current_slider.slider.id).children[1].style.left = leftSize;
+            document.getElementById(current_slider.slider.id).children[1].style.right = rightSize;
+
+            event.stopPropagation(); return false;
+        }
+
+        function handleRelease( event )
+        {
+            document.removeEventListener(event.type === 'touchend' ? 'touchmove' : 'mousemove', handleMove, true);
+            document.removeEventListener(event.type === 'touchend' ? 'touchend' : 'mouseup', handleRelease, true);
+
+            if( current_slider.slider.onchange )
+            {
+                current_slider.slider.onchange({ id: current_slider.slider.id, from: current_slider.slider.getAttribute('data-from'), to: current_slider.slider.getAttribute('data-to') });
+            }
+
+            event.stopPropagation(); return false;
+        }
+
+        this.fastMove = function ( handle, event ) {
+            var slider = handle;
+            var checker = 0;
+            let closestSlider;
+            for( let slide of Array.from(slider.querySelectorAll('div.slider-handle')))
+            {
+                if( checker === 0 ){ checker = ( slide.offsetLeft + slider.offsetLeft ) - event.clientX; closestSlider = slide; }
+                if( Math.abs(checker) > ( ( slide.offsetLeft + slider.offsetLeft ) - event.clientX ) ) {
+                    closestSlider = slide;
+                }
+
+            }
+            var type = ( closestSlider.className.indexOf('from') !== -1 ? 'from' : 'to' );
+            current_slider =
+                {
+                    type: type,
+                    value: parseInt( slider.getAttribute('data-'+type) ),
+                    min: ( type === 'from' ? parseInt( slider.getAttribute('data-min') ) : parseInt( slider.getAttribute('data-from') ) + parseInt( slider.getAttribute('data-min-range') || 0 ) ),
+                    max: ( type === 'from' ? parseInt( slider.getAttribute('data-to') ) - parseInt( slider.getAttribute('data-min-range') || 0 ) : parseInt( slider.getAttribute('data-max') ) ),
+                    sliderMin: parseInt( slider.getAttribute('data-min') ),
+                    range: parseInt( slider.getAttribute('data-max') ) - parseInt( slider.getAttribute('data-min') ),
+                    handle: closestSlider,
+                    slider: closestSlider.parentNode,
+                    x: event.type == 'touchstart' ? event.touches[0].clientX :  event.clientX,
+                    width: slider.clientWidth,
+
+                };
+
+            var progress = Math.min( 1, Math.max( 0, ( event.clientX - current_slider.slider.getBoundingClientRect().x ) / current_slider.slider.clientWidth ));
+            let value = 0;
+            if( type === 'from' ){
+                value = Math.round(  current_slider.min + progress * current_slider.range  );
+            } else {
+                value = Math.round( ( current_slider.min + progress * current_slider.range ) - slider.dataset.from );
+            }
+
+
+            current_slider.slider.setAttribute('data-'+current_slider.type, value);
+            if(current_slider.type === 'from') {
+                let leftValue = ( event.clientX - slider.offsetLeft ) - 16 + 'px';
+                current_slider.handle.setAttribute('style' , "left:" + leftValue + ";--value-0:'" + value + "'");
+                current_slider.handle.setAttribute('data-value' , value);
+            }
+            else {
+                let rightValue = slider.offsetWidth - ( event.clientX - slider.offsetLeft ) - 16 + 'px';
+                current_slider.handle.setAttribute('style' , "right:" + rightValue + ";--value-0:'" + value + "'");
+                current_slider.handle.setAttribute('data-value' , value);
+            }
+
+            var leftSize = document.getElementById(current_slider.slider.id).children[2].style.left;
+            var rightSize = document.getElementById(current_slider.slider.id).children[3].style.right;
+            document.getElementById(current_slider.slider.id).children[1].style.left = leftSize;
+            document.getElementById(current_slider.slider.id).children[1].style.right = rightSize;
+        };
+
+        this.drag = function( handle, event )
+        {
+            var slider = handle.parentNode;
+            var type = ( handle.className.indexOf('from') !== -1 ? 'from' : 'to' );
+            current_slider =
+                {
+                    type: type,
+                    value: parseInt( slider.getAttribute('data-'+type) ),
+                    min: ( type === 'from' ? parseInt( slider.getAttribute('data-min') ) : parseInt( slider.getAttribute('data-from') ) + parseInt( slider.getAttribute('data-min-range') || 0 ) ),
+                    max: ( type === 'from' ? parseInt( slider.getAttribute('data-to') ) - parseInt( slider.getAttribute('data-min-range') || 0 ) : parseInt( slider.getAttribute('data-max') ) ),
+                    sliderMin: parseInt( slider.getAttribute('data-min') ),
+                    range: parseInt( slider.getAttribute('data-max') ) - parseInt( slider.getAttribute('data-min') ),
+                    handle: handle,
+                    slider: handle.parentNode,
+                    x: event.type == 'touchstart' ? event.touches[0].clientX :  event.clientX,
+                    width: slider.clientWidth,
+
+                };
+            document.addEventListener( event.type === 'touchstart' ? 'touchmove' : 'mousemove', handleMove, true);
+            document.addEventListener(event.type === 'touchstart' ? 'touchend' : 'mouseup', handleRelease, true);
+        }
+    })();
+</script>
+<div class="range-slider-box">
+    <div id={sliderID} class="range_slider" onclick="RangeSlider.fastMove(this, event)" ontouchstart="RangeSlider.fastMove(this, event)" data-from={(from != 'false' ? from : min)} data-to={(to != 'false' ? to : max)} data-min={min} data-max={max} data-min-range="0">
+        <div class="color-bar"></div>
+        <div class="color-inside"></div>
+        <div class="slider-handle slider-handle-from" data-value={from} style={"--value-0:'"+from+"'"} onmousedown="RangeSlider.drag(this, event || window.event);" ontouchstart="RangeSlider.drag(this, event || window.event);"></div>
+        <div class="slider-handle slider-handle-to" data-value={to}  style={"--value-0:'"+to+"'"} onmousedown="RangeSlider.drag(this, event || window.event);" ontouchstart="RangeSlider.drag(this, event || window.event);"></div>
+    </div>
+</div>
+<script from={(from != 'false' ? parseInt(from) : min)} to={(to != 'false' ? parseInt(to) : max)} max={max} min={min} id={sliderID} instance>
+    slider = document.getElementById(id);
+    slider.childNodes[2].style.left = ( (100 * (from - min) / (max - min)) * ( slider.clientWidth - 16 ) ) / 100 + 'px';
+    slider.childNodes[1].style.left = ( (100 * (from - min) / (max - min)) * ( slider.clientWidth - 16 ) ) / 100 + 'px';
+    slider.childNodes[3].style.right = ( slider.clientWidth - 32 ) - ( ( ( 100 * (to - min) / (max - min) ) * ( slider.clientWidth - 16 ) / 100 ) ) + 'px';
+    slider.childNodes[1].style.right = ( slider.clientWidth - 32 ) - ( ( ( 100 * (to - min) / (max - min) ) * ( slider.clientWidth - 16 ) / 100 ) ) + 'px';
+</script>

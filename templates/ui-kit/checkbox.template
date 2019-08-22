@@ -7,7 +7,7 @@
         span
         {
             margin-left: 4px;
-            color: var( --form-checkbox-label-color, var(--form-label-color, silver ));
+            color: var( --form-checkbox-label-color, var(--form-label-color, #354052 ));
             font-size: var( --form-checkbox-label-size, var(--form-label-size, 12px ));
             line-height: var( --form-checkbox-label-size, var(--form-label-size, 16px ));
         }
@@ -19,10 +19,11 @@
             margin: 0;
             padding: 0;
             cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: none;
             &:before, &:checked:after
             {
                   content: "";
@@ -36,25 +37,23 @@
             }
             &:before
             {
-                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-color, var(--form-border-color, silver ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-color, var(--form-border-color, #dfe3e9 ));
                  background: var( --form-checkbox-background, var(--form-background, white ));
 
             }
-            &:hover:before
+            &:not(:disabled):hover:before
             {
-                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-hover-border-color, var(--form-hover-border-color, lightblue ));
-                 background: var( --form-checkbox-hover-background, var(--form-hover-background, lightblue ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-hover-border-color, var(--form-hover-border-color, #ced0da ));
             }
             &:checked:after
             {
-                 background: var( --form-checkbox-fill-background, var(--form-fill-background, blue ));
-                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-focus-border-color, var(--form-focus-border-color, blue ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
             }
-            &:disabled
+            &:disabled:before
             {
                 pointer-events: none; cursor: default;
-                background: var( --form-checkbox-disabled-background, var(--form-disabled-background, blue ));
-                border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, blue ));
+                background: var( --form-checkbox-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
+                border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
             }
         }
     }
@@ -62,7 +61,7 @@
 
 let _onClick = ( typeof onclick != 'undefined' ? onclick : null );
 let _onChange = ( typeof onchange != "undefined" ? onchange : null );
-let _disabled = ( typeof disabled != "undefined" ? ' disabled' : null );
+let _disabled = ( typeof disabled != "undefined" ? undefined : null );
 let _checked = (typeof checked != 'undefined' ? 'true' : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
 let _label = (typeof label != 'undefined' ? label.liqd_slugify() : null );

@@ -13,17 +13,19 @@
 
         .input
         {
-            display: flex;
             position: relative;
             width: 100%;
             height: 100%;
             white-space: nowrap;
             text-overflow: ellipsis;
             cursor: pointer;
-            align-items: center;
+            overflow: hidden;
+            font-size: var( --form-select-font-size, var(--form-font-size, 12px ));
+            line-height: calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 4px);
+            padding: calc( ( var( --form-select-height-size, var(--form-height-size, 36px )) -  calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 4px) ) / 2 );
             color: var( --form-select-color, var(--form-color, #354052 ));
             padding-left: var( --form-select-padding-left, var(--form-padding-left, 7px ));
-
+            padding-right: var( --form-select-height-size, var(--form-height-size, 36px ));
 
             &[placeholder]:empty:before
             {
@@ -37,6 +39,7 @@
                  content: "\e08a";
                  font-family: var( --form-select-icon-font, var(--from-icon-font, "flaticon"));
                  right: 0;
+                 top: 0;
                  height: var( --form-select-height-size, var(--form-height-size, 36px ));
                  width: var( --form-select-height-size, var(--form-height-size, 36px ));
                  position: absolute;
@@ -194,7 +197,7 @@
                 height: auto;
                 z-index: 999;
                 background-color: var( --form-select-background, var(--form-background, #ffffff ));
-                border: var( --form-select-border-width, var(--form-border-width, 1px )) solid var( --form-textarea-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
+                border: var( --form-select-border-width, var(--form-border-width, 1px )) solid var( --form-select-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
             }
          }
 
@@ -203,31 +206,39 @@
               .input:after
               {
                   font-weight: bold;
-                  font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) - 2px);
-                  line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) - 2px);
+                  font-size: calc( var( --form-select-font-size, var(--form-font-size, 12px )) - 2px);
+                  line-height: calc( var( --form-select-font-size, var(--form-font-size, 12px )) - 2px);
               }
         }
         &.error
          {
-             border-color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
+             border-color: var( --form-select-error-color, var(--form-error-color, #ed1c24 ));
             .input, .input:after, label
             {
                 opacity: 1;
-                color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
+                color: var( --form-select-error-color, var(--form-error-color, #ed1c24 ));
                 content: "\e002";
             }
         }
 
         &.success
          {
-             border-color: var( --form-input-success-color, var(--form-success-color, #1bb934 ));
+             border-color: var( --form-select-success-color, var(--form-success-color, #1bb934 ));
             .input, .input:after, label
             {
                 opacity: 1;
-                color: var( --form-input-success-color, var(--form-success-color, #1bb934 ));
+                color: var( --form-select-success-color, var(--form-success-color, #1bb934 ));
                 content: "\e024";
             }
         }
+
+        &.disabled
+         {
+             pointer-events: none; cursor: default;
+             border: var( --form-select-border-width, var(--form-border-width, 1px )) solid  var( --form-select-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
+             background: var( --form-select-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
+             color: var( --form-select-disabled-color, var(--form-disabled-color, #354052 ));
+         }
     }
 </style>
 <script>
@@ -267,7 +278,7 @@
 
                 if( this._element.querySelector('div.select-option.active') )
                 {
-                    this._element.querySelector('div.input').innerText = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => r.innerText ).join(',');
+                    this._element.querySelector('div.input').innerText = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => r.innerText ).join(', ');
                     this._values = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => ( { value: r.dataset.value, label : r.innerText } ) );
                 }
             }
@@ -391,7 +402,7 @@
             _setValue( change = true )
             {
                 let old_value = this._input.value;
-                this._element.querySelector('.input').innerHTML = ( this._values.length > 0 ? this._values.map( r => r.label ).join(',') : '' );
+                this._element.querySelector('.input').innerHTML = ( this._values.length > 0 ? this._values.map( r => r.label ).join(', ') : '' );
                 this._input.value = ( this._values.length > 0 ? this._values.map( r => r.value ).join(',') : '' );
 
                 if( this._input.value !== '' )
@@ -450,8 +461,7 @@
         }
     }
 </script>
-
-var value = ( typeof value !== 'object' ? ( value !== '' ? value.toString().split( ',' ) : [] ) : value );
+var value = ( typeof value !== 'undefined' ? (  typeof multiple !== 'undefined' ? ( typeof value === 'string' ? JSON.parse(value) : value ) : value ) : '' );
 let _width = ( typeof width !== 'undefined' ? width : '100%' );
 let _style = ( typeof style !== 'undefined' ? style : '' );
 let _selected = ( typeof selected !== 'undefined' && selected === 'true' ? ' selected' : '');
@@ -461,7 +471,7 @@ let _fill = ( typeof value !== 'undefined' && value.length > 0 ? ' fill' : '' );
 let _label = ( typeof label !== 'undefined' ? label : null );
 let _required = ( typeof required !== 'undefined' ? required : null );
 let _onchange = ( typeof onchange !== 'undefined' ? onchange : null );
-let _value = ( typeof value !== 'undefined' ? value.join( ',' ) : '' );
+let _value = ( typeof value !== 'string' ? value.join( ',' ) : '' );
 let _name = ( typeof name !== 'undefined' ? name : null );
 let _id = ( typeof id !== 'undefined' ? id : null );
 let _contenteditable = ( typeof contenteditable !== 'undefined' ? contenteditable : null );
@@ -484,21 +494,21 @@ let _placeholder = ( typeof placeholder !== 'undefined' ? placeholder : null );
             <div class="suggest-search" data-icon="search"></div>
         }
 
-        for( key, item of option )
+        for( key, item of options )
         {
-            <div class={'select-'+( typeof item === 'string' ? 'option' : 'group' )+( value.includes( key.toString() ) ? ' active' : '' )} data-value={key}>{( typeof item === 'string' ? item : key )}</div>
+            <div class={'select-'+( typeof item === 'string' ? 'option' : 'group' )+( value.includes( key ) ? ' active' : '' )} data-value={key}>{( typeof item === 'string' ? item : key )}</div>
             if( typeof item === 'object' )
             {
                 for( g_item of item )
                 {
-                    if( value.includes( g_item.id.toString() ) )
+                    if( value.includes( g_item.id ) )
                     {
                         <div class="select-option active" data-value={g_item.id}>{g_item.value}</div>
                     }
                 }
                 for( g_item of item )
                 {
-                    if( !value.includes( g_item.id.toString() ) )
+                    if( !value.includes( g_item.id ) )
                     {
                         <div class="select-option" data-value={g_item.id}>{g_item.value}</div>
                     }
@@ -507,12 +517,12 @@ let _placeholder = ( typeof placeholder !== 'undefined' ? placeholder : null );
         }
     </div>
 </div>
-<script instance select={_id} value={value} option={option} contenteditable={_contenteditable} multiple={_multiple} init={_init}>
+<script instance select={_id} value={value} options={options} contenteditable={_contenteditable} multiple={_multiple} init={_init}>
     window.addEventListener('DOMContentLoaded', (event) =>
     {
         if( init === 'true' )
         {
-            new Select( document.getElementById( select ), value, option, {contenteditable, multiple} );
+            new Select( document.getElementById( select ), value, options, {contenteditable, multiple} );
         }
     });
 </script>

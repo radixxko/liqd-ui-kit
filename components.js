@@ -6,7 +6,7 @@ module.exports =
         description : 'Button',
         template    :
         {
-            source  : '<Button label="Test" onclick="alert(\'click\')">test</Button>',
+            source  : '<Button onclick="alert(\'click\')">test</Button>',
             data    : {},
             style   : ''
         },
@@ -191,7 +191,7 @@ module.exports =
         description : 'Select',
         template    :
         {
-            source  : '<Select suggest="true" option={select} value="" id="First-suggestor" label="Label" placeholder="placeholder" width="calc(97% / 4)" />',
+            source  : '<Select suggest="true" options={select} value="1" id="First-suggestor" label="Select" placeholder="placeholder" width="calc(97% / 4)" />',
             data    :
                 {
                     select:
@@ -214,7 +214,7 @@ module.exports =
                 description : 'Select Multiple',
                 template    :
                 {
-                    source  : '<Select suggest="true" option={select} value="1,2" multiple="true" id="Second-suggestor" label="Multiple-Select" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" id="Second-suggestor" label="Multiple-Select" width="calc(97% / 4)" />',
                     data    :
                         {
                             select:
@@ -236,7 +236,7 @@ module.exports =
                 description : 'Select Error',
                 template    :
                 {
-                    source  : '<Select suggest="true" option={select} value="1,2" multiple="true" error="true" id="Third-suggestor" label="Multiple Select Error" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" error="true" id="Third-suggestor" label="Multiple Select Error" width="calc(97% / 4)" />',
                     data    :
                         {
                             select:
@@ -258,7 +258,29 @@ module.exports =
                 description : 'Select Success',
                 template    :
                 {
-                    source  : '<Select suggest="true" option={select} value="1,2" multiple="true" success="true" id="Fourth-suggestor" label="Multiple Select Success" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" success="true" id="Fourth-suggestor" label="Multiple Select Success" width="calc(97% / 4)" />',
+                    data    :
+                        {
+                            select:
+                                {
+                                    Options:
+                                        [
+                                            { id: 1, value: 'Prvy value' },
+                                            { id: 2, value: 'Druhy value' },
+                                            { id: 3, value: 'Treti value' }
+                                        ]
+                                }
+                        },
+                    style   : ''
+                }
+            },
+            'Select-disabled' :
+            {
+                title       : 'Select Disabled',
+                description : 'Select Disabled',
+                template    :
+                {
+                    source  : '<Select suggest="true" options={select} value="[1,2]" multiple="true" disabled="true" id="Fourth-suggestor" label="Multiple Select Disabled" width="calc(97% / 4)" />',
                     data    :
                         {
                             select:
@@ -288,39 +310,81 @@ module.exports =
         },
         variants    :
         {
-            'checkbox-disabled' :
+            'checkbox-checked' :
             {
-                title       : 'Checkbox disabled',
-                description : 'Checkbox disabled',
+                title       : 'Checkbox checked',
+                description : 'Checkbox checked',
                 template    :
-                {
-                    source  : '<Checkbox label="test label" disabled="true" />',
-                    data    : {},
-                    style   : ''
-                }
+                    {
+                        source  : '<Checkbox label="CheckBox checked" checked="true" />',
+                        data    : {},
+                        style   : ''
+                    }
             },
             'checkbox-disabled-checked' :
             {
                 title       : 'Checkbox disabled checked',
                 description : 'Checkbox disabled checked',
                 template    :
-                {
-                    source  : '<Checkbox label="test label" disabled="true" checked="true" />',
-                    data    : {},
-                    style   : ''
-                }
+                    {
+                        source  : '<Checkbox label="CheckBox checked disabled" disabled="true" checked="true" />',
+                        data    : {},
+                        style   : ''
+                    }
             },
-            'checkbox-checked' :
+            'checkbox-disabled' :
             {
-                title       : 'Checkbox checked',
-                description : 'Checkbox checked',
+                title       : 'Checkbox disabled',
+                description : 'Checkbox disabled',
                 template    :
                 {
-                    source  : '<Checkbox label="test label" checked="true" />',
+                    source  : '<Checkbox label="CheckBox disabled" disabled="true" />',
                     data    : {},
                     style   : ''
                 }
             }
         }
+    },
+    'NumberInput' :
+    {
+        title       : 'NumberInput',
+        description : 'NumberInput',
+        template    :
+        {
+            source  : '<NumberInput value="6" contenteditable="true" min="6" max="20" step="2" />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+        }
+    },
+    'Modal' :
+    {
+        title       : 'Modal',
+        description : 'Modal',
+        template    :
+        {
+            source  : '<div style="cursor: pointer;border: 1px solid;padding: 10px; width:calc(97% / 4);text-align: center;" onclick="Modal.open(\'First-modal\')">Open Modal</div><Modal selector="First-modal"><h1>Hello</h1><p>This is my first Modal Box!</p></Modal>',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+        }
+    },
+    'RangeSlider' :
+    {
+        title       : 'RangeSlider',
+        description : 'RangeSlider',
+        template    :
+        {
+            source  : '<RangeSlider selector="First-modal" sliderID="test" min="10" max="10000" from="25" to="5000" />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+        }
     }
-}
+};

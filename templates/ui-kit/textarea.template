@@ -75,13 +75,13 @@
 
         &.error
         {
-            border: 1px solid var( --form-textarea-error-color, var(--form-error-color, #ed1c24 ));
+            border-color: var( --form-textarea-error-color, var(--form-error-color, #ed1c24 ));
             span{ color: var( --form-textarea-error-color, var(--form-error-color, #ed1c24 )); }
         }
 
         &.success
         {
-            border: 1px solid var( --form-textarea-success-color, var(--form-success-color, #1bb934 ));
+            border-color: var( --form-textarea-success-color, var(--form-success-color, #1bb934 ));
             span{ color: var( --form-textarea-success-color, var(--form-success-color, #1bb934 )); }
         }
     }

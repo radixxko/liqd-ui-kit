@@ -59,8 +59,12 @@ server.use('/', async(req, res, next ) =>
         render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Preview</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div><div class="tab" onclick="onTabClick(this)">Design</div></div><div class="content">';
         render += '<div class="tab active" style="'+htmlentities(basic.style)+'">' + basic.render + '</div>';
         render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.source )) + '</pre>' + ( basic.style ? '<pre style="margin-top:16px;">' + htmlentities( basic.style.split(/;\s*/).join(';\n')) + '</pre>' : '' ) + '</div>';
-        render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.render )) + '</pre></div>';
+        render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( basic.render ) + ( basic.instance_scripts.length ? '\n' + basic.instance_scripts.join('') : '' )) + '</pre></div>';
         render += '<div class="tab"><pre>' + htmlentities( basic.styles.join('').split(/;\s*/).join(';\n')) + '</pre></div>';
+        if( basic.instance_scripts.length )
+        {
+            render += basic.instance_scripts.join('');
+        }
         render += '</div></div>';
 
         for( let variant of component.variants )
@@ -70,8 +74,12 @@ server.use('/', async(req, res, next ) =>
             render += '<div class="tabs"><div class="header"><div class="tab active" onclick="onTabClick(this)">Preview</div><div class="tab" onclick="onTabClick(this)">Markup</div><div class="tab" onclick="onTabClick(this)">Render</div><div class="tab" onclick="onTabClick(this)">Design</div></div><div class="content">';
             render += '<div class="tab active" style="'+htmlentities(variant.style)+'">' + variant.render + '</div>';
             render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.source )) + '</pre>' + ( variant.style ? '<pre style="margin-top:16px;">' + htmlentities( variant.style.split(/;\s*/).join(';\n')) + '</pre>' : '' ) + '</div>';
-            render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.render )) + '</pre></div>';
+            render += '<div class="tab"><pre>' + htmlentities( Component.normalizeHTML( variant.render ) + ( variant.instance_scripts.length ? '\n' + variant.instance_scripts.join('') : '' )) + '</pre></div>';
             render += '<div class="tab"><pre>' + htmlentities( variant.styles.join('').split(/;\s*/).join(';\n')) + '</pre></div>';
+            if( variant.instance_scripts.length )
+            {
+                render += variant.instance_scripts.join('');
+            }
             render += '</div></div>';
         }
     }

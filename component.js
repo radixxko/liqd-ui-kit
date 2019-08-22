@@ -56,19 +56,28 @@ module.exports = class Component
     async render( variant )
     {
         let template = variant ? this.config.variants[variant].template : this.config.template;
-        let styles = [], scripts = [], offset = 0;
+        let styles = [], scripts = [], instance_scripts = [], offset = 0;
 
         let render = ( await this.template.render( template.source, template.data )).trim()
-            .replace( /<script[^>]*>([\s\S]*?)<\/script>/g, ( script, source ) =>
+            .replace( /<script([^>]*)>([\s\S]*?)<\/script>/g, ( script, attributes, source ) =>
             {
-                scripts.push( source ); return '';
+                if( attributes.trim() )
+                {
+                    instance_scripts.push( script );
+                }
+                else
+                {
+                    scripts.push( source );
+                }
+
+                return '';
             })
             .replace( /<style[^>]*>([\s\S]*?)<\/style>/g, ( style, source ) =>
             {
                 styles.push( source ); return '';
             });
 
-        return { styles, scripts, render, style: template.style, source: template.source };
+        return { styles, scripts, instance_scripts, render, style: template.style, source: template.source };
 
         /*let basic = await this.template.render( this.config.template.source, this.config.template.data );
         let variants = [];

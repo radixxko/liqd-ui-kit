@@ -5,7 +5,7 @@
         .range_slider
         {
             position:relative;
-            width: calc(100% - 16px);
+            width: calc(100% - 24px);
             height: 36px;
             user-select: none;
         }
@@ -23,7 +23,7 @@
         {
             background: var( --form-input-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
             border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
-            right: -16px;
+            right: -24px;
             border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
 
         }
@@ -67,12 +67,12 @@
             var value = Math.round( Math.max( Math.min( current_slider.value + current_slider.range * ( (event.type === 'touchmove' ? event.touches[0].clientX :  event.clientX) - current_slider.x ) / current_slider.width, current_slider.max ), current_slider.min ) );
             current_slider.slider.setAttribute('data-'+current_slider.type, value);
             if(current_slider.type === 'from') {
-                let leftValue = ( (100 * (value - current_slider.sliderMin) / current_slider.range) * ( current_slider.width - 16 ) ) / 100  + 'px';
+                let leftValue = ( (100 * (value - current_slider.sliderMin) / current_slider.range) * ( current_slider.width - 24 ) ) / 100  + 'px';
                 current_slider.handle.setAttribute('style' , "left:" + leftValue + ";--value-0:'" + value + "'");
                 current_slider.handle.setAttribute('data-value' , value);
             }
             else {
-                let rightValue = ( current_slider.width - 32 ) - ( ( ( 100 * (value - current_slider.sliderMin) / current_slider.range) * ( current_slider.width - 16 ) ) / 100 )  + 'px';
+                let rightValue = ( current_slider.width - 48 ) - ( ( ( 100 * (value - current_slider.sliderMin) / current_slider.range) * ( current_slider.width - 24 ) ) / 100 )  + 'px';
                 current_slider.handle.setAttribute('style' , "right:" + rightValue + ";--value-0:'" + value + "'");
                 current_slider.handle.setAttribute('data-value' , value);
             }
@@ -98,14 +98,16 @@
             event.stopPropagation(); return false;
         }
 
-        this.fastMove = function ( handle, event ) {
+        this.fastMove = function ( handle, event )
+        {
             var slider = handle;
             var checker = 0;
             let closestSlider;
             for( let slide of Array.from(slider.querySelectorAll('div.slider-handle')))
             {
                 if( checker === 0 ){ checker = ( slide.offsetLeft + slider.offsetLeft ) - event.clientX; closestSlider = slide; }
-                if( Math.abs(checker) > ( ( slide.offsetLeft + slider.offsetLeft ) - event.clientX ) ) {
+                if( Math.abs(checker) > ( ( slide.offsetLeft + slider.offsetLeft ) - event.clientX ) )
+                {
                     closestSlider = slide;
                 }
 
@@ -128,21 +130,25 @@
 
             var progress = Math.min( 1, Math.max( 0, ( event.clientX - current_slider.slider.getBoundingClientRect().x ) / current_slider.slider.clientWidth ));
             let value = 0;
-            if( type === 'from' ){
+            if( type === 'from' )
+            {
                 value = Math.round(  current_slider.min + progress * current_slider.range  );
-            } else {
+            } else
+            {
                 value = Math.round( ( current_slider.min + progress * current_slider.range ) - slider.dataset.from );
             }
 
 
             current_slider.slider.setAttribute('data-'+current_slider.type, value);
-            if(current_slider.type === 'from') {
-                let leftValue = ( event.clientX - slider.offsetLeft ) - 16 + 'px';
+            if(current_slider.type === 'from')
+            {
+                let leftValue = ( event.clientX - slider.offsetLeft ) - 24 + 'px';
                 current_slider.handle.setAttribute('style' , "left:" + leftValue + ";--value-0:'" + value + "'");
                 current_slider.handle.setAttribute('data-value' , value);
             }
-            else {
-                let rightValue = slider.offsetWidth - ( event.clientX - slider.offsetLeft ) - 16 + 'px';
+            else
+            {
+                let rightValue = slider.offsetWidth - ( event.clientX - slider.offsetLeft ) - 24 + 'px';
                 current_slider.handle.setAttribute('style' , "right:" + rightValue + ";--value-0:'" + value + "'");
                 current_slider.handle.setAttribute('data-value' , value);
             }
@@ -151,6 +157,7 @@
             var rightSize = document.getElementById(current_slider.slider.id).children[3].style.right;
             document.getElementById(current_slider.slider.id).children[1].style.left = leftSize;
             document.getElementById(current_slider.slider.id).children[1].style.right = rightSize;
+            RangeSlider.drag( closestSlider, event );
         };
 
         this.drag = function( handle, event )
@@ -177,7 +184,7 @@
     })();
 </script>
 <div class="range-slider-box">
-    <div id={sliderID} class="range_slider" onclick="RangeSlider.fastMove(this, event)" ontouchstart="RangeSlider.fastMove(this, event)" data-from={(from != 'false' ? from : min)} data-to={(to != 'false' ? to : max)} data-min={min} data-max={max} data-min-range="0">
+    <div id={sliderID} class="range_slider" onmousedown="RangeSlider.fastMove(this, event || window.event);" ontouchstart="RangeSlider.fastMove(this, event || window.event);" data-from={(from != 'false' ? from : min)} data-to={(to != 'false' ? to : max)} data-min={min} data-max={max} data-min-range="0">
         <div class="color-bar"></div>
         <div class="color-inside"></div>
         <div class="slider-handle slider-handle-from" data-value={from} style={"--value-0:'"+from+"'"} onmousedown="RangeSlider.drag(this, event || window.event);" ontouchstart="RangeSlider.drag(this, event || window.event);"></div>
@@ -186,8 +193,8 @@
 </div>
 <script from={(from != 'false' ? parseInt(from) : min)} to={(to != 'false' ? parseInt(to) : max)} max={max} min={min} id={sliderID} instance>
     slider = document.getElementById(id);
-    slider.childNodes[2].style.left = ( (100 * (from - min) / (max - min)) * ( slider.clientWidth - 16 ) ) / 100 + 'px';
-    slider.childNodes[1].style.left = ( (100 * (from - min) / (max - min)) * ( slider.clientWidth - 16 ) ) / 100 + 'px';
-    slider.childNodes[3].style.right = ( slider.clientWidth - 32 ) - ( ( ( 100 * (to - min) / (max - min) ) * ( slider.clientWidth - 16 ) / 100 ) ) + 'px';
-    slider.childNodes[1].style.right = ( slider.clientWidth - 32 ) - ( ( ( 100 * (to - min) / (max - min) ) * ( slider.clientWidth - 16 ) / 100 ) ) + 'px';
+    slider.childNodes[2].style.left = ( (100 * (from - min) / (max - min)) * ( slider.clientWidth - 24 ) ) / 100 + 'px';
+    slider.childNodes[1].style.left = ( (100 * (from - min) / (max - min)) * ( slider.clientWidth - 24 ) ) / 100 + 'px';
+    slider.childNodes[3].style.right = ( slider.clientWidth - 48 ) - ( ( ( 100 * (to - min) / (max - min) ) * ( slider.clientWidth - 24 ) / 100 ) ) + 'px';
+    slider.childNodes[1].style.right = ( slider.clientWidth - 48 ) - ( ( ( 100 * (to - min) / (max - min) ) * ( slider.clientWidth - 24 ) / 100 ) ) + 'px';
 </script>

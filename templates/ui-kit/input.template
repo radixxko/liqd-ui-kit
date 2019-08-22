@@ -26,7 +26,7 @@
             color: var( --form-input-disabled-color, var(--form-disabled-color, #354052 ));
         }
 
-        &:hover
+        &.empty:hover
         {
             border-color: var( --form-input-border-hover-color, var(--form-border-hover-color, #ced0da ));
         }
@@ -52,7 +52,7 @@
 
         input
         {
-            cursor: pointer;
+            cursor: text;
             height: 100%;
             color: var( --form-input-color, var(--form-color, #354052 ));
             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));

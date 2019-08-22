@@ -27,7 +27,7 @@
              color: var( --form-textarea-disabled-color, var(--form-disabled-color, #354052 ));
         }
 
-        &:hover
+        &.empty:hover
         {
              border-color: var( --form-textarea-border-hover-color, var(--form-border-hover-color, #ced0da ));
         }
@@ -52,7 +52,7 @@
         textarea
         {
             font-family: inherit;
-            cursor: pointer;
+            cursor: text;
             height: 100%;
             color: var( --form-textarea-color, var(--form-color, #354052 ));
             font-size: var( --form-textarea-font-size, var(--form-font-size, 12px ));

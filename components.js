@@ -379,7 +379,43 @@ module.exports =
         description : 'RangeSlider',
         template    :
         {
-            source  : '<RangeSlider selector="First-modal" sliderID="test" min="10" max="10000" from="25" to="5000" />',
+            source  : '<RangeSlider sliderID="test" min="10" max="10000" from="25" to="5000" />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+        }
+    },
+    'Gallery' :
+    {
+        title       : 'Gallery',
+        description : 'Gallery',
+        template    :
+        {
+            source  : '<Gallery selector="Gallery" images={images}><div style="cursor: pointer;border: 1px solid;padding: 10px; width:calc(97% / 4);text-align: center;" data-gallery_open="true" data-key="2">OPEN GALLERY</div></Gallery>',
+            data    :
+                {
+                    images:
+                        [
+                            'https://www.rspca.org.uk/webContent/staticImages/Infographics/DogHappy1.jpg',
+                            'https://www.rspca.org.uk/webContent/staticImages/Infographics/DogAngry2.jpg',
+                            'https://www.rspca.org.uk/webContent/staticImages/Infographics/DogAngry3.jpg'
+                        ]
+                },
+            style   : ''
+        },
+        variants    :
+        {
+        }
+    },
+    'Slider' :
+    {
+        title       : 'Slider',
+        description : 'Slider',
+        template    :
+        {
+            source  : '<Slider id="slider"><div>Ahoj</div></Slider>',
             data    : {},
             style   : ''
         },

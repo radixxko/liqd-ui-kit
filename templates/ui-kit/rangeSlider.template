@@ -21,10 +21,10 @@
         }
         .color-bar
         {
-            background: var( --form-input-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
-            border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
+            background: var( --form-range-slider-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
+            border: var( --form-range-slider-border-width, var(--form-border-width, 1px )) solid  var( --form-range-slider-border-color, var(--form-border-color, #dfe3e9 ));
             right: -24px;
-            border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
+            border-radius: var( --form-range-slider-border-radius, var(--form-border-radius, 2px ));
 
         }
         .slider-handle
@@ -32,9 +32,9 @@
             cursor: pointer;
             height: var( --form-range-slider-handler-height, 24px);
             width: var( --form-range-slider-handler-height, 24px);
-            background: var( --form-input-background, var(--form-background, #ffffff ));
-            border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
-            border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
+            background: var( --form-range-slider-background, var(--form-background, #ffffff ));
+            border: var( --form-range-slider-border-width, var(--form-border-width, 1px )) solid  var( --form-range-slider-border-color, var(--form-border-color, #dfe3e9 ));
+            border-radius: var( --form-range-slider-border-radius, var(--form-border-radius, 2px ));
             bottom: -25%;
             &:before
              {
@@ -42,8 +42,8 @@
                  content: var(--value-0);
                  user-select: none;
                  text-align: center;
-                 color: var( --form-input-label-color, var(--form-label-color, #7f8fa4 ));
-                 font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 12px ));
+                 color: var( --form-range-slider-label-color, var(--form-label-color, #7f8fa4 ));
+                 font-size: var( --form-range-slider-label-fill-size, var(--form-fill-label-size, 12px ));
                  font-weight: bold;
                  bottom: calc( var( --form-range-slider-handler-height, 24px) - 4px );
                  min-width: var( --form-range-slider-handler-height, 24px);
@@ -53,7 +53,7 @@
         }
         .color-inside
         {
-            background: var( --form-input-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
+            background: var( --form-range-slider-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
         }
     }
 </style>

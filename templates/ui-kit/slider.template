@@ -1,0 +1,140 @@
+<style>
+    .horizontal-scroll
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: var(--padding-3);
+        background: white;
+        border-radius: 4px;
+        padding: var(--padding-2);
+        .horizontal-scroll-main
+        {
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            &:after
+             {
+                 content: "";
+                 position: relative;
+                 flex: 0 0 auto;
+                 display: block;
+                 width: 1px;
+                 height: 1px;
+                 background: none;
+             }
+            &::-webkit-scrollbar { display: none; }
+            .horizontal-scroll-container
+            {
+                height: auto;
+                transition: all 0.5s ease-in-out;
+                user-select: none;
+                position: relative;
+                display: flex;
+                flex-wrap: nowrap;
+                width: 100%;
+                -ms-overflow-style: none;
+                overflow-y: scroll;
+                scroll-behavior: smooth;
+                &::-webkit-scrollbar { display: none; }
+                @media (max-width:1024px)
+                {
+                    -webkit-overflow-scrolling: touch;
+                }
+            }
+        }
+
+        .arrow
+        {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            border: 0;
+            transition: opacity var(--main-transition);
+            width: 24px;
+            height: 24px;
+            background: red;
+            @media (max-width: 1024px){ display: none; }
+            &.active { opacity: 1!important; }
+            &:focus { outline: none; }
+
+            &:hover
+             {
+                 &[data-icon]:before
+                 {
+                     background: blue;
+                 }
+            }
+             &.left
+             {
+                 left:0;
+             }
+             &.right
+             {
+                 right:0;
+             }
+        }
+
+    }
+</style>
+<script>
+    window.horizontScroll = function( element )
+    {
+        if( element.parentNode.offsetWidth >= element.querySelector('.product').offsetWidth * element.querySelectorAll('.product').length ){
+            for( let btn of  element.querySelectorAll('div.arrow') )
+            {
+                btn.style.display = 'none';
+            }
+        }
+        element.horizontal = this;
+        var container = element.querySelector(".horizontal-scroll-container");
+        var max_translate = (container.querySelectorAll('.product').length * container.firstChild.offsetWidth) - container.offsetWidth;
+        this.roll = function( side )
+        {
+            side.includes('right') ? container.scrollLeft  += container.offsetWidth : container.scrollLeft  -= container.offsetWidth;
+            setTimeout(function(){ checkArrows(container); }, 800);
+        };
+
+
+        function checkArrows( container )
+        {
+            var arrow = element.querySelectorAll(".arrow");
+            //  vypinanie a zapinanie sipiek pri min/max scroll
+            if ( container.scrollLeft === 0 ) {
+                arrow[0].classList.remove('active');
+                arrow[0].removeAttribute("onclick");
+            }
+            else {
+                arrow[0].classList.add('active');
+                arrow[0].setAttribute("onclick", "this.parentNode.parentNode.horizontal.roll('left')");
+            }
+            if ( max_translate - 20 < container.scrollLeft ) {
+                arrow[1].classList.remove('active');
+                arrow[1].style.cursor = "default";
+                arrow[1].removeAttribute("onclick");
+            }
+            else {
+                arrow[1].classList.add('active');
+                arrow[1].setAttribute("onclick", "this.parentNode.parentNode.horizontal.roll('right')");
+            }
+        }
+    }
+</script>
+<div id={id} class="horizontal-scroll">
+    <section class="horizontal-scroll-main">
+        <div class="horizontal-scroll-container">
+            {CONTENT}
+        </div>
+    <div class="arrow left"></div>
+    <div class="arrow right"></div>
+</section>
+</div>
+<script instance slajderIDd={id} >
+    new window.horizontScroll( document.getElementById( slajderIDd ));
+</script>

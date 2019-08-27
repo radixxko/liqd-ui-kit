@@ -29,7 +29,7 @@ server.use('/', async(req, res, next ) =>
                 ]
         };
 
-    res.reply(await Template.render('index', { select }  ), 'text/html');
+    res.reply(await Template.render('index2', { select }  ), 'text/html');
 
 });
 

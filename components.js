@@ -415,7 +415,7 @@ module.exports =
         description : 'Slider',
         template    :
         {
-            source  : '<Slider id="slider"><div>Ahoj</div></Slider>',
+            source  : '<Slider id="slider"><div style="background: blue;" class="slide">Ahoj</div><div style="background: green;" class="slide">Ahoj</div><div style="background: red;" class="slide">Ahoj</div><div style="background: purple;" class="slide">Ahoj</div><div style="background: silver;" class="slide">Ahoj</div></Slider>',
             data    : {},
             style   : ''
         },

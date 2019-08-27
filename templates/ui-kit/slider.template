@@ -47,6 +47,13 @@
                 {
                     -webkit-overflow-scrolling: touch;
                 }
+                .slide
+                {
+                    width: calc(100% / 4);
+                    height: 50px;
+                    display: flex;
+                    flex: 0 0 auto;
+                }
             }
         }
 
@@ -55,30 +62,14 @@
             position: absolute;
             opacity: 0;
             cursor: pointer;
-            border: 0;
             transition: opacity var(--main-transition);
             width: 24px;
             height: 24px;
             background: red;
             @media (max-width: 1024px){ display: none; }
             &.active { opacity: 1!important; }
-            &:focus { outline: none; }
-
-            &:hover
-             {
-                 &[data-icon]:before
-                 {
-                     background: blue;
-                 }
-            }
-             &.left
-             {
-                 left:0;
-             }
-             &.right
-             {
-                 right:0;
-             }
+            &.left { left:0; }
+            &.right { right:0; }
         }
 
     }
@@ -86,7 +77,9 @@
 <script>
     window.horizontScroll = function( element )
     {
-        if( element.parentNode.offsetWidth >= element.querySelector('.product').offsetWidth * element.querySelectorAll('.product').length ){
+        console.log( element.querySelector('.slide').offsetWidth * element.querySelectorAll('.slide').length, element.parentNode.offsetWidth )
+        if( element.parentNode.offsetWidth >= element.querySelector('.slide').offsetWidth * element.querySelectorAll('.slide').length )
+        {
             for( let btn of  element.querySelectorAll('div.arrow') )
             {
                 btn.style.display = 'none';
@@ -94,7 +87,7 @@
         }
         element.horizontal = this;
         var container = element.querySelector(".horizontal-scroll-container");
-        var max_translate = (container.querySelectorAll('.product').length * container.firstChild.offsetWidth) - container.offsetWidth;
+        var max_translate = (container.querySelectorAll('.slide').length * container.firstChild.offsetWidth) - container.offsetWidth;
         this.roll = function( side )
         {
             side.includes('right') ? container.scrollLeft  += container.offsetWidth : container.scrollLeft  -= container.offsetWidth;

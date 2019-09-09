@@ -81,7 +81,7 @@
 
         getValueForHandlePosition: function( handle_data )
         {
-            return Math.round( handle_data.minV + ( handle_data.maxV - handle_data.minV ) * ( parseFloat( handle_data.handle.style.left ) - handle_data.minX ) / ( handle_data.maxX - handle_data.minX ));
+            return ( handle_data.maxX === handle_data.minX ) ? handle_data.minV : Math.round( handle_data.minV + ( handle_data.maxV - handle_data.minV ) * ( parseFloat( handle_data.handle.style.left ) - handle_data.minX ) / ( handle_data.maxX - handle_data.minX ));
         },
 
         init: function( slider )

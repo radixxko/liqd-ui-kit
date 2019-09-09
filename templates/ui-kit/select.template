@@ -278,7 +278,6 @@
 
                 if( this._element.querySelector('div.select-option.active') )
                 {
-                    console.log(Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => r.innerHTML ))
                     this._element.querySelector('div.input').innerText = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => r.innerHTML ).join(', ');
                     this._values = Array.from(this._element.querySelectorAll('div.select-option.active')).map( r => ( { value: r.dataset.value, label : r.innerHTML } ) );
                 }

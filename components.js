@@ -280,7 +280,7 @@ module.exports =
                 description : 'Select Disabled',
                 template    :
                 {
-                    source  : '<Select suggest="true" options={select} value="[1,2]" multiple="true" disabled="true" id="Fourth-suggestor" label="Multiple Select Disabled" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2]" multiple="true" disabled="true" id="Fifth-suggestor" label="Multiple Select Disabled" width="calc(97% / 4)" />',
                     data    :
                         {
                             select:

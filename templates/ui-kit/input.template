@@ -286,7 +286,6 @@
     };
 </script>
 
-let _selector = ( typeof selector != 'undefined' ? selector : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
 let _autocomplete = ( typeof autocomplete != 'undefined' ? autocomplete : null );
@@ -305,7 +304,7 @@ let _icon = ( typeof icon != 'undefined' ? icon : null );
 let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-'+iconPosition : ' icon-left' );
 
 <label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + ( _icon ? _icon_position : '' ) } data-icon={_icon} style={"width:" + _width + _style } >
-    <input name={_name} placeholder={_placeholder} data-selector={_selector} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
+    <input name={_name} placeholder={_placeholder} type={_type} value={_value} onfocus="input.Focus(this.parentNode)" onblur="input.Blur(this.parentNode)" data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
     if( _label )
     {
         <span onclick="this.previousSibling.focus()">{label}</span>

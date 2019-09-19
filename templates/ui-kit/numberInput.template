@@ -1,9 +1,8 @@
 <style>
-    .Quantity-input
+    .NumberInput
     {
         display: flex;
         background: var( --form-input-background, var(--form-background, #ffffff ));
-        width: calc( var( --form-input-height-size, var(--form-height-size, 36px )) * 3.5 );
         height: var( --form-input-height-size, var(--form-height-size, 36px ));
         font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 12px ));
         line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px );
@@ -17,7 +16,7 @@
             text-align: center;
             background: var( --form-input-background, var(--form-background, #ffffff ));
             font-size: inherit;
-            width: 54px;
+            width: calc(var( --form-input-height-size, var(--form-height-size, 36px )) * 1.5);
             outline: 0;
             border-top: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
             border-bottom: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
@@ -27,7 +26,7 @@
              }
         }
 
-        .Quantity-button
+        .quantity
         {
             color: var( --form-input-color, var(--form-color, #354052 ));
             cursor: pointer;
@@ -35,16 +34,17 @@
             transition: all 83ms ease-in-out 34ms;
             text-align: center;
             user-select: none;
+            font-size: calc( var( --form-input-label-fill-size, var(--form-fill-label-size, 12px ))  + 4px );
             width: var( --form-input-height-size, var(--form-height-size, 36px ));
             height: var( --form-input-height-size, var(--form-height-size, 36px ));
             line-height: var( --form-input-height-size, var(--form-height-size, 36px ));
-            &[data-icon]{ border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 )); }
-            &[data-icon="plus"]
+            border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
+            &.minus
              {
                  border-top-right-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
                  border-bottom-right-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
              }
-            &[data-icon="minus"]
+            &.plus
              {
                  border-top-left-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
                  border-bottom-left-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
@@ -74,16 +74,16 @@
 </style>
 
 let _size = ( typeof size != 'undefined' ? size : ' normal' );
-let _selector = ( typeof selector != 'undefined' ? selector : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _width = ( typeof width != 'undefined' ? width : '' );
 let _style = ( typeof style != 'undefined' ? style : '' );
 let _min = ( typeof min != 'undefined' ? parseFloat(min) : 0 );
 let _max = ( typeof max != 'undefined' ? parseFloat(max) : undefined );
 let _step = ( typeof step != 'undefined' ? parseFloat(step) : 1 );
+let _name = ( typeof name != 'undefined' ? name : null );
 
-<div class="Quantity-input" data-selector={_selector}>
-    <div class="Quantity-button" data-icon="minus" onclick={"this.nextSibling.value = ( ( parseFloat(this.nextSibling.value) - " + _step + " ) >= " + _min + " ? ( parseFloat(this.nextSibling.value) - " + _step + " ) : parseFloat( this.nextSibling.value ) );"}></div>
-    <input type="number" value={_value} disabled={( typeof contenteditable !== 'undefined' ? null : undefined )} onchange={"this.value = ( typeof " + _max + " !== 'undefined' ? ( parseFloat( this.value ) >= " + _min + " && parseFloat( this.value ) <= " + _max + " ? this.value : " + _max + " ) : ( parseFloat( this.value ) >= " + _min + " ? this.value : " + _min + " ) );"} />
-    <div class="Quantity-button" data-icon="plus" onclick={"this.previousSibling.value = ( ( typeof " + _max + " !== 'undefined' ? ( ( parseFloat(this.previousSibling.value) + " + _step + " ) <= " + ( _max || 0 ) + " ) : true ) ? ( parseFloat(this.previousSibling.value) + " + _step + " ) : parseFloat( this.previousSibling.value ) );"}></div>
+<div class="NumberInput">
+    <div class="quantity plus" onclick={"this.nextSibling.value = ( ( parseFloat(this.nextSibling.value) - " + _step + " ) >= " + _min + " ? ( parseFloat(this.nextSibling.value) - " + _step + " ) : parseFloat( this.nextSibling.value ) );"}>+</div>
+    <input type="number"  name={_name} value={_value} disabled={( typeof contenteditable !== 'undefined' ? null : undefined )} onchange={"this.value = ( typeof " + _max + " !== 'undefined' ? ( parseFloat( this.value ) >= " + _min + " && parseFloat( this.value ) <= " + _max + " ? this.value : " + _max + " ) : ( parseFloat( this.value ) >= " + _min + " ? this.value : " + _min + " ) );"} />
+    <div class="quantity minus" onclick={"this.previousSibling.value = ( ( typeof " + _max + " !== 'undefined' ? ( ( parseFloat(this.previousSibling.value) + " + _step + " ) <= " + ( _max || 0 ) + " ) : true ) ? ( parseFloat(this.previousSibling.value) + " + _step + " ) : parseFloat( this.previousSibling.value ) );"}>-</div>
 </div>

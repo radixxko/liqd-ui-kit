@@ -24,12 +24,12 @@
     });
 </script>
 <style>
-    .modal
+    .Modal
     {
         display: none;
         cursor: pointer;
         z-index: 999;
-        .modal-content
+        .content
         {
             background: white;
             transition: all 250ms ease-in-out;
@@ -46,7 +46,7 @@
              background-color: rgba(0, 0, 0, 0)!important;
              -webkit-backdrop-filter: blur(0)!important;
              backdrop-filter: blur(0)!important;
-            .modal-content
+            .content
             {
                 transform: translateY(-24px) !important;
                 opacity: 0!important;
@@ -66,9 +66,9 @@
              background-color: rgba(0, 0, 0, 0.2);
              -webkit-backdrop-filter: blur(2px);
              backdrop-filter: blur(2px);
-            .modal-content{ transform: translateX(0); opacity: 1; }
+            .content{ transform: translateX(0); opacity: 1; }
          }
-        .modal-close
+        .close
         {
             position: absolute;
             right: calc(var( --form-modal-height-size, var(--form-height-size, 36px )) / 2);
@@ -89,9 +89,9 @@
         }
     }
 </style>
-<div class="modal" data-selector={selector} onclick="Modal.close( this );">
-    <div class="modal-content" onclick="event.stopPropagation();">
-        <div class="modal-close" data-icon="cancel" onclick="this.classList.add('focus');Modal.close( this.parentNode.parentNode );"></div>
+<div class="Modal" data-selector={selector} onclick="Modal.close( this );">
+    <div class="content" onclick="event.stopPropagation();">
+        <div class="close" data-icon="cancel" onclick="this.classList.add('focus');Modal.close( this.parentNode.parentNode );"></div>
         {CONTENT}
     </div>
 </div>

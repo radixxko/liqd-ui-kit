@@ -108,7 +108,9 @@
 
 let _loading = ( typeof loading != 'undefined' ? loading : null );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
-<button class="Button" disabled={_disabled} data-loader={_loading} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick + ";this.blur()" ) : '' )}>
+let _type = ( typeof type != 'undefined' ? type : null );
+
+<button class="Button" disabled={_disabled} data-loader={_loading} type={_type} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick + ";this.blur()" ) : '' )}>
    if( typeof CONTENT != 'undefined' )
    {
         {CONTENT}

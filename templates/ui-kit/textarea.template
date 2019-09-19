@@ -136,7 +136,7 @@
     });
 </script>
 
-let _selector = ( typeof selector != 'undefined' ? selector : null );
+let _name = ( typeof name != 'undefined' ? name : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
 let _autocomplete = ( typeof autocomplete != 'undefined' ? autocomplete : null );
@@ -152,7 +152,7 @@ let _label = ( typeof label != 'undefined' ? label.liqd_slugify() : null );
 let _disabled = ( typeof disabled != 'undefined' ? ' disabled' : '' );
 
 <label class={'Textarea ' + ( _value.length > 0 ? '' : 'empty ' ) + _error + _success  + _disabled + ( _label ? ' label' : '' )} style={"width:" + _width + ';' + _style }>
-    <textarea data-selector={_selector} placeholder={_placeholder} data-resize={_auto_extend} required={_required} onfocus="textarea.Focus(this.parentNode)" onchange={_onChange} onblur="textarea.Blur(this.parentNode)" rows={_rows}>
+    <textarea name={_name} placeholder={_placeholder} data-resize={_auto_extend} required={_required} onfocus="textarea.Focus(this.parentNode)" onchange={_onChange} onblur="textarea.Blur(this.parentNode)" rows={_rows}>
         {( _value.length > 0 ? _value : '' )}
     </textarea>
     if( _label )

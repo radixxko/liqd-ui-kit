@@ -65,9 +65,10 @@ let _disabled = ( typeof disabled != "undefined" ? undefined : null );
 let _checked = (typeof checked != 'undefined' ? 'true' : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
 let _label = (typeof label != 'undefined' ? label.liqd_slugify() : null );
+let _name = ( typeof name != 'undefined' ? name : null );
 
 <label class={"Checkbox " + _error }  onclick={ _onClick } onchange={_onChange}>
-    <input disabled={_disabled} type="checkbox" name="check" checked={_checked} />
+    <input disabled={_disabled} type="checkbox" name={_name} checked={_checked} />
     if( _label )
     {
         <span>{label}</span>

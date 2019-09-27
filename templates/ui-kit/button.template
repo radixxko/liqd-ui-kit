@@ -37,7 +37,7 @@
         {
             background: var( --form-button-focus-background, var(--form-focus-background, linear-gradient(0deg, #242f3b 0%, #354353 100%) ));
             color: var( --form-button-focus-color, var(--form-focus-color, #ffffff ));
-            border-color: var( --form-button-focus-border-color, var(--form--focus-border-color, #303c4b ));
+            border-color: var( --form-button--border-focus-color, var(--form--border-focus-color, #303c4b ));
         }
         @media ( min-width: 1024px )
         {
@@ -45,6 +45,7 @@
             {
                 background: var( --form-button-hover-background, var(--form-hover-background, linear-gradient(0deg, #303d4c 0%, #415061 100%) ));
                 color: var( --form-button-hover-color, var(--form-hover-color, #ffffff ));
+                border-color: var( --form-button--border-hover-color, var(--form--border-hover-color, #303c4b ));
             }
         }
         &.loading

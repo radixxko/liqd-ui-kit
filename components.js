@@ -379,7 +379,7 @@ module.exports =
         description : 'RangeSlider',
         template    :
         {
-            source  : '<RangeSlider selector="range" min="10" max="1000000" from="25" to="50000" range="10" />',
+            source  : '<RangeSlider name="name" min="10" max="1000000" from="25" to="50000" range="10" />',
             data    : {},
             style   : ''
         },

@@ -23,7 +23,7 @@
              border: 1px solid var(--green-9);
              background-color: rgba(105, 240, 174, 0.05);
          }
-        p { font-size: 12rem; line-height: 16rem; }
+        p { font-size: 12rem; line-height: 16rem;  }
         h3{ margin-bottom: var(--padding-0); font-weight: 500; }
         .close
         {

@@ -126,10 +126,10 @@
         }
     })
 </script>
-<div class="RangeSlider" data-selector={selector} data-from={(from != 'false' ? from : min)} data-to={(to != 'false' ? to : max)} data-min={min} data-max={max} data-min-range={range}>
+<div class="RangeSlider" data-name={name} data-from={(from != 'false' ? from : min)} data-to={(to != 'false' ? to : max)} data-min={min} data-max={max} data-min-range={range}>
     <div class="handle" onmousedown="window.RangeSlider.drag( this, event );" ontouchstart="window.RangeSlider.drag( this, event );" data-value={from}></div>
     <div class="handle" onmousedown="window.RangeSlider.drag( this, event );" ontouchstart="window.RangeSlider.drag( this, event );" data-value={to}></div>
 </div>
-<script from={(from != 'false' ? parseInt(from) : min)} to={(to != 'false' ? parseInt(to) : max)} max={max} min={min} selector={selector} instance>
-    RangeSlider.init( document.querySelector('[data-selector="'+selector+'"]'));
+<script from={(from != 'false' ? parseInt(from) : min)} to={(to != 'false' ? parseInt(to) : max)} max={max} min={min} name={name} instance>
+    RangeSlider.init( document.queryname('[data-name="'+name+'"]'));
 </script>

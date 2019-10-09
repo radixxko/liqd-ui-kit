@@ -43,11 +43,13 @@
             }
             &:not(:disabled):hover:before
             {
-                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-hover-border-color, var(--form-hover-border-color, #ced0da ));
-            }
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-hover-color, var(--form-border-hover-color, #ced0da ));
+                 background: var( --form-checkbox-hover-background, var(--form-hover-background, white ));
+             }
             &:checked:after
             {
-                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-focus-color, var(--form-border-focus-color, #2ea2f8 ));
+                 background: var( --form-checkbox-focus-background, var(--form-focus-background, white ));
             }
             &:disabled:before
             {
@@ -66,8 +68,11 @@ let _checked = (typeof checked != 'undefined' ? 'true' : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
 let _label = (typeof label != 'undefined' ? label.liqd_slugify() : null );
 let _name = ( typeof name != 'undefined' ? name : null );
+let _required = ( typeof required != 'undefined' ? required : null );
+let _style = ( typeof style != 'undefined' ? style : null );
+let _className = ( typeof className != 'undefined' ? className : '' );
 
-<label class={"Checkbox " + _error }  onclick={ _onClick } onchange={_onChange}>
+<label class={"Checkbox " + _error + _className }  onclick={ _onClick } style={_style} onchange={_onChange}>
     <input disabled={_disabled} type="checkbox" name={_name} checked={_checked} />
     if( _label )
     {

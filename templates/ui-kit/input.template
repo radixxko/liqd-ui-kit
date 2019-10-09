@@ -12,10 +12,12 @@
         transition: all 83ms ease-in-out 34ms;
         &.active
          {
-             border-color: var( --form-input-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
-             span
+             border-color: var( --form-input-border-focus-color, var(--form-border-focus-color, #2ea2f8 ));
+             background: var(--form-input-focus-background-color, var(--form-focus-background-color, white ));
+             color: var( --form-input-focus-color, var(--form-focus-color, #354052 ));
+            span
              {
-                 color: var( --form-input-focus-label-color, var(--form-focus-label-color, #2ea2f8 ));
+                 color: var( --form-input-label-focus--color, var(--form-label-focus-color, #2ea2f8 ));
              }
         }
         &.disabled
@@ -29,6 +31,8 @@
         &.empty:hover
         {
             border-color: var( --form-input-border-hover-color, var(--form-border-hover-color, #ced0da ));
+            background: var(--form-input-hover-background-color, var(--form-hover-background-color, white ));
+             color: var( --form-input-hover-color, var(--form-hover-color, #354052 ));
         }
 
         &.label

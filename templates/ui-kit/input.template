@@ -12,19 +12,13 @@
         transition: all 83ms ease-in-out 34ms;
         &.active
          {
-<<<<<<< HEAD
              border-color: var( --form-input-border-focus-color, var(--form-border-focus-color, #2ea2f8 ));
              background: var(--form-input-focus-background-color, var(--form-focus-background-color, white ));
              color: var( --form-input-focus-color, var(--form-focus-color, #354052 ));
             span
              {
                  color: var( --form-input-label-focus--color, var(--form-label-focus-color, #2ea2f8 ));
-=======
-             border-color: var( --form-input-focus-border-color, var(--form-border-focus-color, #2ea2f8 ));
-             span
-             {
-                 color: var( --form-input--label-focus-color, var(--form--label-focus-color, #2ea2f8 ));
->>>>>>> ce3f68b94270ee30dd262851e907b92c9a5939a1
+                border-color: var( --form-input-focus-border-color, var(--form-border-focus-color, #2ea2f8 ));
              }
         }
         &.disabled
@@ -65,7 +59,7 @@
         {
             cursor: text;
             height: 100%;
-            color: var( --form-input-color, var(--form-color, #354052 ));
+            color: var( --form-input-color, var(--form-color, #7f8fa4 ));
             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
             padding: var( --form-input-padding, var(--form-padding, 0 7px ));
@@ -317,7 +311,7 @@ let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-'+iconPositio
 let _className = ( typeof className != 'undefined' ? className : '' );
 
 <label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + ( _icon ? _icon_position : '' ) + _className } data-icon={_icon} style={_style } >
-    <input name={_name} placeholder={_placeholder} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"++onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
+    <input name={_name} placeholder={_placeholder} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
     if( _label )
     {
         <span onclick="this.previousSibling.focus()">{label}</span>

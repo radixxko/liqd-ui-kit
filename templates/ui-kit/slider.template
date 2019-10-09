@@ -1,133 +1,140 @@
 <style>
-    .horizontal-scroll
+    .Slider
     {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-bottom: var(--padding-3);
-        background: white;
-        border-radius: 4px;
-        padding: var(--padding-2);
-        .horizontal-scroll-main
+        .container
         {
             position: relative;
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: hidden;
-            -ms-overflow-style: none;
-            -webkit-overflow-scrolling: touch;
             width: 100%;
-            &:after
-             {
-                 content: "";
-                 position: relative;
-                 flex: 0 0 auto;
-                 display: block;
-                 width: 1px;
-                 height: 1px;
-                 background: none;
-             }
-            &::-webkit-scrollbar { display: none; }
-            .horizontal-scroll-container
+            height: 100%;
+            overflow-x: hidden;
+            overflow-x: -moz-scrollbars-none;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            user-select: none;
+            display: flex;
+            scroll-behavior: smooth;
+            .content
             {
-                height: auto;
-                transition: all 0.5s ease-in-out;
-                user-select: none;
-                position: relative;
-                display: flex;
-                flex-wrap: nowrap;
                 width: 100%;
+                height: 100%;
+                overflow-x: hidden;
+                overflow-x: -moz-scrollbars-none;
+                scrollbar-width: none;
                 -ms-overflow-style: none;
-                overflow-y: scroll;
+                user-select: none;
+                display: flex;
                 scroll-behavior: smooth;
-                &::-webkit-scrollbar { display: none; }
-                @media (max-width:1024px)
-                {
-                    -webkit-overflow-scrolling: touch;
-                }
                 .slide
                 {
-                    width: calc(100% / 4);
-                    height: 50px;
                     display: flex;
                     flex: 0 0 auto;
+                    opacity:0;
+                    visibility:hidden;
+                    transition:visibility 0.2s linear,opacity 0.2s linear;
+                    &.active{ visibility:visible; opacity:1; }
                 }
             }
-        }
 
-        .arrow
-        {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            transition: opacity var(--main-transition);
-            width: 24px;
-            height: 24px;
-            background: red;
-            @media (max-width: 1024px){ display: none; }
-            &.active { opacity: 1!important; }
-            &.left { left:0; }
-            &.right { right:0; }
+            .arrow
+            {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                transition: opacity 200ms ease-in-out;
+                width: 24px;
+                height: 24px;
+                background: red;
+                top: 50%;
+                transform: translateY(-50%);
+                &.left { left:0; }
+                &.right { right:0; }
+                &.active { opacity:1; }
+            }
         }
-
     }
 </style>
 <script>
     window.horizontScroll = function( element )
     {
-        console.log( element.querySelector('.slide').offsetWidth * element.querySelectorAll('.slide').length, element.parentNode.offsetWidth )
-        if( element.parentNode.offsetWidth >= element.querySelector('.slide').offsetWidth * element.querySelectorAll('.slide').length )
+        if( element.offsetWidth >= element.querySelector('.slide').offsetWidth * element.querySelectorAll('.slide').length )
         {
             for( let btn of  element.querySelectorAll('div.arrow') )
             {
                 btn.style.display = 'none';
             }
         }
+
         element.horizontal = this;
-        var container = element.querySelector(".horizontal-scroll-container");
+
+        var container = element.querySelector(".content");
         var max_translate = (container.querySelectorAll('.slide').length * container.firstChild.offsetWidth) - container.offsetWidth;
+
+        _IntersectionObserver();
+
         this.roll = function( side )
         {
+            _IntersectionObserver();
             side.includes('right') ? container.scrollLeft  += container.offsetWidth : container.scrollLeft  -= container.offsetWidth;
-            setTimeout(function(){ checkArrows(container); }, 800);
+            _checkArrows( side.includes('right') ? container.scrollLeft + container.offsetWidth : container.scrollLeft  -= container.offsetWidth );
         };
 
+        function _IntersectionObserver()
+        {
+            for( let target of element.querySelectorAll('.slide') )
+            {
+                var observer = new IntersectionObserver(onIntersection, { root: null, rootMargin: "0px", threshold: 1.0 });
 
-        function checkArrows( container )
+                observer.observe(target);
+
+                function onIntersection(entries)
+                {
+                    entries.forEach(entry =>
+                    {
+                        target.classList.toggle('active', entry.intersectionRatio > 0);
+                    });
+                }
+            }
+        }
+
+        function _checkArrows( direction )
         {
             var arrow = element.querySelectorAll(".arrow");
-            //  vypinanie a zapinanie sipiek pri min/max scroll
-            if ( container.scrollLeft === 0 ) {
+            if ( direction <= 0
+            )
+            {
                 arrow[0].classList.remove('active');
                 arrow[0].removeAttribute("onclick");
             }
-            else {
+            else
+            {
                 arrow[0].classList.add('active');
                 arrow[0].setAttribute("onclick", "this.parentNode.parentNode.horizontal.roll('left')");
             }
-            if ( max_translate - 20 < container.scrollLeft ) {
+            if ( max_translate - 20 < direction )
+            {
                 arrow[1].classList.remove('active');
                 arrow[1].style.cursor = "default";
                 arrow[1].removeAttribute("onclick");
             }
-            else {
+            else
+            {
                 arrow[1].classList.add('active');
                 arrow[1].setAttribute("onclick", "this.parentNode.parentNode.horizontal.roll('right')");
             }
         }
     }
 </script>
-<div id={id} class="horizontal-scroll">
-    <section class="horizontal-scroll-main">
-        <div class="horizontal-scroll-container">
+let _width = ( typeof width !== 'undefined' ? width : '100%' );
+let _height = ( typeof height !== 'undefined' ? width : '100%' );
+<div id={id} class="Slider" style={"width:"+_width+";height:"+_height}>
+    <div class="container">
+        <div class="content">
             {CONTENT}
         </div>
-    <div class="arrow left"></div>
-    <div class="arrow right"></div>
-</section>
+        <div class="arrow left" onclick="this.parentNode.parentNode.horizontal.roll('left')">LEFT</div>
+        <div class="arrow right active" onclick="this.parentNode.parentNode.horizontal.roll('right')">RIGHT</div>
+    </div>
 </div>
-<script instance slajderIDd={id} >
+<script slajderIDd={id} instance>
     new window.horizontScroll( document.getElementById( slajderIDd ));
 </script>

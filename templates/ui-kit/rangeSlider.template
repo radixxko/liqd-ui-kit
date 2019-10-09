@@ -131,5 +131,5 @@
     <div class="handle" onmousedown="window.RangeSlider.drag( this, event );" ontouchstart="window.RangeSlider.drag( this, event );" data-value={to}></div>
 </div>
 <script from={(from != 'false' ? parseInt(from) : min)} to={(to != 'false' ? parseInt(to) : max)} max={max} min={min} name={name} instance>
-    RangeSlider.init( document.queryname('[data-name="'+name+'"]'));
+    RangeSlider.init( document.querySelector('[data-name="'+name+'"]'));
 </script>

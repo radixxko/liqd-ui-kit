@@ -3,7 +3,7 @@
     {
         display: flex;
         align-items: center;
-        height: var( --form-checkbox-height, var(--form-height, 24px ));
+        height: var( --form-checkbox-height, var(--form-height, 20px ));
         span
         {
             margin-left: 4px;
@@ -11,7 +11,7 @@
             font-size: var( --form-checkbox-label-size, var(--form-label-size, 12px ));
             line-height: var( --form-checkbox-label-size, var(--form-label-size, 16px ));
         }
-        input[type=checkbox]
+        input[type=checkbox], input[type=radio]
         {
             position: relative;
             width: var( --form-checkbox-width, var(--form-width, 24px ));
@@ -24,39 +24,60 @@
             -moz-appearance: none;
             appearance: none;
             outline: none;
+            border: 0;
             &:before, &:checked:after
             {
-                  content: "";
-                  display: block;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: calc( 100% - ( var( --form-checkbox-border-width, var(--form-border-width, 1px )) * 2 ));
-                  height: calc( 100% - ( var( --form-checkbox-border-width, var(--form-border-width, 1px )) * 2 ));
-                  border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
+               font-family: "flaticon";
+               content: "\f199";
+               display: block;
+               position: absolute;
+               top: 0;
+               left: 0;
+               font-size: var( --form-checkbox-icon-size, 12rem );
+                text-align: center;
+               width: 100%;
+               height: 100%;
+               font-weight: bold;
+               line-height: var( --form-checkbox-height, var(--form-height, 20rem ));
+               border-radius: var( --form-checkbox-border-radius, var(--form-border-radius, 2px ));
             }
             &:before
-            {
+             {
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-color, var(--form-border-color, #dfe3e9 ));
+                 color: var( --form-checkbox-border-color, var(--form-border-color, #dfe3e9 ));
                  background: var( --form-checkbox-background, var(--form-background, white ));
 
-            }
+             }
             &:not(:disabled):hover:before
-            {
+             {
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid  var( --form-checkbox-border-hover-color, var(--form-border-hover-color, #ced0da ));
-                 background: var( --form-checkbox-hover-background, var(--form-hover-background, white ));
+                 color: var( --form-checkbox-border-hover-color, var(--form-border-hover-color, #ced0da ));
              }
             &:checked:after
-            {
+             {
+                 background: var( --form-checkbox-border-focus-color, var(--form-border-focus-color, #2ea2f8 ));
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-focus-color, var(--form-border-focus-color, #2ea2f8 ));
-                 background: var( --form-checkbox-focus-background, var(--form-focus-background, white ));
-            }
+                 color: white;
+             }
             &:disabled:before
-            {
-                pointer-events: none; cursor: default;
-                background: var( --form-checkbox-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
-                border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
-            }
+             {
+                 pointer-events: none; cursor: default;
+                 background: var( --form-checkbox-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
+                 color: var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
+                 border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
+             }
+        }
+        input[type=radio]
+        {
+                &:not(:checked):before{ color: transparent; }
+                &:before, &:checked:after
+               {
+                   content: "•";
+                   padding-left: 1px;
+                   font-size: var( --form-checkbox-icon-size, 24rem );
+                   line-height: var( --form-checkbox-height, var(--form-height, 16rem ));
+                   border-radius: 50%;
+               }
         }
     }
 </style>
@@ -64,18 +85,20 @@
 let _onClick = ( typeof onclick != 'undefined' ? onclick : null );
 let _onChange = ( typeof onchange != "undefined" ? onchange : null );
 let _disabled = ( typeof disabled != "undefined" ? undefined : null );
-let _checked = (typeof checked != 'undefined' ? 'true' : null );
+let _checked = (typeof checked != 'undefined' && checked != false ? undefined : null );
 let _error = (typeof error != 'undefined' ? ' error' : '' );
 let _label = (typeof label != 'undefined' ? label.liqd_slugify() : null );
 let _name = ( typeof name != 'undefined' ? name : null );
-let _required = ( typeof required != 'undefined' ? required : null );
+let _className = ( typeof className != 'undefined' ? className : '' );
+let _type =  ( typeof type != 'undefined' ? type : 'checkbox' );
+let _required =  ( typeof required != 'undefined' ? required : null );
 let _style = ( typeof style != 'undefined' ? style : null );
 let _className = ( typeof className != 'undefined' ? className : '' );
 
-<label class={"Checkbox " + _error + _className }  onclick={ _onClick } style={_style} onchange={_onChange}>
-    <input disabled={_disabled} type="checkbox" name={_name} checked={_checked} />
-    if( _label )
-    {
-        <span>{label}</span>
-    }
+<label class={"Checkbox " + _error + ' ' + _className }  onclick={ _onClick } onchange={_onChange}>
+	<input disabled={_disabled} type={_type} name={_name} checked={_checked} required={_required} />
+	if( _label )
+	{
+		<span>{label}</span>
+	}
 </label>

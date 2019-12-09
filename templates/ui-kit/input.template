@@ -125,13 +125,15 @@
 <script>
     window.input = new ( function()
     {
+        let __value, _status = null;
+
         this.Focus = function(input)
         {
             input.classList.add('active');
             input.classList.contains('empty') ? input.classList.remove('empty') : '';
-            if(input.classList.contains('error')){ input.classList.remove('error') }
-            if(input.classList.contains('success')){ input.classList.remove('success') }
-
+            if(input.classList.contains('error')){ input.classList.remove('error'); _status = 'error'; }
+            if(input.classList.contains('success')){ input.classList.remove('success'); _status = 'success'; }
+            __value = input.firstChild.value;
         };
 
         this.Blur = function(input)
@@ -144,6 +146,10 @@
             else if( input.getElementsByTagName('input')[0].value.trim() )
             {
                 input.classList.remove('empty');
+            }
+            if( __value && _status && input.firstChild.value === __value )
+            {
+                input.classList.add(_status)
             }
         };
 

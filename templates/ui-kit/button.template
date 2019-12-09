@@ -15,6 +15,7 @@
         user-select: none;
         box-sizing: border-box;
         width: fit-content;
+        transition: var(--form-button-transition, var(--form-transition, all 200ms));
         background: var( --form-button-background, var(--form-fill-background, linear-gradient(0deg, #3b4857 0%, #516072 100%) ));
         color: var( --form-button-color, var(--form-color, #ffffff ));
         border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, #3b4958 ));
@@ -111,7 +112,7 @@ let _loading = ( typeof loading != 'undefined' ? loading : null );
 let _disabled = ( typeof disabled != 'undefined' ? undefined : null );
 let _type = ( typeof type != 'undefined' ? type : null );
 let _style = ( typeof style != 'undefined' ? style : null );
-let _className = ( typeof className != 'undefined' ? className : 'null' );
+let _className = ( typeof className != 'undefined' ? className : '' );
 
 <button class={"Button " + _className } style={_style} disabled={_disabled} data-loader={_loading} type={_type} onclick={( typeof onclick != "undefined" ? ( typeof loading != "undefined" ? "window.Button.loadStart(this);(" + onclick + ").catch(e=>{}).then(()=>window.Button.loadEnd(this))" : onclick + ";this.blur()" ) : '' )}>
    if( typeof CONTENT != 'undefined' )

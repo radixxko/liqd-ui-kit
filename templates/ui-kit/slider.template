@@ -1,140 +1,202 @@
 <style>
     .Slider
     {
-        .container
+        position: relative;
+        user-select: none;
+        display: flex;
+        overflow: hidden;
+        .content
         {
-            position: relative;
             width: 100%;
             height: 100%;
-            overflow-x: hidden;
-            overflow-x: -moz-scrollbars-none;
             scrollbar-width: none;
-            -ms-overflow-style: none;
             user-select: none;
             display: flex;
             scroll-behavior: smooth;
-            .content
+            overflow: hidden;
+            @media screen and ( max-width: 768px )
+            {
+                overflow-x: scroll;
+                overflow-x: -moz-scrollbars-none;
+                -ms-overflow-style: none;
+            }
+            &:-webkit-scrollbar { display: none; }
+             &.snap
+              {
+                    @media screen and ( max-width: 768px )
+                    {
+                        scroll-snap-type: mandatory;
+                        scroll-snap-type: x mandatory;
+                    }
+              }
+
+
+            ._slide
             {
                 width: 100%;
-                height: 100%;
-                overflow-x: hidden;
-                overflow-x: -moz-scrollbars-none;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-                user-select: none;
                 display: flex;
-                scroll-behavior: smooth;
-                .slide
-                {
-                    display: flex;
-                    flex: 0 0 auto;
-                    opacity:0;
-                    visibility:hidden;
-                    transition:visibility 0.2s linear,opacity 0.2s linear;
-                    &.active{ visibility:visible; opacity:1; }
-                }
+                flex: 0 0 auto;
+                visibility:visible;
+                scroll-snap-align: center;
             }
-
-            .arrow
+            .space
             {
-                position: absolute;
-                opacity: 0;
-                cursor: pointer;
-                transition: opacity 200ms ease-in-out;
-                width: 24px;
-                height: 24px;
-                background: red;
-                top: 50%;
-                transform: translateY(-50%);
-                &.left { left:0; }
-                &.right { right:0; }
-                &.active { opacity:1; }
+                width: var(--padding-2);
+                display: flex;
+                flex: 0 0 auto;
+                visibility:visible;
+                scroll-snap-align: end;
+            }
+        }
+        .arrow
+        {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            transition: opacity 200ms ease-in-out;
+            top: 50%;
+            transform: translateY(-50%);
+            &.active { opacity:1; }
+            @media screen and ( max-width: 768px ){ display: none; }
+        }
+    }
+    .dots
+    {
+        position: absolute;
+        display: flex;
+        .dot
+        {
+            width: 14rem;
+            height: 14rem;
+            border-radius: 100%;
+            border: 2px solid var(--gray-2);
+            margin-left: var(--padding-1);
+            cursor: pointer;
+            position: relative;
+            transition: border-color 200ms ease-in-out;
+            &.active
+             {
+                 border-color: var(--gray-9);
+                &:before
+                 {
+                     content: '';
+                     width: 4px;
+                     height: 4px;
+                     position: absolute;
+                     border-radius: 100%;
+                     background: var(--gray-9);
+                     top: 50%;
+                     left: 50%;
+                     transform: translate(-50%, -50%);
+                 }
             }
         }
     }
+
 </style>
 <script>
-    window.horizontScroll = function( element )
+    window.SliderNew = function( element, dots, arrows )
     {
-        if( element.offsetWidth >= element.querySelector('.slide').offsetWidth * element.querySelectorAll('.slide').length )
-        {
-            for( let btn of  element.querySelectorAll('div.arrow') )
-            {
-                btn.style.display = 'none';
-            }
-        }
 
         element.horizontal = this;
 
-        var container = element.querySelector(".content");
-        var max_translate = (container.querySelectorAll('.slide').length * container.firstChild.offsetWidth) - container.offsetWidth;
+        let _slideList = Array.from( element.querySelectorAll('._slide') );
 
-        _IntersectionObserver();
+        element.firstChild.setAttribute('style', ' scroll-snap-points-x: repeat('+element.querySelector('._slide').offsetWidth+'px);');
+
+        let _slides = Math.ceil( _slideList.length * element.firstChild.firstChild.offsetWidth / element.firstChild.offsetWidth );
+
+        element.dataset.slide = 0;
+
+
+        element.firstChild.addEventListener("scroll", () => Timers.setTimeout( 'slider', async ( ) =>
+        {
+            for( let key = 0; key < _slideList.length; key++ )
+            {
+                console.log( _slideList[key], _slideList[key].getBoundingClientRect().x , element.getBoundingClientRect().x )
+                if( _slideList[key].getBoundingClientRect().x === element.getBoundingClientRect().x )
+                {
+                    if( _slides !== _slideList.length )
+                    {
+                        element.dataset.slide = Math.floor( ( ( key + 1 ) * _slideList[key].offsetWidth ) / ( element.firstChild.scrollWidth / _slides ) );
+                    }
+                    else
+                    {
+                        element.dataset.slide = ( ( key + 1 ) * _slideList[key].offsetWidth ) / ( element.firstChild.scrollWidth / _slides ) - 1;
+                    }
+
+                    if( dots ) { _checkDots( parseInt( element.dataset.slide ) ) }
+                }
+            }
+        }, 50 ) );
+
+
+
+        if( dots && _slideList.length > 1 )
+        {
+
+            let dotBlock = document.createElement('div');
+                dotBlock.classList.add('dots');
+
+            let dot = document.createElement('div');
+                dot.classList.add('dot');
+                dot.setAttribute('onclick', 'this.parentNode.parentNode.horizontal.roll( this )');
+
+                for( let i = 0; i <  _slides; i++ )
+                {
+                    dot.dataset.slide = i; i === 0 ? dot.classList.add('active') : dot.classList.remove('active');
+
+                    dotBlock.appendChild( dot.cloneNode() )
+                }
+
+                element.appendChild( dotBlock )
+        }
 
         this.roll = function( side )
         {
-            _IntersectionObserver();
-            side.includes('right') ? container.scrollLeft  += container.offsetWidth : container.scrollLeft  -= container.offsetWidth;
-            _checkArrows( side.includes('right') ? container.scrollLeft + container.offsetWidth : container.scrollLeft  -= container.offsetWidth );
+            if(typeof side === "object" )
+            {
+                element.firstChild.scrollLeft = element.firstChild.offsetWidth * side.dataset.slide;
+            }
+            else
+            {
+                if( side.includes('right') && parseInt(element.dataset.slide) + 1 === _slides ){ element.dataset.slide = -1; }
+
+                if( side.includes('left') && parseInt( element.dataset.slide ) <= 0 ){ element.dataset.slide = _slides; }
+
+                side.includes('right') ? element.dataset.slide = parseInt( element.dataset.slide ) + 1 : element.dataset.slide = parseInt( element.dataset.slide ) - 1;
+
+                element.firstChild.scrollLeft = element.firstChild.offsetWidth * element.dataset.slide;
+            }
         };
 
-        function _IntersectionObserver()
+        function _checkDots( key )
         {
-            for( let target of element.querySelectorAll('.slide') )
-            {
-                var observer = new IntersectionObserver(onIntersection, { root: null, rootMargin: "0px", threshold: 1.0 });
+            let dots = Array.from( element.querySelectorAll('.dot') );
 
-                observer.observe(target);
-
-                function onIntersection(entries)
-                {
-                    entries.forEach(entry =>
-                    {
-                        target.classList.toggle('active', entry.intersectionRatio > 0);
-                    });
-                }
-            }
-        }
-
-        function _checkArrows( direction )
-        {
-            var arrow = element.querySelectorAll(".arrow");
-            if ( direction <= 0
-            )
-            {
-                arrow[0].classList.remove('active');
-                arrow[0].removeAttribute("onclick");
-            }
-            else
-            {
-                arrow[0].classList.add('active');
-                arrow[0].setAttribute("onclick", "this.parentNode.parentNode.horizontal.roll('left')");
-            }
-            if ( max_translate - 20 < direction )
-            {
-                arrow[1].classList.remove('active');
-                arrow[1].style.cursor = "default";
-                arrow[1].removeAttribute("onclick");
-            }
-            else
-            {
-                arrow[1].classList.add('active');
-                arrow[1].setAttribute("onclick", "this.parentNode.parentNode.horizontal.roll('right')");
-            }
+            dots.map( r => r.classList.remove('active') );
+            element.querySelector('.dot[data-slide="'+key+'"]').classList.add('active');
         }
     }
 </script>
-let _width = ( typeof width !== 'undefined' ? width : '100%' );
-let _height = ( typeof height !== 'undefined' ? width : '100%' );
-<div id={id} class="Slider" style={"width:"+_width+";height:"+_height}>
-    <div class="container">
-        <div class="content">
-            {CONTENT}
-        </div>
-        <div class="arrow left" onclick="this.parentNode.parentNode.horizontal.roll('left')">LEFT</div>
-        <div class="arrow right active" onclick="this.parentNode.parentNode.horizontal.roll('right')">RIGHT</div>
+let _element = ( typeof element != 'undefined' ? element : 'div' );
+let _width = ( typeof width != 'undefined' ? width : 'auto' );
+let _height = ( typeof height != 'undefined' ? height : 'auto' );
+
+#{ '<' + _element + ' style="width:' + _width + '; height:' + _height + '" data-name="' + name + '" class="Slider ' + ( typeof className !== 'undefined' ? className : '' ) + '"' + ( typeof itemscope != 'undefined' ? 'itemscope ' : '' ) + ( typeof itemtype != 'undefined' ? 'itemtype="' + itemtype + '"' : '' ) + ' >' }
+ <div class={"content" + ( typeof snapScroll != 'undefined' ? ' snap' : '' )}>
+        {CONTENT}
+        if( typeof snapScroll == 'undefined' )
+        {
+            <div class="space mobile"></div>
+        }
     </div>
-</div>
-<script slajderIDd={id} instance>
-    new window.horizontScroll( document.getElementById( slajderIDd ));
+    if( typeof arrows != 'undefined' )
+    {
+        <div class="arrow left active" data-icon="arrow-left" onclick="this.parentNode.horizontal.roll('left')"></div>
+        <div class="arrow right active" data-icon="arrow-right" onclick="this.parentNode.horizontal.roll('right')"></div>
+    }
+#{'</' + _element + '>'}
+<script sliderName={name} dots={( typeof dots != 'undefined' ? true : false )} arrows={( typeof arrows != 'undefined' ? true : false )} instance>
+    new window.SliderNew( document.querySelector( '[data-name="' + sliderName + '"]' ), dots, arrows );
 </script>

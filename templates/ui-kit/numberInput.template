@@ -86,7 +86,7 @@ let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
 let _required = ( typeof required != 'undefined' ? undefined : null );
 
 <div class="NumberInput">
-    <div class="quantity plus" onclick={"this.nextSibling.value = ( ( parseFloat(this.nextSibling.value) - " + _step + " ) >= " + _min + " ? ( parseFloat(this.nextSibling.value) - " + _step + " ) : parseFloat( this.nextSibling.value ) );"}>+</div>
+    <div class="quantity plus" onclick={"this.nextSibling.value = ( ( parseFloat(this.nextSibling.value) - " + _step + " ) >= " + _min + " ? ( parseFloat(this.nextSibling.value) - " + _step + " ) : parseFloat( this.nextSibling.value ) );"}>-</div>
     <input type="number" name={_name} value={_value} required={_required} disabled={( typeof contenteditable !== 'undefined' ? null : undefined )} onchange={_onChange + ";this.value = ( typeof " + _max + " !== 'undefined' ? ( parseFloat( this.value ) >= " + _min + " && parseFloat( this.value ) <= " + _max + " ? this.value : " + _max + " ) : ( parseFloat( this.value ) >= " + _min + " ? this.value : " + _min + " ) );"} />
-    <div class="quantity minus" onclick={"this.previousSibling.value = ( ( typeof " + _max + " !== 'undefined' ? ( ( parseFloat(this.previousSibling.value) + " + _step + " ) <= " + ( _max || 0 ) + " ) : true ) ? ( parseFloat(this.previousSibling.value) + " + _step + " ) : parseFloat( this.previousSibling.value ) );"}>-</div>
+    <div class="quantity minus" onclick={"this.previousSibling.value = ( ( typeof " + _max + " !== 'undefined' ? ( ( parseFloat(this.previousSibling.value) + " + _step + " ) <= " + ( _max || 0 ) + " ) : true ) ? ( parseFloat(this.previousSibling.value) + " + _step + " ) : parseFloat( this.previousSibling.value ) );"}>+</div>
 </div>

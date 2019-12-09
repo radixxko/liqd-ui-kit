@@ -422,5 +422,19 @@ module.exports =
         variants    :
         {
         }
+    },
+    'Toggle' :
+    {
+        title       : 'Toggle',
+        description : 'Toggle',
+        template    :
+        {
+            source  : '<Toggle status="on" />',
+            data    : {},
+            style   : ''
+        },
+        variants    :
+        {
+        }
     }
 };

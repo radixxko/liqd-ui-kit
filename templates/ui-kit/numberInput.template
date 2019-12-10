@@ -38,7 +38,7 @@
             width: var( --form-input-height-size, var(--form-height-size, 36px ));
             height: var( --form-input-height-size, var(--form-height-size, 36px ));
             line-height: var( --form-input-height-size, var(--form-height-size, 36px ));
-        border: var( --form-numberinput-border-width, var(--form-border-width, 1rem )) solid  var( --form-numberinput-border-color, var(--form-border-color, #dfe3e9 ));
+        border: var( --form-numberinput-border-width, var(--form-border-width, 1px )) solid  var( --form-numberinput-border-color, var(--form-border-color, #dfe3e9 ));
         display: flex;
         align-items: center;
         justify-content: center;

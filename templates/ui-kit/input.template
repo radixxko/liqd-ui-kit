@@ -5,44 +5,46 @@
         flex-direction: column;
         position: relative;
         border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
-        height: var( --form-input-height-size, var(--form-height-size, 36px ));
-        width: var( --form-input-width-size, var(--form-width-size, 100% ));
+        height: var( --form-input-height-size, var(--form-height-size, 48px ));
+        width: var(--form-input-height-size, var(--form-height-size, 100%));
         border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
         background: var( --form-input-background, var(--form-background, #ffffff ));
         transition: all 83ms ease-in-out 34ms;
         &.active
          {
-             border-color: var( --form-input-border-focus-color, var(--form-border-focus-color, #2ea2f8 ));
-             background: var(--form-input-focus-background-color, var(--form-focus-background-color, white ));
-             color: var( --form-input-focus-color, var(--form-focus-color, #354052 ));
+            border-color: var( --form-input-focus-border-color, var(--form-focus-border-color, #2ea2f8 ));
+            background: var( --form-input-focus-background, var(--form-focus-background, #ffffff ));
+            color: var( --form-input-focus-color, var(--form-focus-color, #354052));
             span
-             {
-                 color: var( --form-input-label-focus--color, var(--form-label-focus-color, #2ea2f8 ));
-                border-color: var( --form-input-focus-border-color, var(--form-border-focus-color, #2ea2f8 ));
-             }
+            {
+                color: var( --form-input-focus-label-color, var(--form-focus-label-color, #2ea2f8 ));
+                top: 2px;
+                transform: translateY(0px);
+            }
         }
         &.disabled
-        {
-            pointer-events: none; cursor: default;
-            border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
-            background: var( --form-input-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
-            color: var( --form-input-disabled-color, var(--form-disabled-color, #354052 ));
-        }
+         {
+             pointer-events: none; cursor: default;
+             border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
+             background: var( --form-input-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
+             color: var( --form-input-disabled-color, var(--form-disabled-color, #354052 ));
+         }
 
         &.empty:hover
-        {
-            border-color: var( --form-input-border-hover-color, var(--form-border-hover-color, #ced0da ));
-            background: var(--form-input-hover-background-color, var(--form-hover-background-color, white ));
-             color: var( --form-input-hover-color, var(--form-hover-color, #354052 ));
-        }
+         {
+             border-color: var( --form-input-border-hover-color, var(--form-border-hover-color, #ced0da ));
+             background: var( --form-input-hover-background, var(--form-hover-background, #ffffff ));
+             color: var( --form-input-hover-color, var(--form-hover-color, #354052));
+         }
+         &:not(.empty), &.success, &.error
+          {
+                span
+                {
+                    top: 2px;
+                    transform: translateY(0px);
+                }
+          }
 
-        &.label
-        {
-            margin-top: var( --form-input-label-height-size, var(--form-label-height-size, 24px ));
-        }
-
-        &.icon-left{ input{ padding-left: var( --form-input-height-size, var(--form-height-size, 36px )); } &:before{ left: 0; } }
-        &.icon-right{ input{ padding-right: var( --form-input-height-size, var(--form-height-size, 36px )); } &:before{ right: 0; } }
         span
         {
             position: absolute;
@@ -50,27 +52,27 @@
             user-select: none;
             transition: all 83ms ease-in-out 34ms;
             color: var( --form-input-label-color, var(--form-label-color, #7f8fa4 ));
-            font-size: var( --form-input-label-fill-size, var(--form-label-fill-size, 12px ));
-            line-height: var( --form-input-label-height-size, var(--form-label-height-size, 24px ));
-            top: calc( var( --form-input-label-height-size, var(--form-label-height-size, 24px )) * -1 );
+            font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 12px ));
+            line-height: var( --form-input-label-height, var(--form-label-height, 24px ));
+            top: 50%;
+            text-align: left;
+            left: 7px;
+            transform: translateY(-50%);
         }
 
         input
         {
             cursor: text;
             height: 100%;
-            color: var( --form-input-color, var(--form-color, #7f8fa4 ));
+            width: 100%;
+            color: var( --form-input-color, var(--form-color, #354052 ));
             font-size: var( --form-input-font-size, var(--form-font-size, 12px ));
             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
             padding: var( --form-input-padding, var(--form-padding, 0 7px ));
+            padding-top: 15px;
             border: 0;
             outline: 0;
             background: transparent;
-            &::placeholder
-            {
-                 color: var( --form-input-placeholder-color, var(--form-placeholder-color, #354052 ));
-                 opacity: 0.5;
-            }
         }
         input::-webkit-search-decoration,
         input::-webkit-search-cancel-button,
@@ -81,44 +83,39 @@
         }
 
         &:after, &:before
-        {
-             font-family: var( --form-input-icon-font, var(--from-icon-font, "flaticon"));
-             position: absolute;
-             bottom: 0;
-             top: 0;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             font-weight: bold;
-             color: var( --form-input-icon-color, var(--from-icon-color, #ced0da));
-             background: var( --form-input-icon-background, var(--from-icon-background, transparent));
-             width: var( --form-input-height-size, var(--form-height-size, 36px ));
-        }
+          {
+              font-family: var( --form-input-icon-font, var(--form-icon-font, "flaticon"));
+              position: absolute;
+              bottom: 0;
+              top: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+              color: var( --form-input-icon-color, var(--from-icon-color, #ced0da));
+              background: var( --form-input-icon-background, var(--from-icon-background, transparent));
+              width: var( --form-input-height-size, var(--form-height-size, 48px ));
+          }
 
         &:after
-        {
-            right: 0;
-            font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) - 2px);
-            line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) - 2px);
-        }
-        &:before
-        {
-            font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
-            line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
-        }
+         {
+             right: 0;
+             font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 6px);
+             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 6px);
+         }
 
         &.error
-        {
-            border-color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
+         {
+             border-color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
             span{ color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
-            &:after { content: "\e002"; color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
+            &:after { content: var(--form-input-cancel-icon, var(--form-cancel-icon, "X")); color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
         }
 
         &.success
-        {
-            border-color: var( --form-input-success-color, var(--form-success-color, #1bb934 ));
+         {
+             border-color: var( --form-input-success-color, var(--form-success-color, #1bb934 ));
             span{ color: var( --form-input-success-color, var(--form-success-color, #1bb934 )); }
-            &:after{ content: "\e024"; color: var( --form-input-success-color, var(--form-success-color, #1bb934 )); }
+            &:after{ content: var(--form-input-success-icon, var(--form-success-icon, "✔")); color: var( --form-input-success-color, var(--form-success-color, #1bb934 )); }
         }
     }
 </style>
@@ -299,8 +296,8 @@
 
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
-let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : null );
-let _onBlur = ( typeof onblur != 'undefined' ? onblur : null );
+let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : '' );
+let _onBlur = ( typeof onblur != 'undefined' ? onblur : '' );
 let _autocomplete = ( typeof autocomplete != 'undefined' ? autocomplete : null );
 let _required = ( typeof required != 'undefined' ? undefined : null );
 let _style = ( typeof style != 'undefined' ? style : '' );
@@ -310,14 +307,12 @@ let _success = ( typeof success != 'undefined' ? ' success' : '' );
 let _type = ( typeof type != 'undefined' ? type : 'text' );
 let _label = ( typeof label != 'undefined' ? label.liqd_slugify() : null );
 let _name = ( typeof name != 'undefined' ? name : null );
-let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
 let _pattern = ( typeof pattern != 'undefined' ? pattern : null );
-let _icon = ( typeof icon != 'undefined' ? icon : null );
-let _icon_position = ( typeof iconPosition != 'undefined' ? ' icon-'+iconPosition : ' icon-left' );
 let _className = ( typeof className != 'undefined' ? className : '' );
+let _id = ( typeof id != 'undefined' ? id : null );
 
-<label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + ( _icon ? _icon_position : '' ) + _className } data-icon={_icon} style={_style } >
-    <input name={_name} placeholder={_placeholder} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
+<label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + _className } style={_style } >
+    <input name={_name} id={_id} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
     if( _label )
     {
         <span onclick="this.previousSibling.focus()">{label}</span>

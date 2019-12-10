@@ -5,7 +5,7 @@
         flex-direction: column;
         position: relative;
         border: var( --form-textarea-border-width, var(--form-border-width, 1px )) solid  var( --form-textarea-border-color, var(--form-border-color, #dfe3e9 ));
-        height: var( --form-textarea-height-size, var(--form-height-size, 36px ));
+        height: var( --form-textarea-height-size, var(--form-height-size, 48px ));
         width: var( --form-textarea-width-size, var(--form-width-size, 100% ));
         border-radius: var( --form-textarea-border-radius, var(--form-border-radius, 2px ));
         background: var( --form-textarea-background, var(--form-background, #ffffff ));
@@ -18,7 +18,9 @@
              color: var( --form-textarea-focus-color, var(--form-focus-color, #354052));
             span
             {
-                color: var( --form-textarea-label-focus-color, var(--form-label-focus-color, #2ea2f8 ));
+                color: var( --form-input-focus-label-color, var(--form-focus-label-color, #2ea2f8 ));
+                top: 2px;
+                transform: translateY(0px);
             }
         }
         &.disabled
@@ -36,9 +38,13 @@
              color: var( --form-textarea-hover-color, var(--form-hover-color, #354052));
         }
 
-        &.label
+        &:not(.empty), &.success, &.error
         {
-             margin-top: var( --form-textarea-label-height-size, var(--form-label-height-size, 24px ));
+            span
+            {
+                top: 2px;
+                transform: translateY(0px);
+            }
         }
 
         span
@@ -47,10 +53,13 @@
             font-weight: normal;
             user-select: none;
             transition: all 83ms ease-in-out 34ms;
-            color: var( --form-textarea-label-color, var(--form-label-color, #7f8fa4 ));
-            font-size: var( --form-textarea-label-fill-size, var(--form-fill-label-size, 12px ));
-            line-height: var( --form-textarea-label-height-size, var(--form-label-height-size, 24px ));
-            top: calc( var( --form-textarea-label-height-size, var(--form-label-height-size, 24px )) * -1 );
+            color: var( --form-input-label-color, var(--form-label-color, #7f8fa4 ));
+            font-size: var( --form-input-label-fill-size, var(--form-fill-label-size, 12px ));
+            line-height: var( --form-input-label-height, var(--form-label-height, 24px ));
+            top: 50%;
+            text-align: left;
+            left: 7px;
+            transform: translateY(-50%);
         }
 
         textarea
@@ -63,6 +72,7 @@
             line-height: var( --form-textarea-line-height, var(--form-line-height, 16px ));
             padding: 0;
             margin: var( --form-textarea-padding, var(--form-padding,10px 7px ));
+            margin-top: 24px;
             border: 0;
             outline: 0;
             background: transparent;
@@ -143,22 +153,21 @@
 let _name = ( typeof name != 'undefined' ? name : null );
 let _value = ( typeof value != 'undefined' ? value : '' );
 let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
-let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : null );
-let _onBlur = ( typeof onblur != 'undefined' ? onblur : null );
+let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : '' );
+let _onBlur = ( typeof onblur != 'undefined' ? onblur : '' );
 let _required = ( typeof required != 'undefined' ? undefined : null );
 let _style = ( typeof style != 'undefined' ? style : '' );
 let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
 let _rows = ( typeof rows != 'undefined' ? rows : 1 );
 let _auto_extend = ( typeof autoextend != 'undefined' ? 'true' : null );
-let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
 let _label = ( typeof label != 'undefined' ? label.liqd_slugify() : null );
 let _id = ( typeof id != 'undefined' ? id : null );
 let _disabled = ( typeof disabled != 'undefined' ? ' disabled' : '' );
 let _className = ( typeof className != 'undefined' ? className : '' );
 
 <label class={'Textarea ' + ( _value.length > 0 ? '' : 'empty ' ) + _error + _success  + _disabled + ( _label ? ' label' : '' ) + _className } style={ _style }>
-    <textarea name={_name} id={_id} placeholder={_placeholder} data-resize={_auto_extend} required={_required} onfocus={"textarea.Focus(this.parentNode);"+_onFocus} onchange={_onChange} onblur="textarea.Blur(this.parentNode)" rows={_rows}>
+    <textarea name={_name} id={_id} data-resize={_auto_extend} required={_required} onfocus={"textarea.Focus(this.parentNode);"+_onFocus} onchange={_onChange} onblur={"textarea.Blur(this.parentNode)"+_onBlur} rows={_rows}>
         {( _value.length > 0 ? _value : '' )}
     </textarea>
     if( _label )

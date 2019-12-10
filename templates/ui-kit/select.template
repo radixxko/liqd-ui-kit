@@ -6,7 +6,7 @@
         width: 100%;
         position: relative;
         border: var( --form-select-border-width, var(--form-border-width, 1px )) solid  var( --form-select-border-color, var(--form-border-color, #dfe3e9 ));
-        height: var( --form-select-height-size, var(--form-height-size, 36px ));
+        height: var( --form-select-height-size, var(--form-height-size, 48px ));
         border-radius: var( --form-select-border-radius, var(--form-border-radius, 2px ));
         background: var( --form-select-background, var(--form-background, #ffffff ));
         transition: all 83ms ease-in-out 34ms;
@@ -22,10 +22,10 @@
             overflow: hidden;
             font-size: var( --form-select-font-size, var(--form-font-size, 12px ));
             line-height: calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 4px);
-            padding: calc( ( var( --form-select-height-size, var(--form-height-size, 36px )) -  calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 4px) ) / 2 );
             color: var( --form-select-color, var(--form-color, #354052 ));
+            padding-top: 24px;
             padding-left: var( --form-select-padding-left, var(--form-padding-left, 7px ));
-            padding-right: var( --form-select-height-size, var(--form-height-size, 36px ));
+            padding-right: var( --form-select-height-size, var(--form-height-size, 48px ));
 
             &[placeholder]:empty:before
             {
@@ -37,11 +37,12 @@
             &:after
              {
                  content: "\e08a";
-                 font-family: var( --form-select-icon-font, var(--from-icon-font, "flaticon"));
+                 font-family: var( --form-select-icon-font, var(--form-icon-font, "flaticon"));
                  right: 0;
                  top: 0;
-                 height: var( --form-select-height-size, var(--form-height-size, 36px ));
-                 width: var( --form-select-height-size, var(--form-height-size, 36px ));
+                 font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
+                 height: var( --form-select-height-size, var(--form-height-size, 48px ));
+                 width: var( --form-select-height-size, var(--form-height-size, 48px ));
                  position: absolute;
                  opacity: 0;
                  transition: opacity 83ms ease-in-out 34ms;
@@ -64,25 +65,25 @@
             transition: all 83ms ease-in-out 34ms;
             color: var( --form-select-label-color, var(--form-label-color, #7f8fa4 ));
             font-size: var( --form-select-label-fill-size, var(--form-fill-label-size, 12px ));
-        line-height: var( --form-select-label-height, var(--form-label-height, 24px ));
-        top: 50%;
-        text-align: left;
-        left: 7rem;
-        transform: translateY(-50%);
+            line-height: var( --form-select-label-height, var(--form-label-height, 24px ));
+            top: 50%;
+            text-align: left;
+            left: 7px;
+            transform: translateY(-50%);
         }
 
     .select-wrap
     {
         position: absolute;
         left: 0;
-        top: calc(var( --form-select-height-size, var(--form-height-size, 36px )) - 2px);
+        top: calc(var( --form-select-height-size, var(--form-height-size, 48px )) - 2px);
         border: var( --form-select-border-width, var(--form-border-width, 1px )) solid transparent;
         border-bottom-right-radius: var( --form-select-border-radius, var(--form-border-radius, 2px ));
         border-bottom-left-radius: var( --form-select-border-radius, var(--form-border-radius, 2px ));
         background-color: transparent;
         margin-left: -1px;
         height: 0;
-        width: calc(100% + 2px);
+        width: 100%;
         overflow-x: hidden;
         overflow-y: auto;
         display: flex;
@@ -91,8 +92,8 @@
             .suggest-search
             {
                 position: relative;
-                width: var( --form-select-height-size, var(--form-height-size, 36px ));
-                height: var( --form-select-height-size, var(--form-height-size, 36px ));
+                width: var( --form-select-height-size, var(--form-height-size, 48px ));
+                height: var( --form-select-height-size, var(--form-height-size, 48px ));
                 &:before
                 {
                      position: absolute;
@@ -111,13 +112,13 @@
             input
             {
                 position: relative;
-                width: calc( 100% - var( --form-select-padding-left, var(--form-padding-left,7px )) - var( --form-select-height-size, var(--form-height-size, 36px )));
+                width: calc( 100% - var( --form-select-padding-left, var(--form-padding-left,7px )) - var( --form-select-height-size, var(--form-height-size, 48px )));
                 border: 0;
                 outline: none;
                 padding: 0;
                 color: var( --form-select-color, var(--form-color, #354052 ));
                 padding-left: var( --form-select-padding-left, var(--form-padding-left, 7px ));
-                height: var( --form-select-height-size, var(--form-height-size, 36px ));
+                height: var( --form-select-height-size, var(--form-height-size, 48px ));
                 line-height: var( --form-select-line-height, var(--form-line-height, 16px ));
                 font-size: var( --form-select-font-size, var(--form-font-size, 12px ));
                 &::placeholder { opacity: 0.5; }
@@ -194,7 +195,7 @@
         }
         label
         {
-            top: 2rem;
+            top: 2px;
             transform: translateY(0px);
         }
     }
@@ -211,36 +212,36 @@
          }
 
     &.error, &.success
-              {
-    .input:after
-    {
-        font-weight: bold;
-        font-size: calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 2px);
-        line-height: calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 2px);
-    }
+   {
+        .input:after
+        {
+            font-weight: bold;
+            font-size: calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 2px);
+            line-height: calc( var( --form-select-font-size, var(--form-font-size, 12px )) + 2px);
+        }
     }
     &.error
      {
          border-color: var( --form-select-error-color, var(--form-error-color, #ed1c24 ));
-        label{ color: var( --form-select-error-color, var(--form-error-color, #ed1c24 )); }
-    .input:after
-    {
-        opacity: 1;
-        color: var( --form-select-error-color, var(--form-error-color, #ed1c24 ));
-        content: "\f18e";
-    }
+         label{ color: var( --form-select-error-color, var(--form-error-color, #ed1c24 )); }
+        .input:after
+        {
+            opacity: 1;
+            color: var( --form-select-error-color, var(--form-error-color, #ed1c24 ));
+            content: var(--form-input-cancel-icon, var(--form-cancel-icon, "X"));
+        }
     }
 
     &.success
      {
          border-color: var( --form-select-success-color, var(--form-success-color, #1bb934 ));
         label{ color: var( --form-select-success-color, var(--form-success-color, #1bb934 )); }
-    .input:after
-    {
-        opacity: 1;
-        color: var( --form-select-success-color, var(--form-success-color, #1bb934 ));
-        content: "\f199";
-    }
+        .input:after
+        {
+            opacity: 1;
+            color: var( --form-select-success-color, var(--form-success-color, #1bb934 ));
+            content: var(--form-input-success-icon, var(--form-success-icon, "✔"));
+        }
     }
 
         &.disabled
@@ -427,10 +428,10 @@
                 }
                 else if( this._input.value === '' )
                 {
-                    this._element.classList.remove('fill');
+                    this._element.classList.pxove('fill');
                     if( this._element.querySelector('.select-option.active') )
                     {
-                        this._element.querySelector('.select-option.active').classList.remove('active');
+                        this._element.querySelector('.select-option.active').classList.pxove('active');
                     }
                 }
 
@@ -492,12 +493,11 @@ let _init = ( typeof init !== 'undefined' ? init : 'true' );
 let _error = ( typeof error !== 'undefined' ? ' error' : '' );
 let _success = ( typeof success !== 'undefined' ? ' success' : '' );
 let _multiple = ( typeof multiple !== 'undefined' ? true : false );
-let _placeholder = ( typeof placeholder !== 'undefined' ? placeholder : null );
 
 <div style={'width:'+_width+';'+_style} class={'Select' + _fill + _selected +_class + _disabled + _error + _success  + ( _label ? ' label' : '' ) }>
 <label for={_id} class="label">{( _label ? _label : '' )}</label>
 <input type="text" style="display:none;" required={_required} onchange={_onchange} value={_value} name={_name} id={_id} />
-<div class="input" placeholder={_placeholder} contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+<div class="input" contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
 </div>
 <div class="select-wrap">
     if( typeof suggest !== 'undefined' && suggest )

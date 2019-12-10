@@ -3,7 +3,7 @@
     {
         position:relative;
         width: 100%;
-        height: var( --form-range-slider-handler-height, 24px );
+        height: var( --form-range-slider-handler-height, 48px );
         user-select: none;
         overflow: visible;
 
@@ -11,7 +11,7 @@
         {
             content: "";
             position: absolute;
-            top: 10px;
+            bottom: 11px;
             height: var( --form-range-slider-bar-height, 6px);
             background: var( --form-range-slider-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
             border: var( --form-range-slider-border-width, var(--form-border-width, 1px )) solid  var( --form-range-slider-border-color, var(--form-border-color, #dfe3e9 ));
@@ -31,7 +31,7 @@
 
         >.handle
         {
-            position: absolute; top: 0; cursor: pointer;
+            position: absolute; bottom: 1px; cursor: pointer;
             height: var( --form-range-slider-handler-height, 24px );
             width: var( --form-range-slider-handler-height, 24px);
             background: var( --form-range-slider-background, var(--form-background, #ffffff ));

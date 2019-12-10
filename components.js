@@ -64,41 +64,19 @@ module.exports =
         description : 'Input',
         template    :
         {
-            source  : '<Input type="text" label="small" placeholder="placeholder" width="calc(97% / 4)" pattern="^(\\+?\\s*([0-9]\\s*){12}|([0-9]\\s*){9,10})$" />',
+            source  : '<Input type="text" label="small" pattern="^(\\+?\\s*([0-9]\\s*){12}|([0-9]\\s*){9,10})$" />',
             data    : {},
             style   : ''
         },
         variants    :
         {
-            'Input-icon-left' :
-            {
-                title       : 'Input error',
-                description : 'Input error',
-                template    :
-                {
-                    source  : '<Input type="text" label="icon-left" value="value" icon="user" width="calc(97% / 4)" />',
-                    data    : {},
-                    style   : ''
-                }
-            },
-            'Input-icon-right' :
-            {
-                title       : 'Input error',
-                description : 'Input error',
-                template    :
-                {
-                    source  : '<Input type="text" label="icon-right" value="value" iconPosition="right" icon="search" width="calc(97% / 4)" />',
-                    data    : {},
-                    style   : ''
-                }
-            },
             'Input-error' :
             {
                 title       : 'Input error',
                 description : 'Input error',
                 template    :
                     {
-                        source  : '<Input type="text" label="error" value="value" error="true" width="calc(97% / 4)" />',
+                        source  : '<Input type="text" label="error" value="value" error="true" />',
                         data    : {},
                         style   : ''
                     }
@@ -109,7 +87,7 @@ module.exports =
                 description : 'Input success',
                 template    :
                 {
-                    source  : '<Input type="text" label="success" placeholder="test" success="true" width="calc(97% / 4)" />',
+                    source  : '<Input type="text" label="success" value="value" success="true" />',
                     data    : {},
                     style   : ''
                 }
@@ -120,7 +98,7 @@ module.exports =
                 description : 'Input disabled',
                 template    :
                     {
-                        source  : '<Input type="text" label="disabled" value="value" disabled="true" width="calc(97% / 4)" />',
+                        source  : '<Input type="text" label="disabled" value="value" disabled="true" />',
                         data    : {},
                         style   : ''
                     }
@@ -133,7 +111,7 @@ module.exports =
         description : 'Textarea',
         template    :
         {
-            source  : '<Textarea label="Label" placeholder="placeholder" width="calc(97% / 4)" />',
+            source  : '<Textarea label="Label" />',
             data    : {},
             style   : ''
         },
@@ -145,7 +123,7 @@ module.exports =
                 description : 'Textarea rows',
                 template    :
                 {
-                    source  : '<Textarea label="AutoExtend" value="Press Enter" rows="5" autoextend="true" width="calc(97% / 4)" />',
+                    source  : '<Textarea label="AutoExtend" value="Press Enter" rows="5" autoextend="true" />',
                     data    : {},
                     style   : ''
                 }
@@ -156,7 +134,7 @@ module.exports =
                 description : 'Textarea error',
                 template    :
                 {
-                    source  : '<Textarea label="Textarea error" value="Press Enter" error="true" width="calc(97% / 4)" />',
+                    source  : '<Textarea label="Textarea error" value="Press Enter" error="true" />',
                     data    : {},
                     style   : ''
                 }
@@ -167,7 +145,7 @@ module.exports =
                 description : 'Textarea success',
                 template    :
                 {
-                    source  : '<Textarea label="Textarea success" value="Press Enter" success="true" width="calc(97% / 4)" />',
+                    source  : '<Textarea label="Textarea success" value="Press Enter" success="true" />',
                     data    : {},
                     style   : ''
                 }
@@ -178,7 +156,7 @@ module.exports =
                 description : 'Textarea disabled',
                 template    :
                 {
-                    source  : '<Textarea label="Disabled" value="value" disabled="true" width="calc(97% / 4)" />',
+                    source  : '<Textarea label="Disabled" value="value" disabled="true" />',
                     data    : {},
                     style   : ''
                 }
@@ -191,7 +169,7 @@ module.exports =
         description : 'Select',
         template    :
         {
-            source  : '<Select suggest="true" options={select} value="1" id="First-suggestor" label="Select" placeholder="placeholder" width="calc(97% / 4)" />',
+            source  : '<Select suggest="true" options={select} value="" id="First-suggestor" label="Select" />',
             data    :
                 {
                     select:
@@ -214,7 +192,7 @@ module.exports =
                 description : 'Select Multiple',
                 template    :
                 {
-                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" id="Second-suggestor" label="Multiple-Select" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" id="Second-suggestor" label="Multiple-Select" />',
                     data    :
                         {
                             select:
@@ -415,7 +393,7 @@ module.exports =
         description : 'Slider',
         template    :
         {
-            source  : '<Slider id="slider"><div style="background: blue;" class="slide">Ahoj</div><div style="background: green;" class="slide">Ahoj</div><div style="background: red;" class="slide">Ahoj</div><div style="background: purple;" class="slide">Ahoj</div><div style="background: silver;" class="slide">Ahoj</div></Slider>',
+            source  : '<Slider name="Slider"><div style="background: blue;" class="slide">Ahoj</div><div style="background: green;" class="slide">Ahoj</div><div style="background: red;" class="slide">Ahoj</div><div style="background: purple;" class="slide">Ahoj</div><div style="background: silver;" class="slide">Ahoj</div></Slider>',
             data    : {},
             style   : ''
         },

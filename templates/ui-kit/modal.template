@@ -9,9 +9,11 @@
             _CloneNode.classList.add('opened');
 
             document.body.appendChild( _CloneNode );
+            element.remove();
+
+            DOM_execute( document.body );
             setTimeout( () =>
             {
-                console.log(document.querySelector('div.opening[data-selector="'+selector+'"]'))
                 document.querySelector('div.opening[data-selector="'+selector+'"]').classList.remove('opening');
             }, 25);
         };
@@ -19,7 +21,7 @@
         this.close = function ( element )
         {
             element.classList.add('removing');
-            setTimeout( () => { element.remove() }, 250);
+            setTimeout( () => { element.className = 'Modal' }, 250);
         }
     });
 </script>

@@ -393,7 +393,7 @@ module.exports =
         description : 'Slider',
         template    :
         {
-            source  : '<Slider name="Slider"><div style="background: blue;" class="slide">Ahoj</div><div style="background: green;" class="slide">Ahoj</div><div style="background: red;" class="slide">Ahoj</div><div style="background: purple;" class="slide">Ahoj</div><div style="background: silver;" class="slide">Ahoj</div></Slider>',
+            source  : '<Slider name="latestBlogPostsMobile" snapScroll="true" element="section" dots="true" arrows="true"><Slide>Prvy Slajd</Slide><Slide>Druhy Slajd</Slide></Slider>',
             data    : {},
             style   : ''
         },

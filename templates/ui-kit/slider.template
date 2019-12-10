@@ -66,8 +66,8 @@
         display: flex;
         .dot
         {
-            width: 14rem;
-            height: 14rem;
+            width: 14px;
+            height: 14px;
             border-radius: 100%;
             border: 2px solid var(--gray-2);
             margin-left: var(--padding-1);

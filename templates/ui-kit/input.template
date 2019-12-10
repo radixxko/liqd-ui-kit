@@ -108,7 +108,7 @@
          {
              border-color: var( --form-input-error-color, var(--form-error-color, #ed1c24 ));
             span{ color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
-            &:after { content: var(--form-input-cancel-icon, var(--form-cancel-icon, "X")); color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
+            &:after { content: var(--form-input-error-icon, var(--form-error-icon, "X")); color: var( --form-input-error-color, var(--form-error-color, #ed1c24 )); }
         }
 
         &.success

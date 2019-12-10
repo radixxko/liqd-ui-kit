@@ -63,7 +63,7 @@
              {
                  pointer-events: none; cursor: default;
                  background: var( --form-checkbox-disabled-background, var(--form-disabled-background, rgba(0,0,0,0.03) ));
-                 color: var( --form-checkbox-checkmark-disabled-color, #dfe3e9 );
+                 color: var( --form-checkbox-checkmark-disabled-color, transparent );
                  border: var( --form-checkbox-border-width, var(--form-border-width, 1px )) solid var( --form-checkbox-border-disabled-color, var(--form-border-disabled-color, #dfe3e9 ));
              }
         }

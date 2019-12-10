@@ -228,7 +228,7 @@
         {
             opacity: 1;
             color: var( --form-select-error-color, var(--form-error-color, #ed1c24 ));
-            content: var(--form-input-cancel-icon, var(--form-cancel-icon, "X"));
+            content: var(--form-input-error-icon, var(--form-error-icon, "X"));
         }
     }
 

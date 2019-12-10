@@ -156,7 +156,7 @@ let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
 let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : '' );
 let _onBlur = ( typeof onblur != 'undefined' ? onblur : '' );
 let _required = ( typeof required != 'undefined' ? undefined : null );
-let _style = ( typeof style != 'undefined' ? style : '' );
+let _style = ( typeof style != 'undefined' ? style : null );
 let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
 let _rows = ( typeof rows != 'undefined' ? rows : 1 );

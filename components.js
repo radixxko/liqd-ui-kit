@@ -214,7 +214,7 @@ module.exports =
                 description : 'Select Error',
                 template    :
                 {
-                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" error="true" id="Third-suggestor" label="Multiple Select Error" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" error="true" id="Third-suggestor" label="Multiple Select Error" />',
                     data    :
                         {
                             select:
@@ -236,7 +236,7 @@ module.exports =
                 description : 'Select Success',
                 template    :
                 {
-                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" success="true" id="Fourth-suggestor" label="Multiple Select Success" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2,3]" multiple="true" success="true" id="Fourth-suggestor" label="Multiple Select Success" />',
                     data    :
                         {
                             select:
@@ -258,7 +258,7 @@ module.exports =
                 description : 'Select Disabled',
                 template    :
                 {
-                    source  : '<Select suggest="true" options={select} value="[1,2]" multiple="true" disabled="true" id="Fifth-suggestor" label="Multiple Select Disabled" width="calc(97% / 4)" />',
+                    source  : '<Select suggest="true" options={select} value="[1,2]" multiple="true" disabled="true" id="Fifth-suggestor" label="Multiple Select Disabled" />',
                     data    :
                         {
                             select:

@@ -100,8 +100,8 @@
         &:after
          {
              right: 0;
-             font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 6px);
-             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 6px);
+             font-size: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
+             line-height: calc( var( --form-input-font-size, var(--form-font-size, 12px )) + 2px);
          }
 
         &.error

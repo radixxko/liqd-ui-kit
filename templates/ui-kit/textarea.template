@@ -153,11 +153,12 @@ let _rows = ( typeof rows != 'undefined' ? rows : 1 );
 let _auto_extend = ( typeof autoextend != 'undefined' ? 'true' : null );
 let _placeholder = ( typeof placeholder != 'undefined' ? placeholder : null );
 let _label = ( typeof label != 'undefined' ? label.liqd_slugify() : null );
+let _id = ( typeof id != 'undefined' ? id : null );
 let _disabled = ( typeof disabled != 'undefined' ? ' disabled' : '' );
 let _className = ( typeof className != 'undefined' ? className : '' );
 
 <label class={'Textarea ' + ( _value.length > 0 ? '' : 'empty ' ) + _error + _success  + _disabled + ( _label ? ' label' : '' ) + _className } style={ _style }>
-    <textarea name={_name} placeholder={_placeholder} data-resize={_auto_extend} required={_required} onfocus={"textarea.Focus(this.parentNode);"+_onFocus} onchange={_onChange} onblur="textarea.Blur(this.parentNode)" rows={_rows}>
+    <textarea name={_name} id={_id} placeholder={_placeholder} data-resize={_auto_extend} required={_required} onfocus={"textarea.Focus(this.parentNode);"+_onFocus} onchange={_onChange} onblur="textarea.Blur(this.parentNode)" rows={_rows}>
         {( _value.length > 0 ? _value : '' )}
     </textarea>
     if( _label )

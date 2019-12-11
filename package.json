@@ -1,10 +1,10 @@
 {
-  "name": "liqd-ds-heap",
-  "description": "Heap Data Structure",
-  "version": "1.1.2",
+  "name": "liqd-ui-kit",
+  "description": "UKIT",
+  "version": "0.0.1",
   "author": "radixxko",
   "license": "MIT",
-  "main": "lib/heap.js",
+  "main": "lib/uikit.js",
   "files": [
     "lib/"
   ],
@@ -14,22 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/radixxko/liqd-ds-heap.git"
+    "url": "git://github.com/radixxko/liqd-ui-kit.git"
   },
   "keywords": [
-    "heap",
-    "data",
-    "structure",
-    "algorithm",
+    "ui",
     "liqd"
   ],
   "dependencies": {
-    "liqd-server": "^1.3.2",
-    "liqd-template": "^1.9.2"
   },
   "devDependencies": {
-    "coveralls": "^3.0.4",
-    "mocha": "^5.0.4",
-    "nyc": "^14.1.1"
   }
 }

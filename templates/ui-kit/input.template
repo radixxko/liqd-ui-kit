@@ -6,7 +6,7 @@
         position: relative;
         border: var( --form-input-border-width, var(--form-border-width, 1px )) solid  var( --form-input-border-color, var(--form-border-color, #dfe3e9 ));
         height: var( --form-input-height-size, var(--form-height-size, 48px ));
-        width: var(--form-input-height-size, var(--form-height-size, 100%));
+        width: var(--form-input-width-size, var(--form-width-size, 100%));
         border-radius: var( --form-input-border-radius, var(--form-border-radius, 2px ));
         background: var( --form-input-background, var(--form-background, #ffffff ));
         transition: all 83ms ease-in-out 34ms;

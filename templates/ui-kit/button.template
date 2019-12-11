@@ -21,7 +21,7 @@
         border: var( --form-button-border-width, var(--form-border-width, 1px )) solid  var( --form-button-border-color, var(--form-border-color, #3b4958 ));
         border-radius: var( --form-button-border-radius, var(--form-border-radius, 2px ));
         height: var( --form-button-height-size, var(--form-height-size, 36px ));
-        min-width: var( --form-button-height-size, var(--form-height-size, 36px ));
+        min-width: var( --form-button-width-size, var(--form-width-size, 36px ));
         font-size: var( --form-button-font-size, var(--form-font-size, 14px ));
         line-height: var( --form-button-font-size, var(--form-font-size, 14px ));
         padding:  var( --form-button-padding, var(--form-padding, 0 14px ));

@@ -59,7 +59,16 @@
         }
     }
 </style>
-<label class="Toggle">
-    <input type="checkbox" checked={ ( typeof status != "undefined" && status != "off" ? undefined : null ) } />
+
+let _name = ( typeof name != 'undefined' ? name : null );
+let _id = ( typeof id != 'undefined' ? id : null );
+let _onChange = ( typeof onchange != 'undefined' ? onchange : null );
+let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : null );
+let _onBlur = ( typeof onblur != 'undefined' ? onblur : null );
+let _style = ( typeof style != 'undefined' ? style : null );
+let _className = ( typeof className != 'undefined' ? className : '' );
+
+<label class={"Toggle" + _className}>
+    <input type="checkbox" name={_name} onchange={_onChange} onblur={_onBlur} onfocus={_onFocus} checked={ ( typeof status != "undefined" && status != "off" ? undefined : null ) } />
     <span></span>
 </label>

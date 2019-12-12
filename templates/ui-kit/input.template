@@ -300,7 +300,7 @@ let _onFocus = ( typeof onfocus != 'undefined' ? onfocus : '' );
 let _onBlur = ( typeof onblur != 'undefined' ? onblur : '' );
 let _autocomplete = ( typeof autocomplete != 'undefined' ? autocomplete : null );
 let _required = ( typeof required != 'undefined' ? undefined : null );
-let _style = ( typeof style != 'undefined' ? style : '' );
+let _style = ( typeof style != 'undefined' ? style : null );
 let _error = ( typeof error != 'undefined' ? ' error' : '' );
 let _disabled = ( typeof disabled != 'undefined' ? ' disabled' : '' );
 let _success = ( typeof success != 'undefined' ? ' success' : '' );
@@ -311,8 +311,8 @@ let _pattern = ( typeof pattern != 'undefined' ? pattern : null );
 let _className = ( typeof className != 'undefined' ? className : '' );
 let _id = ( typeof id != 'undefined' ? id : null );
 
-<label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + _className } style={_style + ( !_label ? ' padding-top: 0;' : '' )} >
-    <input name={_name} id={_id} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
+<label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + _className } style={ _style } >
+    <input style={( !_label ? ' padding-top: 0;' : '' )} name={_name} id={_id} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
     if( _label )
     {
         <span onclick="this.previousSibling.focus()">{label}</span>

@@ -52,10 +52,6 @@
              }
         }
 
-        &.label
-        {
-            margin-top: var( --form-select-label-height, var(--form-label-height, 24px ));
-        }
 
         label
         {

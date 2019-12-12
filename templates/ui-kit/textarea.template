@@ -167,7 +167,7 @@ let _disabled = ( typeof disabled != 'undefined' ? ' disabled' : '' );
 let _className = ( typeof className != 'undefined' ? className : '' );
 
 <label class={'Textarea ' + ( _value.length > 0 ? '' : 'empty ' ) + _error + _success  + _disabled + ( _label ? ' label' : '' ) + _className } style={ _style }>
-    <textarea style={( !_label ? ' padding-top: 0;' : '' )} name={_name} id={_id} data-resize={_auto_extend} required={_required} onfocus={"textarea.Focus(this.parentNode);"+_onFocus} onchange={_onChange} onblur={"textarea.Blur(this.parentNode)"+_onBlur} rows={_rows}>
+    <textarea style={( !_label ? ' margin-top: 10px;' : '' )} name={_name} id={_id} data-resize={_auto_extend} required={_required} onfocus={"textarea.Focus(this.parentNode);"+_onFocus} onchange={_onChange} onblur={"textarea.Blur(this.parentNode)"+_onBlur} rows={_rows}>
         {( _value.length > 0 ? _value : '' )}
     </textarea>
     if( _label )

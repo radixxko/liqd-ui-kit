@@ -311,7 +311,7 @@ let _pattern = ( typeof pattern != 'undefined' ? pattern : null );
 let _className = ( typeof className != 'undefined' ? className : '' );
 let _id = ( typeof id != 'undefined' ? id : null );
 
-<label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + _className } style={_style} >
+<label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + _className } style={_style + ( !_label ? 'padding-top: 0;' : '' )} >
     <input name={_name} id={_id} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
     if( _label )
     {

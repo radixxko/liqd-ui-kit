@@ -493,7 +493,7 @@ let _error = ( typeof error !== 'undefined' ? ' error' : '' );
 let _success = ( typeof success !== 'undefined' ? ' success' : '' );
 let _multiple = ( typeof multiple !== 'undefined' ? true : false );
 
-<div style={_style} class={'Select' + _fill + _selected +_class + _disabled + _error + _success  + ( _label ? ' label' : '' ) }>
+<div style={ _style + ( !_label ? 'padding-top: 0;' : '' ) } class={'Select' + _fill + _selected +_class + _disabled + _error + _success  + ( _label ? ' label' : '' ) }>
 <label for={_id} class="label">{( _label ? _label : '' )}</label>
 <input type="text" style="display:none;" required={_required} onchange={_onchange} value={_value} name={_name} id={_id} />
 <div class="input" contenteditable={_contenteditable} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">

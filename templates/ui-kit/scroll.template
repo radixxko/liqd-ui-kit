@@ -203,8 +203,8 @@
 
 let _selector = ( typeof selector != 'undefined' ? selector : null );
 
-<div class="Scroll" data-selector={_selector}  onmouseenter="Scroll.enter(this.firstChild, event)" onmouseleave="Scroll.leave(this.firstChild, event)" style={( typeof width !== 'undefined' ? 'width:' + width + ';' : '' )+( typeof height !== 'undefined' ? 'height:' + height + ';' : '' )}>
-    <div class="ScrollContent" onscroll="Scroll.onScroll(this)" style={( typeof overflowLeft !== 'undefined' ? 'margin-left:'+overflowLeft.replace(/^\s*calc\((.*)\)\s*$/,'calc(-1 * ($1))')+';padding-left:'+overflowLeft : '' )}>
+<div class="Scroll"  onmouseenter="Scroll.enter(this.firstChild, event)" onmouseleave="Scroll.leave(this.firstChild, event)" style={( typeof width !== 'undefined' ? 'width:' + width + ';' : '' )+( typeof height !== 'undefined' ? 'height:' + height + ';' : '' )}>
+    <div class="ScrollContent" data-selector={_selector} onscroll="Scroll.onScroll(this)" style={( typeof overflowLeft !== 'undefined' ? 'margin-left:'+overflowLeft.replace(/^\s*calc\((.*)\)\s*$/,'calc(-1 * ($1))')+';padding-left:'+overflowLeft : '' )}>
         {CONTENT}
     </div>
     <div class="ScrollHandle">

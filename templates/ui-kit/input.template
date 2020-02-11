@@ -135,6 +135,11 @@
 
         this.Blur = function(input)
         {
+            if( input.firstChild.hasAttribute('data-suggest'))
+            {
+                Suggestor.onBlur( input.firstChild );
+            }
+
             input.classList.remove('active');
             if( !input.getElementsByTagName('input')[0].value.trim() && !input.classList.contains('empty') )
             {
@@ -152,6 +157,11 @@
 
         this.keyUp = function( input, event )
         {
+            if( input.hasAttribute('data-suggest'))
+            {
+                Suggestor.onKeyUp( input, event, input.parentNode );
+            }
+
             let prev = input.previousValue || '';
             let re = new RegExp(input.getAttribute('data-pattern'))
             let partial = re.toPartialMatchRegex();
@@ -310,9 +320,15 @@ let _name = ( typeof name != 'undefined' ? name : null );
 let _pattern = ( typeof pattern != 'undefined' ? pattern : null );
 let _className = ( typeof className != 'undefined' ? className : '' );
 let _id = ( typeof id != 'undefined' ? id : null );
+let _suggest = ( typeof suggest != 'undefined' ? suggest : null );
+
+if( typeof suggest !== 'undefined' )
+{
+    <Suggestor/>
+}
 
 <label class={'Input ' + ( _value.length > 0 ? '' : ' empty' ) + _error + _success + _disabled + ( _label ? ' label' : '' ) + _className } style={ _style } >
-    <input style={( !_label ? ' padding-top: 0;' : '' )} name={_name} id={_id} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} />
+    <input style={( !_label ? ' padding-top: 0;' : '' )} name={_name} id={_id} type={_type} value={_value} onfocus={"input.Focus(this.parentNode)"+_onFocus} onblur={"input.Blur(this.parentNode);"+_onBlur} data-pattern={_pattern} onchange={_onChange} onkeyup="window.input.keyUp(this, event)" autocomplete={_autocomplete} required={_required} data-suggest={_suggest} />
     if( _label )
     {
         <span onclick="this.previousSibling.focus()">{label}</span>

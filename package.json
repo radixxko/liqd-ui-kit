@@ -1,12 +1,13 @@
 {
   "name": "liqd-ui-kit",
   "description": "UKIT",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "author": "radixxko",
   "license": "MIT",
-  "main": "lib/uikit.js",
+  "main": "uikit.js",
   "files": [
-    "lib/"
+    "uikit.js",
+    "templates/"
   ],
   "scripts": {
     "test": "nyc mocha",
